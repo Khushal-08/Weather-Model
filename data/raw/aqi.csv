@@ -1,0 +1,169 @@
+country,state,city,station,last_update,latitude,longitude,pollutant_id,min_value,max_value,avg_value
+India,Maharashtra,Mumbai,"Chembur, Mumbai - MPCB",13-07-2026 16:00:00,19.0364585,72.8954371,CO,14,15,14
+India,Maharashtra,Mumbai,"Chembur, Mumbai - MPCB",13-07-2026 16:00:00,19.0364585,72.8954371,OZONE,5,6,5
+India,Maharashtra,Mumbai,"Deonar, Mumbai - IITM",13-07-2026 16:00:00,19.04946,72.923,NH3,7,11,9
+India,Maharashtra,Mumbai,"Mindspace-Malad West, Mumbai - MPCB",13-07-2026 16:00:00,19.1878657,72.8304069,NH3,9,10,9
+India,Maharashtra,Mumbai,"Mindspace-Malad West, Mumbai - MPCB",13-07-2026 16:00:00,19.1878657,72.8304069,SO2,3,4,3
+India,Maharashtra,Mumbai,"Mindspace-Malad West, Mumbai - MPCB",13-07-2026 16:00:00,19.1878657,72.8304069,OZONE,28,48,39
+India,Maharashtra,Mumbai,"Chakala-Andheri East, Mumbai - IITM",13-07-2026 16:00:00,19.11074,72.86084,PM2.5,12,28,22
+India,Maharashtra,Mumbai,"Kandivali West, Mumbai - BMC",13-07-2026 16:00:00,19.215859,72.831718,PM2.5,4,23,12
+India,Maharashtra,Mumbai,"Sion, Mumbai - MPCB",13-07-2026 16:00:00,19.047,72.8746,NH3,6,6,6
+India,Maharashtra,Mumbai,"Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",13-07-2026 16:00:00,19.10078,72.87462,OZONE,NA,NA,NA
+India,Maharashtra,Mumbai,"Mulund West, Mumbai - MPCB",13-07-2026 16:00:00,19.175,72.9419,PM10,NA,NA,NA
+India,Maharashtra,Mumbai,"Mulund West, Mumbai - MPCB",13-07-2026 16:00:00,19.175,72.9419,NO2,12,14,13
+India,Maharashtra,Mumbai,"Mulund West, Mumbai - MPCB",13-07-2026 16:00:00,19.175,72.9419,OZONE,NA,NA,NA
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - IITM",13-07-2026 16:00:00,19.053536,72.84643,PM2.5,6,73,21
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - IITM",13-07-2026 16:00:00,19.053536,72.84643,CO,8,17,14
+India,Maharashtra,Mumbai,"Borivali East, Mumbai - IITM",13-07-2026 16:00:00,19.23241,72.86895,NO2,14,27,21
+India,Maharashtra,Mumbai,"Kurla, Mumbai - MPCB",13-07-2026 16:00:00,19.0863,72.8888,SO2,29,29,29
+India,Maharashtra,Mumbai,"Siddharth Nagar-Worli, Mumbai - IITM",13-07-2026 16:00:00,19.000083,72.813993,PM2.5,24,39,28
+India,Maharashtra,Mumbai,"Siddharth Nagar-Worli, Mumbai - IITM",13-07-2026 16:00:00,19.000083,72.813993,PM10,54,72,64
+India,Maharashtra,Mumbai,"Byculla, Mumbai - BMC",13-07-2026 16:00:00,18.9767,72.838,OZONE,7,11,9
+India,Maharashtra,Mumbai,"Kherwadi_Bandra East, Mumbai - MPCB",13-07-2026 16:00:00,19.0632143,72.8456324,PM10,40,56,49
+India,Maharashtra,Mumbai,"Kherwadi_Bandra East, Mumbai - MPCB",13-07-2026 16:00:00,19.0632143,72.8456324,NH3,4,4,4
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - MPCB",13-07-2026 16:00:00,19.065931,72.862131,PM10,49,71,57
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - MPCB",13-07-2026 16:00:00,19.065931,72.862131,SO2,2,3,3
+India,Maharashtra,Mumbai,"Malad West, Mumbai - IITM",13-07-2026 16:00:00,19.19709,72.82204,PM2.5,3,46,18
+India,Maharashtra,Mumbai,"Malad West, Mumbai - IITM",13-07-2026 16:00:00,19.19709,72.82204,NO2,8,36,20
+India,Maharashtra,Mumbai,"Mazgaon, Mumbai - IITM",13-07-2026 16:00:00,18.96702,72.84214,NO2,22,24,23
+India,Maharashtra,Mumbai,"Chembur, Mumbai - MPCB",13-07-2026 16:00:00,19.0364585,72.8954371,PM10,NA,NA,NA
+India,Maharashtra,Mumbai,"Chembur, Mumbai - MPCB",13-07-2026 16:00:00,19.0364585,72.8954371,NO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Khindipada-Bhandup West, Mumbai - IITM",13-07-2026 16:00:00,19.1653323,72.922099,SO2,2,19,13
+India,Maharashtra,Mumbai,"Worli, Mumbai - MPCB",13-07-2026 16:00:00,18.9936162,72.8128113,NH3,10,29,15
+India,Maharashtra,Mumbai,"Byculla, Mumbai - BMC",13-07-2026 16:00:00,18.9767,72.838,NO2,11,32,21
+India,Maharashtra,Mumbai,"Byculla, Mumbai - BMC",13-07-2026 16:00:00,18.9767,72.838,CO,16,20,18
+India,Maharashtra,Mumbai,"Kherwadi_Bandra East, Mumbai - MPCB",13-07-2026 16:00:00,19.0632143,72.8456324,SO2,2,3,3
+India,Maharashtra,Mumbai,"Shivaji Nagar, Mumbai - BMC",13-07-2026 16:00:00,19.060498,72.923356,PM10,35,105,77
+India,Maharashtra,Mumbai,"Shivaji Nagar, Mumbai - BMC",13-07-2026 16:00:00,19.060498,72.923356,SO2,3,16,7
+India,Maharashtra,Mumbai,"Shivaji Nagar, Mumbai - BMC",13-07-2026 16:00:00,19.060498,72.923356,OZONE,8,11,10
+India,Maharashtra,Mumbai,"Malad West, Mumbai - IITM",13-07-2026 16:00:00,19.19709,72.82204,CO,20,30,25
+India,Maharashtra,Mumbai,"Mazgaon, Mumbai - IITM",13-07-2026 16:00:00,18.96702,72.84214,PM2.5,22,58,33
+India,Maharashtra,Mumbai,"Mazgaon, Mumbai - IITM",13-07-2026 16:00:00,18.96702,72.84214,PM10,57,74,63
+India,Maharashtra,Mumbai,"Mazgaon, Mumbai - IITM",13-07-2026 16:00:00,18.96702,72.84214,NH3,2,4,3
+India,Maharashtra,Mumbai,"Mazgaon, Mumbai - IITM",13-07-2026 16:00:00,18.96702,72.84214,OZONE,22,25,23
+India,Maharashtra,Mumbai,"Chembur, Mumbai - MPCB",13-07-2026 16:00:00,19.0364585,72.8954371,SO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Deonar, Mumbai - IITM",13-07-2026 16:00:00,19.04946,72.923,CO,31,41,38
+India,Maharashtra,Mumbai,"Sewri, Mumbai - BMC",13-07-2026 16:00:00,19.000084,72.85673,NO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Sion, Mumbai - MPCB",13-07-2026 16:00:00,19.047,72.8746,SO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",13-07-2026 16:00:00,19.10078,72.87462,NH3,0,0,0
+India,Maharashtra,Mumbai,"Navy Nagar-Colaba, Mumbai - IITM",13-07-2026 16:00:00,18.897756,72.81332,NO2,86,111,100
+India,Maharashtra,Mumbai,"Navy Nagar-Colaba, Mumbai - IITM",13-07-2026 16:00:00,18.897756,72.81332,NH3,7,8,7
+India,Maharashtra,Mumbai,"Navy Nagar-Colaba, Mumbai - IITM",13-07-2026 16:00:00,18.897756,72.81332,SO2,1,24,8
+India,Maharashtra,Mumbai,"Navy Nagar-Colaba, Mumbai - IITM",13-07-2026 16:00:00,18.897756,72.81332,CO,4,16,10
+India,Maharashtra,Mumbai,"Navy Nagar-Colaba, Mumbai - IITM",13-07-2026 16:00:00,18.897756,72.81332,OZONE,22,25,24
+India,Maharashtra,Mumbai,"Ghatkopar, Mumbai - BMC",13-07-2026 16:00:00,19.083694,72.920967,SO2,0,4,1
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - IITM",13-07-2026 16:00:00,19.053536,72.84643,PM10,51,84,63
+India,Maharashtra,Mumbai,"Kurla, Mumbai - MPCB",13-07-2026 16:00:00,19.0863,72.8888,NO2,6,7,7
+India,Maharashtra,Mumbai,"Kurla, Mumbai - MPCB",13-07-2026 16:00:00,19.0863,72.8888,CO,14,17,16
+India,Maharashtra,Mumbai,"Siddharth Nagar-Worli, Mumbai - IITM",13-07-2026 16:00:00,19.000083,72.813993,NH3,1,2,2
+India,Maharashtra,Mumbai,"Powai, Mumbai - MPCB",13-07-2026 16:00:00,19.1375,72.915056,OZONE,NA,NA,NA
+India,Maharashtra,Mumbai,"Khindipada-Bhandup West, Mumbai - IITM",13-07-2026 16:00:00,19.1653323,72.922099,NO2,19,21,20
+India,Maharashtra,Mumbai,"Chakala-Andheri East, Mumbai - IITM",13-07-2026 16:00:00,19.11074,72.86084,CO,1,4,3
+India,Maharashtra,Mumbai,"Kandivali West, Mumbai - BMC",13-07-2026 16:00:00,19.215859,72.831718,PM10,NA,NA,NA
+India,Maharashtra,Mumbai,"Kandivali West, Mumbai - BMC",13-07-2026 16:00:00,19.215859,72.831718,CO,5,12,9
+India,Maharashtra,Mumbai,"Malad West, Mumbai - IITM",13-07-2026 16:00:00,19.19709,72.82204,PM10,40,105,70
+India,Maharashtra,Mumbai,"Malad West, Mumbai - IITM",13-07-2026 16:00:00,19.19709,72.82204,NH3,2,6,3
+India,Maharashtra,Mumbai,"Mazgaon, Mumbai - IITM",13-07-2026 16:00:00,18.96702,72.84214,CO,1,53,25
+India,Maharashtra,Mumbai,"Deonar, Mumbai - IITM",13-07-2026 16:00:00,19.04946,72.923,PM10,74,110,97
+India,Maharashtra,Mumbai,"Deonar, Mumbai - IITM",13-07-2026 16:00:00,19.04946,72.923,NO2,2,4,3
+India,Maharashtra,Mumbai,"Mindspace-Malad West, Mumbai - MPCB",13-07-2026 16:00:00,19.1878657,72.8304069,PM2.5,11,12,12
+India,Maharashtra,Mumbai,"Mindspace-Malad West, Mumbai - MPCB",13-07-2026 16:00:00,19.1878657,72.8304069,PM10,24,26,25
+India,Maharashtra,Mumbai,"Mindspace-Malad West, Mumbai - MPCB",13-07-2026 16:00:00,19.1878657,72.8304069,NO2,13,13,13
+India,Maharashtra,Mumbai,"Chakala-Andheri East, Mumbai - IITM",13-07-2026 16:00:00,19.11074,72.86084,NH3,NA,NA,NA
+India,Maharashtra,Mumbai,"Kandivali West, Mumbai - BMC",13-07-2026 16:00:00,19.215859,72.831718,NO2,7,19,13
+India,Maharashtra,Mumbai,"Borivali East, Mumbai - IITM",13-07-2026 16:00:00,19.23241,72.86895,SO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Siddharth Nagar-Worli, Mumbai - IITM",13-07-2026 16:00:00,19.000083,72.813993,NO2,13,19,16
+India,Maharashtra,Mumbai,"Siddharth Nagar-Worli, Mumbai - IITM",13-07-2026 16:00:00,19.000083,72.813993,SO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Powai, Mumbai - MPCB",13-07-2026 16:00:00,19.1375,72.915056,NO2,6,7,7
+India,Maharashtra,Mumbai,"Khindipada-Bhandup West, Mumbai - IITM",13-07-2026 16:00:00,19.1653323,72.922099,OZONE,18,29,26
+India,Maharashtra,Mumbai,"Worli, Mumbai - MPCB",13-07-2026 16:00:00,18.9936162,72.8128113,PM2.5,24,63,41
+India,Maharashtra,Mumbai,"Worli, Mumbai - MPCB",13-07-2026 16:00:00,18.9936162,72.8128113,NO2,2,11,6
+India,Maharashtra,Mumbai,"Worli, Mumbai - MPCB",13-07-2026 16:00:00,18.9936162,72.8128113,OZONE,6,8,7
+India,Maharashtra,Mumbai,"Kherwadi_Bandra East, Mumbai - MPCB",13-07-2026 16:00:00,19.0632143,72.8456324,OZONE,14,55,32
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - MPCB",13-07-2026 16:00:00,19.065931,72.862131,NH3,2,3,3
+India,Maharashtra,Mumbai,"Shivaji Nagar, Mumbai - BMC",13-07-2026 16:00:00,19.060498,72.923356,NO2,9,15,12
+India,Maharashtra,Mumbai,"Shivaji Nagar, Mumbai - BMC",13-07-2026 16:00:00,19.060498,72.923356,NH3,3,6,4
+India,Maharashtra,Mumbai,"Shivaji Nagar, Mumbai - BMC",13-07-2026 16:00:00,19.060498,72.923356,CO,8,23,14
+India,Maharashtra,Mumbai,"Sewri, Mumbai - BMC",13-07-2026 16:00:00,19.000084,72.85673,PM2.5,NA,NA,NA
+India,Maharashtra,Mumbai,"Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",13-07-2026 16:00:00,19.10078,72.87462,SO2,7,8,7
+India,Maharashtra,Mumbai,"Mulund West, Mumbai - MPCB",13-07-2026 16:00:00,19.175,72.9419,SO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Navy Nagar-Colaba, Mumbai - IITM",13-07-2026 16:00:00,18.897756,72.81332,PM2.5,11,33,22
+India,Maharashtra,Mumbai,"Ghatkopar, Mumbai - BMC",13-07-2026 16:00:00,19.083694,72.920967,CO,20,21,20
+India,Maharashtra,Mumbai,"Ghatkopar, Mumbai - BMC",13-07-2026 16:00:00,19.083694,72.920967,OZONE,30,30,30
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - IITM",13-07-2026 16:00:00,19.053536,72.84643,NO2,3,10,4
+India,Maharashtra,Mumbai,"Borivali East, Mumbai - IITM",13-07-2026 16:00:00,19.23241,72.86895,PM2.5,27,52,40
+India,Maharashtra,Mumbai,"Borivali East, Mumbai - IITM",13-07-2026 16:00:00,19.23241,72.86895,PM10,51,76,65
+India,Maharashtra,Mumbai,"Borivali East, Mumbai - IITM",13-07-2026 16:00:00,19.23241,72.86895,OZONE,25,30,28
+India,Maharashtra,Mumbai,"Kurla, Mumbai - MPCB",13-07-2026 16:00:00,19.0863,72.8888,PM2.5,29,183,76
+India,Maharashtra,Mumbai,"Kurla, Mumbai - MPCB",13-07-2026 16:00:00,19.0863,72.8888,NH3,2,2,2
+India,Maharashtra,Mumbai,"Siddharth Nagar-Worli, Mumbai - IITM",13-07-2026 16:00:00,19.000083,72.813993,OZONE,9,13,12
+India,Maharashtra,Mumbai,"Powai, Mumbai - MPCB",13-07-2026 16:00:00,19.1375,72.915056,PM2.5,NA,NA,NA
+India,Maharashtra,Mumbai,"Powai, Mumbai - MPCB",13-07-2026 16:00:00,19.1375,72.915056,PM10,8,22,16
+India,Maharashtra,Mumbai,"Powai, Mumbai - MPCB",13-07-2026 16:00:00,19.1375,72.915056,CO,NA,NA,NA
+India,Maharashtra,Mumbai,"Khindipada-Bhandup West, Mumbai - IITM",13-07-2026 16:00:00,19.1653323,72.922099,NH3,3,3,3
+India,Maharashtra,Mumbai,"Worli, Mumbai - MPCB",13-07-2026 16:00:00,18.9936162,72.8128113,PM10,62,85,72
+India,Maharashtra,Mumbai,"Worli, Mumbai - MPCB",13-07-2026 16:00:00,18.9936162,72.8128113,SO2,2,5,3
+India,Maharashtra,Mumbai,"Kherwadi_Bandra East, Mumbai - MPCB",13-07-2026 16:00:00,19.0632143,72.8456324,NO2,7,7,7
+India,Maharashtra,Mumbai,"Kherwadi_Bandra East, Mumbai - MPCB",13-07-2026 16:00:00,19.0632143,72.8456324,CO,7,14,12
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - MPCB",13-07-2026 16:00:00,19.065931,72.862131,NO2,1,3,2
+India,Maharashtra,Mumbai,"Shivaji Nagar, Mumbai - BMC",13-07-2026 16:00:00,19.060498,72.923356,PM2.5,21,63,38
+India,Maharashtra,Mumbai,"Sewri, Mumbai - BMC",13-07-2026 16:00:00,19.000084,72.85673,SO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Sewri, Mumbai - BMC",13-07-2026 16:00:00,19.000084,72.85673,CO,17,19,18
+India,Maharashtra,Mumbai,"Sion, Mumbai - MPCB",13-07-2026 16:00:00,19.047,72.8746,NO2,37,51,40
+India,Maharashtra,Mumbai,"Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",13-07-2026 16:00:00,19.10078,72.87462,PM10,NA,NA,NA
+India,Maharashtra,Mumbai,"Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",13-07-2026 16:00:00,19.10078,72.87462,NO2,26,26,26
+India,Maharashtra,Mumbai,"Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",13-07-2026 16:00:00,19.10078,72.87462,CO,NA,NA,NA
+India,Maharashtra,Mumbai,"Navy Nagar-Colaba, Mumbai - IITM",13-07-2026 16:00:00,18.897756,72.81332,PM10,63,85,72
+India,Maharashtra,Mumbai,"Ghatkopar, Mumbai - BMC",13-07-2026 16:00:00,19.083694,72.920967,PM10,71,126,89
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - IITM",13-07-2026 16:00:00,19.053536,72.84643,OZONE,20,22,21
+India,Maharashtra,Mumbai,"Malad West, Mumbai - IITM",13-07-2026 16:00:00,19.19709,72.82204,SO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Malad West, Mumbai - IITM",13-07-2026 16:00:00,19.19709,72.82204,OZONE,8,17,13
+India,Maharashtra,Mumbai,"Chembur, Mumbai - MPCB",13-07-2026 16:00:00,19.0364585,72.8954371,PM2.5,NA,NA,NA
+India,Maharashtra,Mumbai,"Chembur, Mumbai - MPCB",13-07-2026 16:00:00,19.0364585,72.8954371,NH3,NA,NA,NA
+India,Maharashtra,Mumbai,"Deonar, Mumbai - IITM",13-07-2026 16:00:00,19.04946,72.923,PM2.5,11,32,20
+India,Maharashtra,Mumbai,"Deonar, Mumbai - IITM",13-07-2026 16:00:00,19.04946,72.923,SO2,1,3,2
+India,Maharashtra,Mumbai,"Mindspace-Malad West, Mumbai - MPCB",13-07-2026 16:00:00,19.1878657,72.8304069,CO,10,12,11
+India,Maharashtra,Mumbai,"Chakala-Andheri East, Mumbai - IITM",13-07-2026 16:00:00,19.11074,72.86084,NO2,NA,NA,NA
+India,Maharashtra,Mumbai,"Chakala-Andheri East, Mumbai - IITM",13-07-2026 16:00:00,19.11074,72.86084,SO2,0,8,4
+India,Maharashtra,Mumbai,"Sewri, Mumbai - BMC",13-07-2026 16:00:00,19.000084,72.85673,PM10,NA,NA,NA
+India,Maharashtra,Mumbai,"Sewri, Mumbai - BMC",13-07-2026 16:00:00,19.000084,72.85673,NH3,NA,NA,NA
+India,Maharashtra,Mumbai,"Sewri, Mumbai - BMC",13-07-2026 16:00:00,19.000084,72.85673,OZONE,13,18,16
+India,Maharashtra,Mumbai,"Sion, Mumbai - MPCB",13-07-2026 16:00:00,19.047,72.8746,PM2.5,NA,NA,NA
+India,Maharashtra,Mumbai,"Sion, Mumbai - MPCB",13-07-2026 16:00:00,19.047,72.8746,PM10,NA,NA,NA
+India,Maharashtra,Mumbai,"Sion, Mumbai - MPCB",13-07-2026 16:00:00,19.047,72.8746,CO,16,18,17
+India,Maharashtra,Mumbai,"Sion, Mumbai - MPCB",13-07-2026 16:00:00,19.047,72.8746,OZONE,NA,NA,NA
+India,Maharashtra,Mumbai,"Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",13-07-2026 16:00:00,19.10078,72.87462,PM2.5,NA,NA,NA
+India,Maharashtra,Mumbai,"Chakala-Andheri East, Mumbai - IITM",13-07-2026 16:00:00,19.11074,72.86084,PM10,36,78,55
+India,Maharashtra,Mumbai,"Chakala-Andheri East, Mumbai - IITM",13-07-2026 16:00:00,19.11074,72.86084,OZONE,11,18,16
+India,Maharashtra,Mumbai,"Kandivali West, Mumbai - BMC",13-07-2026 16:00:00,19.215859,72.831718,NH3,1,3,2
+India,Maharashtra,Mumbai,"Kandivali West, Mumbai - BMC",13-07-2026 16:00:00,19.215859,72.831718,SO2,0,1,1
+India,Maharashtra,Mumbai,"Kandivali West, Mumbai - BMC",13-07-2026 16:00:00,19.215859,72.831718,OZONE,11,13,12
+India,Maharashtra,Mumbai,"Mulund West, Mumbai - MPCB",13-07-2026 16:00:00,19.175,72.9419,PM2.5,9,36,20
+India,Maharashtra,Mumbai,"Mulund West, Mumbai - MPCB",13-07-2026 16:00:00,19.175,72.9419,NH3,5,5,5
+India,Maharashtra,Mumbai,"Mulund West, Mumbai - MPCB",13-07-2026 16:00:00,19.175,72.9419,CO,NA,NA,NA
+India,Maharashtra,Mumbai,"Ghatkopar, Mumbai - BMC",13-07-2026 16:00:00,19.083694,72.920967,PM2.5,17,66,33
+India,Maharashtra,Mumbai,"Ghatkopar, Mumbai - BMC",13-07-2026 16:00:00,19.083694,72.920967,NO2,3,6,4
+India,Maharashtra,Mumbai,"Ghatkopar, Mumbai - BMC",13-07-2026 16:00:00,19.083694,72.920967,NH3,3,5,4
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - IITM",13-07-2026 16:00:00,19.053536,72.84643,NH3,2,4,2
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - IITM",13-07-2026 16:00:00,19.053536,72.84643,SO2,2,5,3
+India,Maharashtra,Mumbai,"Borivali East, Mumbai - IITM",13-07-2026 16:00:00,19.23241,72.86895,NH3,4,5,4
+India,Maharashtra,Mumbai,"Borivali East, Mumbai - IITM",13-07-2026 16:00:00,19.23241,72.86895,CO,42,53,47
+India,Maharashtra,Mumbai,"Kurla, Mumbai - MPCB",13-07-2026 16:00:00,19.0863,72.8888,PM10,34,144,81
+India,Maharashtra,Mumbai,"Kurla, Mumbai - MPCB",13-07-2026 16:00:00,19.0863,72.8888,OZONE,28,29,28
+India,Maharashtra,Mumbai,"Siddharth Nagar-Worli, Mumbai - IITM",13-07-2026 16:00:00,19.000083,72.813993,CO,16,24,21
+India,Maharashtra,Mumbai,"Powai, Mumbai - MPCB",13-07-2026 16:00:00,19.1375,72.915056,NH3,NA,NA,NA
+India,Maharashtra,Mumbai,"Powai, Mumbai - MPCB",13-07-2026 16:00:00,19.1375,72.915056,SO2,15,16,16
+India,Maharashtra,Mumbai,"Khindipada-Bhandup West, Mumbai - IITM",13-07-2026 16:00:00,19.1653323,72.922099,PM2.5,25,26,26
+India,Maharashtra,Mumbai,"Khindipada-Bhandup West, Mumbai - IITM",13-07-2026 16:00:00,19.1653323,72.922099,PM10,31,78,60
+India,Maharashtra,Mumbai,"Khindipada-Bhandup West, Mumbai - IITM",13-07-2026 16:00:00,19.1653323,72.922099,CO,7,19,12
+India,Maharashtra,Mumbai,"Worli, Mumbai - MPCB",13-07-2026 16:00:00,18.9936162,72.8128113,CO,36,39,38
+India,Maharashtra,Mumbai,"Byculla, Mumbai - BMC",13-07-2026 16:00:00,18.9767,72.838,PM2.5,11,31,20
+India,Maharashtra,Mumbai,"Byculla, Mumbai - BMC",13-07-2026 16:00:00,18.9767,72.838,PM10,21,76,42
+India,Maharashtra,Mumbai,"Byculla, Mumbai - BMC",13-07-2026 16:00:00,18.9767,72.838,NH3,1,2,2
+India,Maharashtra,Mumbai,"Byculla, Mumbai - BMC",13-07-2026 16:00:00,18.9767,72.838,SO2,4,11,7
+India,Maharashtra,Mumbai,"Kherwadi_Bandra East, Mumbai - MPCB",13-07-2026 16:00:00,19.0632143,72.8456324,PM2.5,13,44,25
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - MPCB",13-07-2026 16:00:00,19.065931,72.862131,PM2.5,32,87,56
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - MPCB",13-07-2026 16:00:00,19.065931,72.862131,CO,26,30,28
+India,Maharashtra,Mumbai,"Bandra Kurla Complex, Mumbai - MPCB",13-07-2026 16:00:00,19.065931,72.862131,OZONE,15,16,15
+India,Maharashtra,Mumbai,"Mazgaon, Mumbai - IITM",13-07-2026 16:00:00,18.96702,72.84214,SO2,4,13,7
+India,Maharashtra,Mumbai,"Deonar, Mumbai - IITM",13-07-2026 16:00:00,19.04946,72.923,OZONE,12,18,17
