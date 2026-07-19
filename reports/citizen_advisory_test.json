@@ -1,0 +1,21 @@
+{
+  "station": "Sion, Mumbai - MPCB",
+  "forecast_horizon": "24h",
+  "aqi_category": "Very Poor",
+  "dominant_source": "Traffic",
+  "advisories": {
+    "english": {
+      "general_public": "The air quality in Sion, Mumbai is forecasted to remain in the 'Very Poor' category over the next 24 hours, primarily driven by heavy traffic emissions. Prolonged exposure to this air may cause respiratory illness, so it is advisable to reduce outdoor activities and avoid congested roads. Consider limiting your time spent near high-traffic areas to minimize exposure.",
+      "sensitive_groups": "With air quality in Sion, Mumbai expected to be 'Very Poor' due to traffic emissions, vulnerable individuals including children, the elderly, and those with respiratory or cardiac conditions face a higher risk of respiratory illness upon prolonged exposure. It is highly recommended that these sensitive groups minimize outdoor exertion and avoid areas with heavy vehicular congestion."
+    },
+    "hindi": {
+      "general_public": "सायन, मुंबई में अगले 24 घंटों में वायु गुणवत्ता 'बहुत खराब' श्रेणी में रहने का अनुमान है, जिसका मुख्य कारण वाहनों का प्रदूषण (ट्रैफिक) है। इस हवा में लंबे समय तक रहने से सांस की बीमारी हो सकती है, इसलिए बाहरी गतिविधियों को कम करने और भीड़भाड़ वाले रास्तों से बचने की सलाह दी जाती है।",
+      "sensitive_groups": "सायन, मुंबई में ट्रैफिक प्रदूषण के कारण वायु गुणवत्ता 'बहुत खराब' होने की संभावना है, जिससे बच्चों, बुजुर्गों और सांस या हृदय रोगियों जैसे संवेदनशील समूहों को लंबे समय तक संपर्क में रहने पर सांस की बीमारी का अधिक खतरा है। इन संवेदनशील समूहों को सलाह दी जाती है कि वे बाहर शारीरिक श्रम करने से बचें और सुरक्षित स्थानों पर रहें।"
+    },
+    "marathi": {
+      "general_public": "सायन, मुंबई येथे पुढील २४ तासांत हवेची गुणवत्ता 'अतिशय वाईट' श्रेणीत राहण्याचा अंदाज असून, वाहतुकीचे प्रदूषण हे याचे मुख्य कारण आहे. या हवेत दीर्घकाळ राहिल्याने श्वसनाचे आजार होऊ शकतात, त्यामुळे घराबाहेरील कामे मर्यादित ठेवावीत आणि गर्दीच्या रस्त्यांवर जाणे टाळावे.",
+      "sensitive_groups": "सायन, मुंबई येथे वाहतुकीच्या प्रदूषणामुळे हवेची गुणवत्ता 'अतिशय वाईट' होण्याची शक्यता असल्याने, लहान मुले, वृद्ध आणि श्वसन किंवा हृदयविकार असलेल्या संवेदनशील व्यक्तींना दीर्घकाळ संपर्कात आल्यास श्वसनाचा त्रास होण्याचा धोका जास्त आहे. या संवेदनशील गटांनी घराबाहेर पडणे टाळावे आणि स्वतःची काळजी घ्यावी."
+    }
+  },
+  "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"
+}

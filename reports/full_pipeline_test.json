@@ -1,0 +1,161 @@
+{
+  "location": "Kurla, Mumbai - MPCB",
+  "latitude": 19.0728,
+  "longitude": 72.8826,
+  "timestamp": "2023-07-28 00:00:00",
+  "forecast": {
+    "24h": {
+      "pm25": 14.91,
+      "aqi_category": "Good"
+    },
+    "48h": {
+      "pm25": 13.74,
+      "aqi_category": "Good"
+    },
+    "72h": {
+      "pm25": 16.88,
+      "aqi_category": "Good"
+    }
+  },
+  "model_explanation": {
+    "top_increasing_factors": [
+      {
+        "feature": "humidity_lag_1",
+        "impact": 1.25,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_30_shifted",
+        "impact": 0.2,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "temperature_2m_mean",
+        "impact": 0.19,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "wind_speed_lag_1",
+        "impact": 0.17,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm10_lag_1",
+        "impact": 0.11,
+        "direction": "increases pollution"
+      }
+    ],
+    "top_decreasing_factors": [
+      {
+        "feature": "pm25",
+        "impact": -20.76,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "day_of_year_cos",
+        "impact": -3.44,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "precipitation_sum",
+        "impact": -1.82,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_7_shifted",
+        "impact": -0.65,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "day_of_year_sin",
+        "impact": -0.56,
+        "direction": "reduces pollution"
+      }
+    ],
+    "main_drivers": [
+      {
+        "category": "Historical Pollution",
+        "impact": "-26.65"
+      },
+      {
+        "category": "Calendar",
+        "impact": "-1.23"
+      },
+      {
+        "category": "Meteorology",
+        "impact": "-0.35"
+      }
+    ]
+  },
+  "source_influence": {
+    "confidence": 0.9,
+    "sources": [
+      {
+        "name": "Traffic",
+        "contribution_percentage": 39.5,
+        "evidence": [
+          "Road density within 5km is 2151.4 km.",
+          "Nearest major road is 75 meters away."
+        ],
+        "recommendation": "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+        "confidence": 0.9
+      },
+      {
+        "name": "Industry",
+        "contribution_percentage": 36.3,
+        "evidence": [
+          "Upwind sector (N) contains 0.91 sq km of industrial land use."
+        ],
+        "recommendation": "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+        "confidence": 0.9
+      },
+      {
+        "name": "Construction",
+        "contribution_percentage": 16.2,
+        "evidence": [
+          "Upwind sector (N) contains 0.10 sq km of construction/brownfield.",
+          "Pollutant signature (High PM10 vs PM2.5 ratio) strongly indicates coarse dust suspension."
+        ],
+        "recommendation": "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites.",
+        "confidence": 0.9
+      },
+      {
+        "name": "Regional Background",
+        "contribution_percentage": 8.0,
+        "evidence": [
+          "Base atmospheric pollution level representing broader urban/regional accumulation.",
+          "High wind speeds (17.7 km/h) indicate strong long-range regional transport."
+        ],
+        "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
+        "confidence": 0.7
+      }
+    ]
+  },
+  "recommendations": [
+    "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+    "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+    "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites.",
+    "Coordinate with state/regional authorities on broad emission reduction policies."
+  ],
+  "citizen_advisory": {
+    "station": "Kurla, Mumbai - MPCB",
+    "forecast_horizon": "24h",
+    "aqi_category": "Good",
+    "dominant_source": "Traffic",
+    "advisories": {
+      "english": {
+        "general_public": "The air quality in Kurla, Mumbai is currently 'Good', with traffic being the dominant source of emissions. Over the next 24 hours, the air quality is expected to have minimal impact on daily activities. This is an ideal time for outdoor activities and normal routines.",
+        "sensitive_groups": "The air quality in Kurla, Mumbai is currently 'Good', with traffic being the dominant source of emissions. Over the next 24 hours, the air quality is expected to have minimal impact on health. However, sensitive individuals, including children, the elderly, and those with respiratory conditions, should continue to monitor their comfort during outdoor activities near busy roads."
+      },
+      "hindi": {
+        "general_public": "कुर्ला, मुंबई में वायु गुणवत्ता वर्तमान में 'अच्छी' श्रेणी में है, जिसमें यातायात प्रदूषण का मुख्य स्रोत है। अगले 24 घंटों में, वायु गुणवत्ता का दैनिक गतिविधियों पर न्यूनतम प्रभाव पड़ने की संभावना है। यह बाहरी गतिविधियों के लिए एक अच्छा समय है।",
+        "sensitive_groups": "कुर्ला, मुंबई में वायु गुणवत्ता वर्तमान में 'अच्छी' श्रेणी में है, जिसमें यातायात प्रदूषण का मुख्य स्रोत है। अगले 24 घंटों में, स्वास्थ्य पर इसका न्यूनतम प्रभाव पड़ने की संभावना है। हालांकि, संवेदनशील समूहों जैसे बच्चों, बुजुर्गों और श्वसन संबंधी समस्याओं वाले लोगों को व्यस्त सड़कों के पास बाहरी गतिविधियों के दौरान अपनी सहजता का ध्यान रखना चाहिए।"
+      },
+      "marathi": {
+        "general_public": "कुर्ला, मुंबई येथील हवेची गुणवत्ता सध्या 'चांगली' श्रेणीत आहे, ज्यामध्ये वाहतूक हा प्रदूषणाचा मुख्य स्त्रोत आहे. पुढील २४ तासांत, हवेच्या गुणवत्तेचा दैनंदिन क्रियाकलापांवर किमान परिणाम होण्याची शक्यता आहे. मैदानी उपक्रमांसाठी ही चांगली वेळ आहे.",
+        "sensitive_groups": "कुर्ला, मुंबई येथील हवेची गुणवत्ता सध्या 'चांगली' श्रेणीत आहे, ज्यामध्ये वाहतूक हा प्रदूषणाचा मुख्य स्त्रोत आहे. पुढील २४ तासांत, आरोग्यावर याचा किमान परिणाम होण्याची शक्यता आहे. तरीही, संवेदनशील गट जसे की मुले, वृद्ध आणि श्वसनाचा त्रास असलेल्या व्यक्तींनी व्यस्त रस्त्यांजवळ मैदानी उपक्रम करताना आपल्या आरोग्याची काळजी घ्यावी."
+      }
+    },
+    "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"
+  }
+}

@@ -1,0 +1,21 @@
+Feature,Gain,Weight,Category
+pm25_rolling_mean_7_shifted,14216.4599609375,31.0,Rolling Statistics
+pm25_lag_1,12281.58203125,306.0,PM2.5 Lag
+pm25_rolling_mean_14_shifted,10748.4169921875,39.0,Rolling Statistics
+pm10_lag_1,8531.578125,234.0,Pollutant Lag
+month_cos,4918.27978515625,6.0,Pollutant Lag
+pm25_lag_2,3559.278076171875,182.0,PM2.5 Lag
+month,3124.94580078125,16.0,Calendar
+pm25_rolling_mean_30_shifted,2698.60791015625,40.0,Rolling Statistics
+no2_lag_7,2202.554931640625,71.0,Pollutant Lag
+co_lag_7,2043.4796142578125,15.0,Pollutant Lag
+pm25_lag_7,2023.6766357421875,59.0,PM2.5 Lag
+no2_lag_1,1913.39501953125,55.0,Pollutant Lag
+day_of_year_cos,1545.21923828125,46.0,Pollutant Lag
+wind_speed_lag_1,1541.3748779296875,88.0,Weather
+pm25_rolling_std_7_shifted,1218.3929443359375,73.0,Rolling Statistics
+day_of_year,1190.9345703125,34.0,Calendar
+pm25_rolling_std_30_shifted,1120.9248046875,62.0,Rolling Statistics
+pm10_lag_7,963.5924682617188,72.0,Pollutant Lag
+humidity_lag_1,908.085205078125,95.0,Weather
+day_of_year_sin,784.3943481445312,30.0,Cyclical

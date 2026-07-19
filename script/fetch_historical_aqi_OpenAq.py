@@ -203,7 +203,12 @@ def main():
                 continue
 
             sensor_first = sensor.get("datetimeFirst")
+            if isinstance(sensor_first, dict):
+                sensor_first = sensor_first.get("utc")
+                
             sensor_last = sensor.get("datetimeLast")
+            if isinstance(sensor_last, dict):
+                sensor_last = sensor_last.get("utc")
 
             if not sensor_first:
                 print(f"   Skipping Sensor {sensor_id} ({parameter}): No datetimeFirst")

@@ -34,3 +34,9 @@ Thumbs.db
 
 # Large PDF files
 *.pdf
+
+# Data and Models
+data/
+models/
+cache/
+.ipynb_checkpoints/

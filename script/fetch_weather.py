@@ -19,12 +19,14 @@ logger = logging.getLogger(__name__)
 requests_cache.install_cache('open_meteo_cache', expire_after=2592000)
 
 TARGET_STATIONS = [
-    "Colaba",
-    "Chembur",
-    "Sion",
-    "Worli",
-    "Borivali",
-    "Bandra Kurla"
+    {"full_name": "Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB", "latitude": 19.0974, "longitude": 72.8743},
+    {"full_name": "Sion, Mumbai - MPCB", "latitude": 19.0470, "longitude": 72.8746},
+    {"full_name": "Worli, Mumbai - MPCB", "latitude": 19.0169, "longitude": 72.8169},
+    {"full_name": "Borivali East, Mumbai - MPCB", "latitude": 19.2290, "longitude": 72.8649},
+    {"full_name": "Kurla, Mumbai - MPCB", "latitude": 19.0728, "longitude": 72.8826},
+    {"full_name": "Powai, Mumbai - MPCB", "latitude": 19.1176, "longitude": 72.9060},
+    {"full_name": "Vasai West, Mumbai - MPCB", "latitude": 19.3800, "longitude": 72.8256},
+    {"full_name": "Mulund West, Mumbai - MPCB", "latitude": 19.1718, "longitude": 72.9452}
 ]
 
 AQI_DATA_PATH = "data/raw/aqi.csv"
@@ -35,8 +37,8 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "weather_daily.csv")
 BASE_URL = "https://archive-api.open-meteo.com/v1/archive"
 
 # Define date range matching our AQI data fetch
-START_DATE = "2024-01-01"
-END_DATE = "2024-12-31"
+START_DATE = "2021-08-01"
+END_DATE = "2023-07-31"
 
 # ==========================================
 # HELPER FUNCTIONS
@@ -57,47 +59,10 @@ def get_session():
     return session
 
 def extract_station_coordinates():
-    """Extract distinct target stations and their coordinates from the AQI dataset."""
-    if not os.path.exists(AQI_DATA_PATH):
-        logger.error(f"AQI data file not found at {AQI_DATA_PATH}")
-        return []
-
-    try:
-        df = pd.read_csv(AQI_DATA_PATH)
-    except Exception as e:
-        logger.error(f"Failed to read {AQI_DATA_PATH}: {e}")
-        return []
-
-    # Verify required columns exist
-    required_cols = ['station', 'latitude', 'longitude']
-    if not all(col in df.columns for col in required_cols):
-        logger.error(f"Required columns {required_cols} missing in AQI dataset.")
-        return []
-    
-    stations_df = df[required_cols].drop_duplicates()
-    
-    selected_stations = []
-    seen = set()
-    
-    for _, row in stations_df.iterrows():
-        station_name = str(row['station'])
-        
-        for target in TARGET_STATIONS:
-            if target.lower() in station_name.lower() and target not in seen:
-                selected_stations.append({
-                    "station_query": target,
-                    "full_name": station_name,
-                    "latitude": row["latitude"],
-                    "longitude": row["longitude"]
-                })
-                seen.add(target)
-                break
-                
-    logger.info(f"Extracted {len(selected_stations)} target stations from AQI data.")
-    for s in selected_stations:
+    """Return hardcoded target stations."""
+    for s in TARGET_STATIONS:
         logger.info(f" - {s['full_name']} (Lat: {s['latitude']}, Lon: {s['longitude']})")
-        
-    return selected_stations
+    return TARGET_STATIONS
 
 def fetch_weather_for_station(session, lat, lon):
     """Fetch hourly weather data from Open-Meteo Archive API."""
