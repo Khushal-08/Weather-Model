@@ -36,7 +36,9 @@ Thumbs.db
 *.pdf
 
 # Data and Models
-data/
-models/
+data/raw/
+data/*.zip
+data/*.gz
+models/*.bak
 cache/
 .ipynb_checkpoints/
