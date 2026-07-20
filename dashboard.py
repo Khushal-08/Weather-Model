@@ -210,12 +210,16 @@ if view_mode == "Administrator":
             try:
                 industry = ox.features.features_from_point((lat, lon), tags={'landuse': 'industrial', 'man_made': 'works'}, dist=5000)
                 if not industry.empty:
-                    layers['industry'] = industry.to_json()
+                    industry = industry[industry.geometry.type.isin(['Polygon', 'MultiPolygon'])]
+                    if not industry.empty:
+                        layers['industry'] = industry.to_json()
             except: pass
             try:
                 construction = ox.features.features_from_point((lat, lon), tags={'landuse': ['construction', 'brownfield', 'quarry']}, dist=5000)
                 if not construction.empty:
-                    layers['construction'] = construction.to_json()
+                    construction = construction[construction.geometry.type.isin(['Polygon', 'MultiPolygon'])]
+                    if not construction.empty:
+                        layers['construction'] = construction.to_json()
             except: pass
             return layers
             
@@ -232,11 +236,11 @@ if view_mode == "Administrator":
             show_fires = any("biomass" in s.get('name', '').lower() and s.get('contribution_percentage', 0) > 15 for s in sources)
             
             if 'roads' in layers:
-                folium.GeoJson(layers['roads'], name="Major Roads", style_function=lambda x: {'color':'gray','weight':2}, tooltip="Major Road", show=show_roads).add_to(m)
+                folium.GeoJson(layers['roads'], name="Major Roads", style_function=lambda x: {'color':'gray','weight':2}, show=show_roads).add_to(m)
             if 'industry' in layers:
-                folium.GeoJson(layers['industry'], name="Industrial Zones", style_function=lambda x: {'fillColor':'purple','color':'purple','weight':1,'fillOpacity':0.4}, tooltip="Industrial Zone", show=show_industry).add_to(m)
+                folium.GeoJson(layers['industry'], name="Industrial Zones", style_function=lambda x: {'fillColor':'purple','color':'purple','weight':1,'fillOpacity':0.4}, show=show_industry).add_to(m)
             if 'construction' in layers:
-                folium.GeoJson(layers['construction'], name="Construction Zones", style_function=lambda x: {'fillColor':'orange','color':'orange','weight':1,'fillOpacity':0.4}, tooltip="Construction Zone", show=show_construction).add_to(m)
+                folium.GeoJson(layers['construction'], name="Construction Zones", style_function=lambda x: {'fillColor':'orange','color':'orange','weight':1,'fillOpacity':0.4}, show=show_construction).add_to(m)
                 
             try:
                 from geospatial_features import fetch_nasa_firms_data
