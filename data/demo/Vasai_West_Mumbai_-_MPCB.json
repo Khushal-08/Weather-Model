@@ -2,97 +2,97 @@
   "location": "Vasai West, Mumbai - MPCB",
   "latitude": 19.38,
   "longitude": 72.8256,
-  "timestamp": "2023-07-28 00:00:00",
+  "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 10.06,
-      "aqi_category": "Good"
+      "pm25": 146.41,
+      "aqi_category": "Very Poor"
     },
     "48h": {
-      "pm25": 11.9,
-      "aqi_category": "Good"
+      "pm25": 144.5,
+      "aqi_category": "Very Poor"
     },
     "72h": {
-      "pm25": 16.88,
-      "aqi_category": "Good"
+      "pm25": 140.15,
+      "aqi_category": "Very Poor"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "humidity_lag_1",
-        "impact": 1.19,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "wind_speed_lag_1",
-        "impact": 0.17,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "co_lag_7",
-        "impact": 0.13,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "temperature_2m_mean",
-        "impact": 0.12,
-        "direction": "increases pollution"
-      },
-      {
         "feature": "pm10_lag_1",
-        "impact": 0.11,
+        "impact": 8.65,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_7_shifted",
+        "impact": 3.12,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_30_shifted",
+        "impact": 2.25,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_week_sin",
+        "impact": 1.49,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm25_rolling_std_7_shifted",
+        "impact": 1.24,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
+        "feature": "pm10",
+        "impact": -25.06,
+        "direction": "reduces pollution"
+      },
+      {
         "feature": "pm25",
-        "impact": -24.55,
+        "impact": -7.56,
         "direction": "reduces pollution"
       },
       {
-        "feature": "day_of_year_cos",
-        "impact": -3.48,
+        "feature": "co",
+        "impact": -2.4,
         "direction": "reduces pollution"
       },
       {
-        "feature": "precipitation_sum",
-        "impact": -1.92,
+        "feature": "wind_speed_10m_mean",
+        "impact": -2.03,
         "direction": "reduces pollution"
       },
       {
-        "feature": "pm25_rolling_mean_7_shifted",
-        "impact": -1.19,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "day_of_year_sin",
-        "impact": -0.57,
+        "feature": "month_cos",
+        "impact": -1.64,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-31.25"
+        "impact": "-22.58"
       },
       {
         "category": "Calendar",
-        "impact": "-1.26"
+        "impact": "+2.11"
       },
       {
         "category": "Meteorology",
-        "impact": "-0.57"
+        "impact": "-1.81"
       }
     ]
   },
   "source_influence": {
-    "confidence": 0.87,
+    "confidence": 0.84,
     "sources": [
       {
         "name": "Traffic",
-        "contribution_percentage": 56.7,
+        "contribution_percentage": 64.5,
         "evidence": [
           "Road density within 5km is 781.5 km.",
           "Nearest major road is 269 meters away."
@@ -102,27 +102,25 @@
       },
       {
         "name": "Construction",
-        "contribution_percentage": 30.2,
+        "contribution_percentage": 20.7,
         "evidence": [
-          "Upwind sector (N) contains 0.15 sq km of construction/brownfield.",
-          "Pollutant signature (High PM10 vs PM2.5 ratio) strongly indicates coarse dust suspension."
+          "Upwind sector (N) contains 0.15 sq km of construction/brownfield."
         ],
         "recommendation": "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites.",
-        "confidence": 0.851
+        "confidence": 0.741
       },
       {
         "name": "Regional Background",
-        "contribution_percentage": 12.0,
+        "contribution_percentage": 13.6,
         "evidence": [
-          "Base atmospheric pollution level representing broader urban/regional accumulation.",
-          "High wind speeds (20.541666666666668 km/h) indicate strong long-range regional transport."
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
         ],
         "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
-        "confidence": 0.76
+        "confidence": 0.71
       },
       {
         "name": "Industry",
-        "contribution_percentage": 1.1,
+        "contribution_percentage": 1.2,
         "evidence": [
           "Upwind sector (N) contains 0.02 sq km of industrial land use."
         ],
@@ -140,20 +138,20 @@
   "citizen_advisory": {
     "station": "Vasai West, Mumbai - MPCB",
     "forecast_horizon": "24h",
-    "aqi_category": "Good",
+    "aqi_category": "Very Poor",
     "dominant_source": "Traffic",
     "advisories": {
       "english": {
-        "general_public": "The air quality in Vasai West is currently Good, with traffic being the dominant source of emissions. According to CPCB guidelines, this level of air quality poses minimal health impact, making it an excellent time for outdoor activities.",
-        "sensitive_groups": "The air quality in Vasai West is Good, with traffic as the primary source of emissions. While CPCB guidelines indicate minimal health impact, sensitive individuals, including children, the elderly, and those with respiratory conditions, can safely enjoy outdoor activities while remaining mindful of localized traffic emissions."
+        "general_public": "The air quality is Very Poor. Main pollution source is Traffic. Respiratory illness on prolonged exposure.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Very Poor due to Traffic. Respiratory illness on prolonged exposure."
       },
       "hindi": {
-        "general_public": "वसई वेस्ट में वायु गुणवत्ता वर्तमान में 'अच्छी' श्रेणी में है, जिसमें यातायात प्रदूषण का मुख्य स्रोत है। सीपीसीबी (CPCB) के दिशानिर्देशों के अनुसार, इस वायु गुणवत्ता का स्वास्थ्य पर न्यूनतम प्रभाव पड़ेगा, और यह बाहरी गतिविधियों के लिए पूरी तरह अनुकूल है।",
-        "sensitive_groups": "वसई वेस्ट में वायु गुणवत्ता 'अच्छी' है और यातायात इसका मुख्य स्रोत है। हालांकि सीपीसीबी दिशानिर्देशों के अनुसार इसका स्वास्थ्य पर न्यूनतम प्रभाव पड़ेगा, फिर भी संवेदनशील समूहों (जैसे बच्चों, बुजुर्गों और सांस के रोगियों) को स्थानीय यातायात के पास सावधानी बरतते हुए बाहरी गतिविधियों का आनंद लेना चाहिए।"
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       },
       "marathi": {
-        "general_public": "वसई वेस्ट येथील हवेची गुणवत्ता सध्या 'चांगली' श्रेणीत असून, वाहतूक हा प्रदूषणाचा मुख्य स्त्रोत आहे. सीपीसीबी (CPCB) च्या मार्गदर्शक तत्त्वांनुसार, या हवेच्या गुणवत्तेचा आरोग्यावर किमान परिणाम होईल, ज्यामुळे बाहेरील क्रियाकलापांसाठी ही उत्तम वेळ आहे.",
-        "sensitive_groups": "वसई वेस्ट येथील हवेची गुणवत्ता 'चांगली' असून वाहतूक हा मुख्य स्त्रोत आहे. सीपीसीबी मार्गदर्शक तत्त्वांनुसार याचा आरोग्यावर किमान परिणाम होईल; तरीही, संवेदनशील व्यक्तींनी (उदा. मुले, वृद्ध आणि श्वसनाचे त्रास असलेले लोक) स्थानिक वाहतुकीच्या ठिकाणी काळजी घेत बाहेरील वातावरणाचा आनंद घ्यावा।"
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

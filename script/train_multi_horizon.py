@@ -5,19 +5,28 @@ import joblib
 from pathlib import Path
 from sklearn.metrics import mean_squared_error, r2_score
 from xgboost import XGBRegressor
-
-print("\n" + "="*60)
-print("SAFEGUARD: TRAINING DATASET")
-print("Loading exclusively from: data/processed/training_features.csv")
-print("Target Date Range: 2021-08-01 to 2023-07-31")
-print("="*60 + "\n")
+import sys
+import os
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-INPUT_FILE = Path("data/processed/training_features.csv")
-MODELS_DIR = Path("models")
-REPORTS_DIR = Path("reports/figures")
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--city', type=str, default='mumbai', choices=['mumbai', 'delhi'])
+args, unknown = parser.parse_known_args()
+CITY = args.city.lower()
+
+if CITY == 'mumbai':
+    INPUT_FILE = Path("data/processed/training_features.csv")
+    MODELS_DIR = Path("models/mumbai")
+    REPORTS_DIR = Path("reports/figures")
+else:
+    INPUT_FILE = Path(f"data/processed/{CITY}_training_features.csv")
+    MODELS_DIR = Path(f"models/{CITY}")
+    REPORTS_DIR = Path(f"reports/{CITY}")
+
 
 def load_and_prepare_data_multi(filepath):
     logger.info(f"Loading data from {filepath}")
@@ -39,14 +48,11 @@ def load_and_prepare_data_multi(filepath):
                      'month_sin', 'month_cos', 'day_of_week_sin', 'day_of_week_cos', 
                      'day_of_year_sin', 'day_of_year_cos']
                      
-    # Add current-day features to ensure XGBoost has actual values
     current_cols = ['pm25', 'pm10', 'no2', 'co', 'o3', 'temperature_2m_mean', 'relative_humidity_2m_mean', 'precipitation_sum', 'wind_speed_10m_mean']
     current_cols = [c for c in current_cols if c in df.columns]
     
-    # pm25_rolling_mean_14_shifted and pm25_rolling_mean_30_shifted are inherently in shifted_rolling_cols
     features = current_cols + lag_cols + shifted_rolling_cols + calendar_cols
     
-    # Create target columns using STATION-WISE grouping
     df["pm25_target_24h"] = df.groupby(sort_col)["pm25"].shift(-1)
     df["pm25_target_48h"] = df.groupby(sort_col)["pm25"].shift(-2)
     df["pm25_target_72h"] = df.groupby(sort_col)["pm25"].shift(-3)
@@ -57,12 +63,14 @@ def load_and_prepare_data_multi(filepath):
     return df, features, targets
 
 def chronological_train_val_test_split(df):
-    """Creates a chronological split for Train, Validation, and Test using explicit dates."""
+    """Creates a chronological split for Train, Validation, and Test."""
+    # Data goes from late 2019 to mid 2026. 
+    # Train: start to 2024-12-31
+    # Val: 2025-01-01 to 2025-12-31
+    # Test: 2026-01-01 to end
     
-    # Train: start to 2022-09-30
-    train_end = pd.to_datetime('2022-09-30')
-    # Val: 2022-10-01 to 2022-12-31
-    val_end = pd.to_datetime('2022-12-31')
+    train_end = pd.to_datetime('2024-12-31')
+    val_end = pd.to_datetime('2025-12-31')
     
     train_df = df[df['date'] <= train_end].copy()
     val_df = df[(df['date'] > train_end) & (df['date'] <= val_end)].copy()
@@ -76,10 +84,8 @@ def tune_and_train(train_df, val_df, test_df, features, target_col, baseline_val
     X_test, y_test = test_df[features], test_df[target_col]
     
     baseline_preds_test = test_df[baseline_val_col]
-    
     best_params = tuned_params.copy()
     
-    # Only sweep for 48h and 72h
     if horizon in ["48h", "72h"]:
         logger.info(f"Sweeping hyperparameters for {horizon} on validation set...")
         sweep_params = [
@@ -106,14 +112,10 @@ def tune_and_train(train_df, val_df, test_df, features, target_col, baseline_val
                 best_imp = imp
                 best_p = p
                 
-        logger.info(f"Best sweep params for {horizon}: {best_p} (Val Imp: {best_imp:.2f}%)")
         best_params.update(best_p)
-        
-        # Train final model using the best params and early stopping
         model = XGBRegressor(**best_params, early_stopping_rounds=15)
         model.fit(X_train, y_train, eval_set=[(X_val, y_val)], verbose=False)
     else:
-        # 24h model uses original logic: train on train+val combined, no early stopping
         X_train_full = pd.concat([X_train, X_val])
         y_train_full = pd.concat([y_train, y_val])
         model = XGBRegressor(**best_params)
@@ -126,7 +128,6 @@ def tune_and_train(train_df, val_df, test_df, features, target_col, baseline_val
     improvement = ((persistence_rmse - xgboost_rmse) / persistence_rmse) * 100
     xgboost_r2 = r2_score(y_test, y_pred)
     
-    # Calculate Winter-only subset metrics
     winter_mask = test_df['date'].dt.month.isin([12, 1, 2])
     if winter_mask.sum() > 0:
         y_test_w = y_test[winter_mask]
@@ -143,23 +144,40 @@ def tune_and_train(train_df, val_df, test_df, features, target_col, baseline_val
 
 def main():
     MODELS_DIR.mkdir(parents=True, exist_ok=True)
+    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     
     df, features, targets = load_and_prepare_data_multi(INPUT_FILE)
     train_df, val_df, test_df = chronological_train_val_test_split(df)
     
-    print("\n--- SPLIT DISTRIBUTION VALIDATION ---")
+    print("\n====================================================")
+    print("PHASE 5 — CHRONOLOGICAL SPLIT VALIDATION")
+    print("====================================================")
+    
     for name, split_df in zip(['Train', 'Validation', 'Test'], [train_df, val_df, test_df]):
         d_min = split_df['date'].min().date()
         d_max = split_df['date'].max().date()
         mean_val = split_df['pm25'].mean()
         std_val = split_df['pm25'].std()
-        print(f"\n{name} Split: Dates {d_min} to {d_max} | OVERALL PM2.5 Mean: {mean_val:.2f} | PM2.5 Std: {std_val:.2f}")
-        
-        print(f"  Monthly Breakdown:")
+        print(f"\n{name} Split: Dates {d_min} to {d_max}")
+        print(f"OVERALL PM2.5 Mean: {mean_val:.2f} | PM2.5 Std: {std_val:.2f}")
+        print(f"Monthly Breakdown:")
         monthly = split_df.groupby(split_df['date'].dt.month)['pm25'].agg(['mean', 'std', 'count']).round(2)
-        for m, row in monthly.iterrows():
-            print(f"    Month {m:02d}: Mean {row['mean']:<6.2f} | Std {row['std']:<6.2f} | N={int(row['count'])}")
-    print("\n-------------------------------------\n")
+        print(monthly.to_string())
+    
+    # Verify Winter Exists
+    train_has_winter = train_df['date'].dt.month.isin([12, 1, 2]).any()
+    test_has_winter = test_df['date'].dt.month.isin([12, 1, 2]).any()
+    if not train_has_winter or not test_has_winter:
+        print("\n[RED FLAG]: Winter (Dec-Feb) is missing from Train or Test sets. STOPPING EXECUTION.")
+        sys.exit(1)
+    else:
+        print("\nWinter properly exists in both Train and Test sets.")
+        
+    print("====================================================\n")
+    
+    print("====================================================")
+    print("PHASE 6, 7 & 8 — MODEL TRAINING & COMPARISON")
+    print("====================================================")
     
     params_path = REPORTS_DIR / "xgboost_tuned_params.csv"
     if params_path.exists():
@@ -197,22 +215,24 @@ def main():
             "imp_w": imp_w
         }
         
-        joblib.dump(model, MODELS_DIR / f"xgboost_{horizon}.joblib")
+        model_path = MODELS_DIR / f"xgboost_{horizon}.joblib"
+        joblib.dump(model, model_path)
+        logger.info(f"Saved {horizon} model to {model_path}")
         
-    print("\n================= OVERALL TEST PERFORMANCE =================")
-    print("Horizon | XGBoost RMSE | Persistence RMSE | Improvement % | XGBoost R²")
+    print("\n--- PHASE 7: MODEL COMPARISON (ALL YEAR) ---")
+    print("Horizon | New RMSE | Persistence RMSE | Improvement % | R²")
     for hor in ["24h", "48h", "72h"]:
         r = results[hor]
-        print(f"{hor:<7} | {r['xb_rmse']:<12.2f} | {r['per_rmse']:<16.2f} | {r['imp']:<13.2f} | {r['r2']:.4f}")
+        print(f"{hor:<7} | {r['xb_rmse']:<8.2f} | {r['per_rmse']:<16.2f} | {r['imp']:<13.2f} | {r['r2']:.4f}")
 
-    print("\n=============== WINTER-ONLY TEST PERFORMANCE ===============")
-    print("Horizon | XGBoost RMSE | Persistence RMSE | Improvement %")
+    print("\n--- PHASE 8: WINTER VALIDATION ---")
+    print("Horizon | New RMSE | Persistence RMSE | Improvement %")
     for hor in ["24h", "48h", "72h"]:
         r = results[hor]
         if np.isnan(r['xb_rmse_w']):
             print(f"{hor:<7} | No Winter Data | No Winter Data   | N/A")
         else:
-            print(f"{hor:<7} | {r['xb_rmse_w']:<12.2f} | {r['per_rmse_w']:<16.2f} | {r['imp_w']:<13.2f}")
+            print(f"{hor:<7} | {r['xb_rmse_w']:<8.2f} | {r['per_rmse_w']:<16.2f} | {r['imp_w']:<13.2f}")
 
     print("\n--- PERFORMANCE SUMMARY NOTE ---")
     for hor in ["24h", "48h", "72h"]:
@@ -225,6 +245,8 @@ def main():
             print(f"[{hor}] BEATS persistence overall (+{overall_imp:.2f}%), BUT FAILS IN WINTER ({winter_imp:.2f}%).")
         else:
             print(f"[{hor}] FAILS to beat persistence overall ({overall_imp:.2f}%).")
+            
+    print("====================================================\n")
 
 if __name__ == "__main__":
     main()

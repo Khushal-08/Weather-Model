@@ -1,0 +1,149 @@
+{
+  "location": "Dwarka Sector 8",
+  "latitude": 28.571,
+  "longitude": 77.0719,
+  "timestamp": "2026-06-20 00:00:00",
+  "forecast": {
+    "24h": {
+      "pm25": 106.74,
+      "aqi_category": "Poor"
+    },
+    "48h": {
+      "pm25": 110.79,
+      "aqi_category": "Poor"
+    },
+    "72h": {
+      "pm25": 107.34,
+      "aqi_category": "Poor"
+    }
+  },
+  "model_explanation": {
+    "top_increasing_factors": [
+      {
+        "feature": "co_lag_7",
+        "impact": 1.84,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "temperature_2m_mean",
+        "impact": 1.67,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "temperature_lag_1",
+        "impact": 1.31,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_week_sin",
+        "impact": 1.25,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_1",
+        "impact": 0.85,
+        "direction": "increases pollution"
+      }
+    ],
+    "top_decreasing_factors": [
+      {
+        "feature": "pm25",
+        "impact": -40.68,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm10",
+        "impact": -9.33,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "co",
+        "impact": -4.86,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_30_shifted",
+        "impact": -2.4,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm10_lag_1",
+        "impact": -2.23,
+        "direction": "reduces pollution"
+      }
+    ],
+    "main_drivers": [
+      {
+        "category": "Historical Pollution",
+        "impact": "-65.47"
+      },
+      {
+        "category": "Meteorology",
+        "impact": "+2.04"
+      },
+      {
+        "category": "Calendar",
+        "impact": "+1.47"
+      }
+    ]
+  },
+  "source_influence": {
+    "confidence": 0.759,
+    "sources": [
+      {
+        "name": "Traffic",
+        "contribution_percentage": 64.7,
+        "evidence": [
+          "Road density within 5km is 2244.8 km.",
+          "Nearest major road is 2092 meters away."
+        ],
+        "recommendation": "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+        "confidence": 0.78
+      },
+      {
+        "name": "Regional Background",
+        "contribution_percentage": 21.6,
+        "evidence": [
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
+        ],
+        "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
+        "confidence": 0.61
+      },
+      {
+        "name": "Construction",
+        "contribution_percentage": 13.7,
+        "evidence": [
+          "Upwind sector (N) contains 0.06 sq km of construction/brownfield."
+        ],
+        "recommendation": "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites.",
+        "confidence": 0.588
+      }
+    ]
+  },
+  "recommendations": [
+    "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+    "Coordinate with state/regional authorities on broad emission reduction policies.",
+    "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites."
+  ],
+  "citizen_advisory": {
+    "station": "Dwarka Sector 8",
+    "forecast_horizon": "24h",
+    "aqi_category": "Poor",
+    "dominant_source": "Traffic",
+    "advisories": {
+      "english": {
+        "general_public": "The air quality is Poor. Main pollution source is Traffic. Breathing discomfort to most people on prolonged exposure.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Poor due to Traffic. Breathing discomfort to most people on prolonged exposure."
+      },
+      "hindi": {
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
+      },
+      "marathi": {
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
+      }
+    },
+    "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"
+  }
+}

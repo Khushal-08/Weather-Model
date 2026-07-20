@@ -2,88 +2,88 @@
   "location": "Worli, Mumbai - MPCB",
   "latitude": 19.0169,
   "longitude": 72.8169,
-  "timestamp": "2023-07-28 00:00:00",
+  "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 17.66,
-      "aqi_category": "Good"
+      "pm25": 52.01,
+      "aqi_category": "Satisfactory"
     },
     "48h": {
-      "pm25": 16.06,
-      "aqi_category": "Good"
+      "pm25": 65.53,
+      "aqi_category": "Moderately Polluted"
     },
     "72h": {
-      "pm25": 17.26,
-      "aqi_category": "Good"
+      "pm25": 73.73,
+      "aqi_category": "Moderately Polluted"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "humidity_lag_1",
-        "impact": 1.19,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "temperature_2m_mean",
-        "impact": 0.17,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "pm25_rolling_mean_30_shifted",
-        "impact": 0.17,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "wind_speed_lag_1",
-        "impact": 0.16,
-        "direction": "increases pollution"
-      },
-      {
         "feature": "pm10_lag_1",
-        "impact": 0.12,
+        "impact": 10.3,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm10_lag_7",
+        "impact": 4.9,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_7",
+        "impact": 3.51,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm25_rolling_std_30_shifted",
+        "impact": 2.03,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_1",
+        "impact": 2.0,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
         "feature": "pm25",
-        "impact": -18.13,
+        "impact": -78.65,
         "direction": "reduces pollution"
       },
       {
-        "feature": "day_of_year_cos",
-        "impact": -3.5,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "precipitation_sum",
-        "impact": -1.85,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "day_of_year_sin",
-        "impact": -0.56,
+        "feature": "pm10",
+        "impact": -44.89,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm25_rolling_mean_7_shifted",
-        "impact": -0.55,
+        "impact": -5.53,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "month_cos",
+        "impact": -1.59,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "o3",
+        "impact": -1.2,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-23.69"
+        "impact": "-116.82"
       },
       {
         "category": "Calendar",
-        "impact": "-1.29"
+        "impact": "+1.41"
       },
       {
         "category": "Meteorology",
-        "impact": "-0.5"
+        "impact": "-1.29"
       }
     ]
   },
@@ -104,11 +104,10 @@
         "name": "Regional Background",
         "contribution_percentage": 14.5,
         "evidence": [
-          "Base atmospheric pollution level representing broader urban/regional accumulation.",
-          "High wind speeds (19.6375 km/h) indicate strong long-range regional transport."
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
         ],
         "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
-        "confidence": 0.76
+        "confidence": 0.71
       },
       {
         "name": "Construction",
@@ -139,20 +138,20 @@
   "citizen_advisory": {
     "station": "Worli, Mumbai - MPCB",
     "forecast_horizon": "24h",
-    "aqi_category": "Good",
+    "aqi_category": "Satisfactory",
     "dominant_source": "Traffic",
     "advisories": {
       "english": {
-        "general_public": "The air quality in Worli, Mumbai is currently 'Good', with traffic being the dominant source of emissions. According to CPCB guidelines, this level of air quality is expected to have a minimal impact on health over the next 24 hours. You can safely continue with your regular outdoor activities.",
-        "sensitive_groups": "The air quality in Worli, Mumbai is 'Good' with traffic as the primary source, indicating minimal health impact over the next 24 hours. While conditions are excellent, sensitive individuals, including children and those with respiratory conditions, can comfortably enjoy outdoor activities while remaining mindful of localized traffic emissions."
+        "general_public": "The air quality is Satisfactory. Main pollution source is Traffic. Minor breathing discomfort to sensitive people.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Satisfactory due to Traffic. Minor breathing discomfort to sensitive people."
       },
       "hindi": {
-        "general_public": "वर्ली, मुंबई में वायु गुणवत्ता वर्तमान में 'अच्छी' श्रेणी में है, जिसमें यातायात प्रदूषण का मुख्य स्रोत है। सीपीसीबी के दिशानिर्देशों के अनुसार, अगले 24 घंटों में इस वायु गुणवत्ता का स्वास्थ्य पर न्यूनतम प्रभाव पड़ने की संभावना है। आप अपनी सामान्य बाहरी गतिविधियाँ सुरक्षित रूप से जारी रख सकते हैं।",
-        "sensitive_groups": "वर्ली, मुंबई में वायु गुणवत्ता 'अच्छी' है और यातायात इसका मुख्य स्रोत है, जिससे अगले 24 घंटों में स्वास्थ्य पर न्यूनतम प्रभाव पड़ने की उम्मीद है। हालांकि स्थिति बहुत अनुकूल है, संवेदनशील समूहों जैसे बच्चों और सांस के रोगियों को स्थानीय यातायात उत्सर्जन के प्रति थोड़ा सतर्क रहते हुए बाहरी गतिविधियों का आनंद लेना चाहिए।"
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       },
       "marathi": {
-        "general_public": "वरळी, मुंबई येथील हवेची गुणवत्ता सध्या 'चांगली' श्रेणीत असून, वाहतूक हा प्रदूषणाचा मुख्य स्रोत आहे. सीपीसीबीच्या मार्गदर्शक तत्त्वांनुसार, पुढील २४ तासांत या हवेच्या गुणवत्तेचा आरोग्यावर अत्यंत कमी परिणाम होण्याची शक्यता आहे. तुम्ही तुमच्या नेहमीच्या बाहेरील क्रियाकलाप सुरक्षितपणे सुरू ठेवू शकता.",
-        "sensitive_groups": "वरळी, मुंबई येथील हवेची गुणवत्ता 'चांगली' असून वाहतूक हा मुख्य स्रोत आहे, ज्यामुळे पुढील २४ तासांत आरोग्यावर अत्यंत कमी परिणाम होण्याची अपेक्षा आहे. परिस्थिती उत्कृष्ट असली तरी, लहान मुले आणि श्वसनाचा त्रास असलेल्या संवेदनशील व्यक्तींनी स्थानिक वाहतूक उत्सर्जनाची नोंद घेत बाहेरील क्रियाकलापांचा आनंद घ्यावा।"
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

@@ -1,0 +1,149 @@
+{
+  "location": "Anand Vihar",
+  "latitude": 28.6469,
+  "longitude": 77.3159,
+  "timestamp": "2026-06-20 00:00:00",
+  "forecast": {
+    "24h": {
+      "pm25": 127.67,
+      "aqi_category": "Very Poor"
+    },
+    "48h": {
+      "pm25": 112.86,
+      "aqi_category": "Poor"
+    },
+    "72h": {
+      "pm25": 117.28,
+      "aqi_category": "Poor"
+    }
+  },
+  "model_explanation": {
+    "top_increasing_factors": [
+      {
+        "feature": "pm10",
+        "impact": 4.68,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_1",
+        "impact": 2.31,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_7",
+        "impact": 2.06,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_week_sin",
+        "impact": 1.27,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "humidity_lag_1",
+        "impact": 0.68,
+        "direction": "increases pollution"
+      }
+    ],
+    "top_decreasing_factors": [
+      {
+        "feature": "pm25",
+        "impact": -30.8,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "temperature_lag_1",
+        "impact": -3.79,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_7_shifted",
+        "impact": -2.53,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "co",
+        "impact": -2.26,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "relative_humidity_2m_mean",
+        "impact": -2.19,
+        "direction": "reduces pollution"
+      }
+    ],
+    "main_drivers": [
+      {
+        "category": "Historical Pollution",
+        "impact": "-36.95"
+      },
+      {
+        "category": "Meteorology",
+        "impact": "-5.39"
+      },
+      {
+        "category": "Calendar",
+        "impact": "+1.32"
+      }
+    ]
+  },
+  "source_influence": {
+    "confidence": 0.792,
+    "sources": [
+      {
+        "name": "Traffic",
+        "contribution_percentage": 67.0,
+        "evidence": [
+          "Road density within 5km is 2955.7 km.",
+          "Nearest major road is 1164 meters away."
+        ],
+        "recommendation": "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+        "confidence": 0.83
+      },
+      {
+        "name": "Regional Background",
+        "contribution_percentage": 17.5,
+        "evidence": [
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
+        ],
+        "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
+        "confidence": 0.61
+      },
+      {
+        "name": "Industry",
+        "contribution_percentage": 15.5,
+        "evidence": [
+          "Upwind sector (N) contains 0.18 sq km of industrial land use."
+        ],
+        "recommendation": "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+        "confidence": 0.603
+      }
+    ]
+  },
+  "recommendations": [
+    "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+    "Coordinate with state/regional authorities on broad emission reduction policies.",
+    "Inspect nearby industrial sources for emission compliance and stack height regulations."
+  ],
+  "citizen_advisory": {
+    "station": "Anand Vihar",
+    "forecast_horizon": "24h",
+    "aqi_category": "Very Poor",
+    "dominant_source": "Traffic",
+    "advisories": {
+      "english": {
+        "general_public": "The air quality is Very Poor. Main pollution source is Traffic. Respiratory illness on prolonged exposure.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Very Poor due to Traffic. Respiratory illness on prolonged exposure."
+      },
+      "hindi": {
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
+      },
+      "marathi": {
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
+      }
+    },
+    "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"
+  }
+}

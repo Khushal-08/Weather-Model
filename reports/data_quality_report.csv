@@ -1,0 +1,8 @@
+Station Name,Date Range,Total Rows,PM2.5 Completeness %,PM10 Completeness %,Weather Completeness %,Duplicate Dates,Negative Values,Longest Gap (Days),PM2.5 Missing %,PM10 Missing %,NO2 Missing %
+"Borivali East, Mumbai - MPCB",2019-12-02 to 2026-06-23,2011,81.3%,80.6%,N/A (Phase 2),0,No,208,3.1%,4.0%,28.3%
+"Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",2019-12-02 to 2026-06-22,2331,94.1%,94.4%,N/A (Phase 2),0,No,16,3.3%,3.0%,6.3%
+"Kurla, Mumbai - MPCB",2019-12-02 to 2026-06-23,2336,94.2%,93.7%,N/A (Phase 2),0,No,13,3.4%,3.9%,4.8%
+"Powai, Mumbai - MPCB",2019-12-02 to 2026-06-23,2325,93.2%,93.0%,N/A (Phase 2),0,No,20,3.9%,4.2%,5.0%
+"Sion, Mumbai - MPCB",2019-12-02 to 2026-06-23,2295,93.4%,93.1%,N/A (Phase 2),0,No,36,2.5%,2.8%,3.5%
+"Vasai West, Mumbai - MPCB",2019-12-02 to 2026-05-13,2028,82.8%,69.1%,N/A (Phase 2),0,No,168,3.8%,19.8%,5.5%
+"Worli, Mumbai - MPCB",2019-07-03 to 2026-06-23,2406,88.1%,89.1%,N/A (Phase 2),0,No,57,6.7%,5.7%,15.6%

@@ -15,9 +15,23 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-INPUT_FILE = Path("data/processed/training_features.csv")
-MODELS_DIR = Path("models")
-REPORTS_DIR = Path("reports/figures")
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--city', type=str, default='mumbai', choices=['mumbai', 'delhi'])
+args, unknown = parser.parse_known_args()
+CITY = args.city.lower()
+
+if CITY == 'mumbai':
+    INPUT_FILE = Path("data/processed/training_features.csv")
+    MODELS_DIR = Path("models/mumbai")
+    REPORTS_DIR = Path("reports/figures")
+else:
+    INPUT_FILE = Path(f"data/processed/{CITY}_training_features.csv")
+    MODELS_DIR = Path(f"models/{CITY}")
+    REPORTS_DIR = Path(f"reports/{CITY}")
+REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+
 
 def setup_directories():
     """Ensure output directories exist."""
@@ -46,8 +60,12 @@ def load_and_prepare_data(filepath):
                      'month_sin', 'month_cos', 'day_of_week_sin', 'day_of_week_cos', 
                      'day_of_year_sin', 'day_of_year_cos']
                      
-    features = lag_cols + shifted_rolling_cols + calendar_cols
-    target = 'pm25'
+    df["pm25_target_24h"] = df.groupby(sort_col)["pm25"].shift(-1)
+    current_cols = ['pm25', 'pm10', 'no2', 'co', 'o3', 'temperature_2m_mean', 'relative_humidity_2m_mean', 'precipitation_sum', 'wind_speed_10m_mean']
+    current_cols = [c for c in current_cols if c in df.columns]
+    
+    features = current_cols + lag_cols + shifted_rolling_cols + calendar_cols
+    target = 'pm25_target_24h'
 
     df = df.dropna(subset=features + [target]).reset_index(drop=True)
     
@@ -169,7 +187,7 @@ def validate_shap():
         
     X_sion = sion_df[features]
     
-    model_path = MODELS_DIR / "xgboost_tuned.joblib"
+    model_path = MODELS_DIR / "xgboost_24h.joblib"
     if not model_path.exists():
         raise FileNotFoundError(f"Tuned model not found at {model_path}. Please train first.")
         

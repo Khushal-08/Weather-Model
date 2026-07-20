@@ -1,0 +1,159 @@
+{
+  "location": "Jawaharlal Nehru Stadium",
+  "latitude": 28.5818,
+  "longitude": 77.2343,
+  "timestamp": "2026-06-20 00:00:00",
+  "forecast": {
+    "24h": {
+      "pm25": 102.45,
+      "aqi_category": "Poor"
+    },
+    "48h": {
+      "pm25": 102.44,
+      "aqi_category": "Poor"
+    },
+    "72h": {
+      "pm25": 100.81,
+      "aqi_category": "Poor"
+    }
+  },
+  "model_explanation": {
+    "top_increasing_factors": [
+      {
+        "feature": "co_lag_7",
+        "impact": 2.73,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "temperature_2m_mean",
+        "impact": 2.33,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_1",
+        "impact": 1.79,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_week_sin",
+        "impact": 0.72,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "humidity_lag_1",
+        "impact": 0.66,
+        "direction": "increases pollution"
+      }
+    ],
+    "top_decreasing_factors": [
+      {
+        "feature": "pm25",
+        "impact": -44.45,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm10",
+        "impact": -10.87,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "co",
+        "impact": -4.71,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "relative_humidity_2m_mean",
+        "impact": -2.52,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_30_shifted",
+        "impact": -1.96,
+        "direction": "reduces pollution"
+      }
+    ],
+    "main_drivers": [
+      {
+        "category": "Historical Pollution",
+        "impact": "-67.29"
+      },
+      {
+        "category": "Calendar",
+        "impact": "+0.81"
+      },
+      {
+        "category": "Meteorology",
+        "impact": "+0.24"
+      }
+    ]
+  },
+  "source_influence": {
+    "confidence": 0.884,
+    "sources": [
+      {
+        "name": "Traffic",
+        "contribution_percentage": 54.1,
+        "evidence": [
+          "Road density within 5km is 2389.9 km.",
+          "Nearest major road is 233 meters away."
+        ],
+        "recommendation": "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+        "confidence": 0.886
+      },
+      {
+        "name": "Industry",
+        "contribution_percentage": 20.7,
+        "evidence": [
+          "Upwind sector (N) contains 0.36 sq km of industrial land use."
+        ],
+        "recommendation": "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+        "confidence": 0.659
+      },
+      {
+        "name": "Construction",
+        "contribution_percentage": 13.8,
+        "evidence": [
+          "Upwind sector (N) contains 0.12 sq km of construction/brownfield."
+        ],
+        "recommendation": "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites.",
+        "confidence": 0.623
+      },
+      {
+        "name": "Regional Background",
+        "contribution_percentage": 11.4,
+        "evidence": [
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
+        ],
+        "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
+        "confidence": 0.61
+      }
+    ]
+  },
+  "recommendations": [
+    "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+    "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+    "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites.",
+    "Coordinate with state/regional authorities on broad emission reduction policies."
+  ],
+  "citizen_advisory": {
+    "station": "Jawaharlal Nehru Stadium",
+    "forecast_horizon": "24h",
+    "aqi_category": "Poor",
+    "dominant_source": "Traffic",
+    "advisories": {
+      "english": {
+        "general_public": "The air quality is Poor. Main pollution source is Traffic. Breathing discomfort to most people on prolonged exposure.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Poor due to Traffic. Breathing discomfort to most people on prolonged exposure."
+      },
+      "hindi": {
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
+      },
+      "marathi": {
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
+      }
+    },
+    "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"
+  }
+}

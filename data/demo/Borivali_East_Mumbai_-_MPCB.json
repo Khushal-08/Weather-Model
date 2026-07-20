@@ -2,97 +2,97 @@
   "location": "Borivali East, Mumbai - MPCB",
   "latitude": 19.229,
   "longitude": 72.8649,
-  "timestamp": "2023-07-28 00:00:00",
+  "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 8.01,
-      "aqi_category": "Good"
+      "pm25": 46.16,
+      "aqi_category": "Satisfactory"
     },
     "48h": {
-      "pm25": 11.67,
-      "aqi_category": "Good"
+      "pm25": 72.5,
+      "aqi_category": "Moderately Polluted"
     },
     "72h": {
-      "pm25": 16.88,
-      "aqi_category": "Good"
+      "pm25": 78.88,
+      "aqi_category": "Moderately Polluted"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "humidity_lag_1",
-        "impact": 1.22,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "temperature_2m_mean",
-        "impact": 0.18,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "wind_speed_lag_1",
-        "impact": 0.17,
-        "direction": "increases pollution"
-      },
-      {
         "feature": "pm10_lag_1",
-        "impact": 0.12,
+        "impact": 11.24,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm10_lag_7",
+        "impact": 1.43,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm25_rolling_std_30_shifted",
+        "impact": 1.26,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "no2",
+        "impact": 1.0,
         "direction": "increases pollution"
       },
       {
         "feature": "temperature_lag_1",
-        "impact": 0.04,
+        "impact": 0.81,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
         "feature": "pm25",
-        "impact": -26.22,
+        "impact": -73.09,
         "direction": "reduces pollution"
       },
       {
-        "feature": "day_of_year_cos",
-        "impact": -3.56,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "precipitation_sum",
-        "impact": -1.82,
+        "feature": "pm10",
+        "impact": -49.91,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm25_rolling_mean_7_shifted",
-        "impact": -1.28,
+        "impact": -6.52,
         "direction": "reduces pollution"
       },
       {
-        "feature": "pm25_lag_7",
-        "impact": -0.62,
+        "feature": "month_cos",
+        "impact": -1.59,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "day_of_year_cos",
+        "impact": -1.36,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-33.54"
+        "impact": "-122.8"
       },
       {
         "category": "Calendar",
-        "impact": "-1.25"
+        "impact": "+0.58"
       },
       {
         "category": "Meteorology",
-        "impact": "-0.34"
+        "impact": "-0.32"
       }
     ]
   },
   "source_influence": {
-    "confidence": 0.891,
+    "confidence": 0.861,
     "sources": [
       {
         "name": "Traffic",
-        "contribution_percentage": 53.7,
+        "contribution_percentage": 60.4,
         "evidence": [
           "Road density within 5km is 1145.9 km.",
           "Nearest major road is 145 meters away."
@@ -102,31 +102,30 @@
       },
       {
         "name": "Construction",
-        "contribution_percentage": 25.0,
+        "contribution_percentage": 15.7,
         "evidence": [
-          "Upwind sector (N) contains 0.13 sq km of construction/brownfield.",
-          "Pollutant signature (High PM10 vs PM2.5 ratio) strongly indicates coarse dust suspension."
+          "Upwind sector (N) contains 0.13 sq km of construction/brownfield."
         ],
         "recommendation": "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites.",
-        "confidence": 0.836
+        "confidence": 0.626
       },
       {
         "name": "Regional Background",
-        "contribution_percentage": 11.1,
+        "contribution_percentage": 12.4,
         "evidence": [
           "Base atmospheric pollution level representing broader urban/regional accumulation."
         ],
         "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
-        "confidence": 0.71
+        "confidence": 0.61
       },
       {
         "name": "Industry",
-        "contribution_percentage": 10.2,
+        "contribution_percentage": 11.5,
         "evidence": [
           "Upwind sector (N) contains 0.18 sq km of industrial land use."
         ],
         "recommendation": "Inspect nearby industrial sources for emission compliance and stack height regulations.",
-        "confidence": 0.706
+        "confidence": 0.606
       }
     ]
   },
@@ -139,20 +138,20 @@
   "citizen_advisory": {
     "station": "Borivali East, Mumbai - MPCB",
     "forecast_horizon": "24h",
-    "aqi_category": "Good",
+    "aqi_category": "Satisfactory",
     "dominant_source": "Traffic",
     "advisories": {
       "english": {
-        "general_public": "The air quality in Borivali East is currently Good, with traffic being the dominant source of emissions. According to CPCB guidance, this level of air quality is expected to have minimal impact on daily activities. It is an excellent time to enjoy outdoor activities over the next 24 hours.",
-        "sensitive_groups": "Air quality in Borivali East is Good, presenting minimal impact for most individuals despite local traffic emissions. Sensitive groups, including children, the elderly, and those with respiratory conditions, can safely continue their normal outdoor routines over the next 24 hours."
+        "general_public": "The air quality is Satisfactory. Main pollution source is Traffic. Minor breathing discomfort to sensitive people.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Satisfactory due to Traffic. Minor breathing discomfort to sensitive people."
       },
       "hindi": {
-        "general_public": "बोरीवली ईस्ट में वायु गुणवत्ता 'अच्छी' श्रेणी में है, जिसमें यातायात प्रदूषण का मुख्य स्रोत है। सीपीसीबी के दिशानिर्देशों के अनुसार, इसका दैनिक गतिविधियों पर न्यूनतम प्रभाव पड़ेगा। अगले 24 घंटों में बाहरी गतिविधियों का आनंद लेने के लिए यह एक बेहतरीन समय है।",
-        "sensitive_groups": "बोरीवली ईस्ट में वायु गुणवत्ता 'अच्छी' है और यातायात उत्सर्जन के बावजूद इसका प्रभाव न्यूनतम रहने की उम्मीद है। संवेदनशील समूहों, जैसे बच्चों, बुजुर्गों और सांस के रोगियों के लिए अगले 24 घंटों में अपनी सामान्य बाहरी गतिविधियां जारी रखना पूरी तरह से सुरक्षित है।"
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       },
       "marathi": {
-        "general_public": "बोरिवली पूर्व येथील हवेची गुणवत्ता 'चांगली' असून, वाहतूक हा प्रदूषणाचा मुख्य स्त्रोत आहे. सीपीसीबीच्या मार्गदर्शक तत्त्वांनुसार, याचा दैनंदिन जीवनावर अत्यंत कमी परिणाम होईल. पुढील २४ तासांत मैदानी उपक्रमांचा आनंद घेण्यासाठी ही उत्तम वेळ आहे.",
-        "sensitive_groups": "बोरिवली पूर्व येथील हवेची गुणवत्ता 'चांगली' आहे आणि वाहतुकीचे उत्सर्जन असूनही याचा परिणाम अत्यंत कमी असण्याची शक्यता आहे. संवेदनशील गट, जसे की लहान मुले, वृद्ध आणि श्वसनाचा त्रास असलेले लोक पुढील २४ तासांत त्यांचे नेहमीचे मैदानी उपक्रम सुरक्षितपणे सुरू ठेवू शकतात."
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

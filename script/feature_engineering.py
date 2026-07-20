@@ -11,8 +11,20 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-INPUT_FILE = Path("data/processed/training_dataset.csv")
-OUTPUT_FILE = Path("data/processed/training_features.csv")
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--city', type=str, default='mumbai', choices=['mumbai', 'delhi'])
+args, unknown = parser.parse_known_args()
+CITY = args.city.lower()
+
+if CITY == 'mumbai':
+    INPUT_FILE = Path("data/processed/training_dataset.csv")
+    OUTPUT_FILE = Path("data/processed/training_features.csv")
+else:
+    INPUT_FILE = Path(f"data/processed/{CITY}_training_dataset.csv")
+    OUTPUT_FILE = Path(f"data/processed/{CITY}_training_features.csv")
+
 
 def main():
     logger.info("Starting feature engineering...")

@@ -2,88 +2,88 @@
   "location": "Sion, Mumbai - MPCB",
   "latitude": 19.047,
   "longitude": 72.8746,
-  "timestamp": "2023-07-28 00:00:00",
+  "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 13.71,
-      "aqi_category": "Good"
+      "pm25": 303.61,
+      "aqi_category": "Severe"
     },
     "48h": {
-      "pm25": 13.3,
-      "aqi_category": "Good"
+      "pm25": 157.17,
+      "aqi_category": "Very Poor"
     },
     "72h": {
-      "pm25": 16.88,
-      "aqi_category": "Good"
+      "pm25": 173.81,
+      "aqi_category": "Very Poor"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "humidity_lag_1",
-        "impact": 1.21,
+        "feature": "pm10",
+        "impact": 116.7,
         "direction": "increases pollution"
       },
       {
-        "feature": "temperature_2m_mean",
-        "impact": 0.17,
+        "feature": "pm25",
+        "impact": 77.02,
         "direction": "increases pollution"
       },
       {
-        "feature": "wind_speed_lag_1",
-        "impact": 0.17,
+        "feature": "pm25_lag_14",
+        "impact": 3.55,
         "direction": "increases pollution"
       },
       {
-        "feature": "pm25_rolling_mean_30_shifted",
-        "impact": 0.17,
+        "feature": "pm25_rolling_std_30_shifted",
+        "impact": 3.5,
         "direction": "increases pollution"
       },
       {
-        "feature": "pm10_lag_1",
-        "impact": 0.11,
+        "feature": "pm25_rolling_std_7_shifted",
+        "impact": 3.11,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
-        "feature": "pm25",
-        "impact": -21.98,
+        "feature": "month_cos",
+        "impact": -16.87,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm10_lag_7",
+        "impact": -7.67,
         "direction": "reduces pollution"
       },
       {
         "feature": "day_of_year_cos",
-        "impact": -3.45,
+        "impact": -7.03,
         "direction": "reduces pollution"
       },
       {
-        "feature": "precipitation_sum",
-        "impact": -1.81,
+        "feature": "co",
+        "impact": -6.98,
         "direction": "reduces pollution"
       },
       {
-        "feature": "pm25_rolling_mean_7_shifted",
-        "impact": -0.59,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "day_of_year_sin",
-        "impact": -0.56,
+        "feature": "pm25_lag_2",
+        "impact": -6.55,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-27.81"
-      },
-      {
-        "category": "Calendar",
-        "impact": "-1.23"
+        "impact": "+142.22"
       },
       {
         "category": "Meteorology",
-        "impact": "-0.39"
+        "impact": "-9.58"
+      },
+      {
+        "category": "Calendar",
+        "impact": "+2.27"
       }
     ]
   },
@@ -123,11 +123,10 @@
         "name": "Regional Background",
         "contribution_percentage": 8.6,
         "evidence": [
-          "Base atmospheric pollution level representing broader urban/regional accumulation.",
-          "High wind speeds (19.6375 km/h) indicate strong long-range regional transport."
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
         ],
         "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
-        "confidence": 0.76
+        "confidence": 0.71
       }
     ]
   },
@@ -140,20 +139,20 @@
   "citizen_advisory": {
     "station": "Sion, Mumbai - MPCB",
     "forecast_horizon": "24h",
-    "aqi_category": "Good",
+    "aqi_category": "Severe",
     "dominant_source": "Traffic",
     "advisories": {
       "english": {
-        "general_public": "The air quality in Sion, Mumbai is currently 'Good', with traffic being the dominant source of emissions. According to CPCB guidelines, this level of air quality poses minimal impact to health. It is an excellent time for the general public to engage in outdoor activities and enjoy the clean air.",
-        "sensitive_groups": "The air quality in Sion, Mumbai is currently 'Good', with traffic being the dominant source of emissions. While CPCB guidelines indicate minimal health impact, sensitive individuals, including children, the elderly, and those with respiratory conditions, can safely enjoy outdoor activities today without concern."
+        "general_public": "The air quality is Severe. Main pollution source is Traffic. Affects healthy people and seriously impacts those with existing diseases.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Severe due to Traffic. Affects healthy people and seriously impacts those with existing diseases."
       },
       "hindi": {
-        "general_public": "सायन, मुंबई में वायु गुणवत्ता वर्तमान में 'अच्छी' श्रेणी में है, जिसमें मुख्य रूप से यातायात से होने वाला उत्सर्जन शामिल है। सीपीसीबी (CPCB) के दिशानिर्देशों के अनुसार, इस वायु गुणवत्ता का स्वास्थ्य पर न्यूनतम प्रभाव पड़ेगा। आम जनता के लिए बाहरी गतिविधियों और व्यायाम का आनंद लेने के लिए यह एक बेहतरीन समय है।",
-        "sensitive_groups": "सायन, मुंबई में वायु गुणवत्ता वर्तमान में 'अच्छी' श्रेणी में है, जिसमें मुख्य रूप से यातायात से होने वाला उत्सर्जन शामिल है। हालांकि सीपीसीबी (CPCB) के दिशानिर्देशों के अनुसार स्वास्थ्य पर न्यूनतम प्रभाव पड़ेगा, फिर भी संवेदनशील समूह जैसे बच्चे, बुजुर्ग और सांस के रोगी सुरक्षित रूप से बाहरी गतिविधियों का आनंद ले सकते हैं।"
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       },
       "marathi": {
-        "general_public": "सायन, मुंबई येथील हवेची गुणवत्ता सध्या 'चांगली' श्रेणीत आहे, ज्यामध्ये वाहतूक हा प्रदूषणाचा मुख्य स्त्रोत आहे. सीपीसीबी (CPCB) च्या मार्गदर्शक तत्त्वांनुसार, या हवेच्या गुणवत्तेचा आरोग्यावर किमान परिणाम होईल. सर्वसामान्य नागरिकांसाठी बाहेरील क्रियाकलाप आणि व्यायामासाठी ही उत्तम वेळ आहे.",
-        "sensitive_groups": "सायन, मुंबई येथील हवेची गुणवत्ता सध्या 'चांगली' श्रेणीत आहे, ज्यामध्ये वाहतूक हा प्रदूषणाचा मुख्य स्त्रोत आहे. सीपीसीबी (CPCB) च्या मार्गदर्शक तत्त्वांनुसार आरोग्यावर किमान परिणाम होणार असला, तरी संवेदनशील गट जसे की मुले, वृद्ध आणि श्वसनाचे त्रास असलेले लोक सुरक्षितपणे बाहेरील वातावरणाचा आनंद घेऊ शकतात."
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

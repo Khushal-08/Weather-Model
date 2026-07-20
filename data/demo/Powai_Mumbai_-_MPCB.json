@@ -2,88 +2,88 @@
   "location": "Powai, Mumbai - MPCB",
   "latitude": 19.1176,
   "longitude": 72.906,
-  "timestamp": "2023-07-28 00:00:00",
+  "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 14.93,
-      "aqi_category": "Good"
+      "pm25": 54.51,
+      "aqi_category": "Satisfactory"
     },
     "48h": {
-      "pm25": 14.23,
-      "aqi_category": "Good"
+      "pm25": 53.19,
+      "aqi_category": "Satisfactory"
     },
     "72h": {
-      "pm25": 16.88,
-      "aqi_category": "Good"
+      "pm25": 60.27,
+      "aqi_category": "Moderately Polluted"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "humidity_lag_1",
-        "impact": 1.24,
+        "feature": "pm10_lag_1",
+        "impact": 14.08,
         "direction": "increases pollution"
       },
       {
-        "feature": "wind_speed_lag_1",
-        "impact": 0.2,
+        "feature": "co_lag_7",
+        "impact": 5.79,
         "direction": "increases pollution"
       },
       {
-        "feature": "pm25_rolling_mean_30_shifted",
-        "impact": 0.2,
+        "feature": "pm10_lag_7",
+        "impact": 4.86,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "o3_lag_1",
+        "impact": 3.7,
         "direction": "increases pollution"
       },
       {
         "feature": "temperature_2m_mean",
-        "impact": 0.18,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "pm10_lag_1",
-        "impact": 0.11,
+        "impact": 2.2,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
         "feature": "pm25",
-        "impact": -20.89,
+        "impact": -93.01,
         "direction": "reduces pollution"
       },
       {
-        "feature": "day_of_year_cos",
-        "impact": -3.43,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "precipitation_sum",
-        "impact": -1.83,
+        "feature": "pm10",
+        "impact": -42.14,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm25_rolling_mean_7_shifted",
-        "impact": -0.64,
+        "impact": -4.89,
         "direction": "reduces pollution"
       },
       {
-        "feature": "day_of_year_sin",
-        "impact": -0.55,
+        "feature": "month_cos",
+        "impact": -1.59,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_30_shifted",
+        "impact": -1.5,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-26.67"
-      },
-      {
-        "category": "Calendar",
-        "impact": "-1.23"
+        "impact": "-119.2"
       },
       {
         "category": "Meteorology",
-        "impact": "-0.31"
+        "impact": "+3.89"
+      },
+      {
+        "category": "Calendar",
+        "impact": "+1.12"
       }
     ]
   },
@@ -107,7 +107,7 @@
           "Base atmospheric pollution level representing broader urban/regional accumulation."
         ],
         "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
-        "confidence": 0.71
+        "confidence": 0.61
       }
     ]
   },
@@ -118,20 +118,20 @@
   "citizen_advisory": {
     "station": "Powai, Mumbai - MPCB",
     "forecast_horizon": "24h",
-    "aqi_category": "Good",
+    "aqi_category": "Satisfactory",
     "dominant_source": "Traffic",
     "advisories": {
       "english": {
-        "general_public": "The air quality in Powai, Mumbai is currently Good, with traffic being the dominant source of emissions. According to CPCB guidelines, this level of air quality poses minimal health impact, making it an excellent time for outdoor activities.",
-        "sensitive_groups": "While the air quality in Powai is Good with minimal expected health impact, sensitive individuals should remain aware of localized traffic emissions. It is generally safe for children, the elderly, and those with respiratory conditions to enjoy outdoor activities."
+        "general_public": "The air quality is Satisfactory. Main pollution source is Traffic. Minor breathing discomfort to sensitive people.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Satisfactory due to Traffic. Minor breathing discomfort to sensitive people."
       },
       "hindi": {
-        "general_public": "पवई, मुंबई में वर्तमान में वायु गुणवत्ता 'अच्छी' श्रेणी में है, जिसमें यातायात प्रदूषण का मुख्य स्रोत है। सीपीसीबी (CPCB) के दिशानिर्देशों के अनुसार, इस वायु गुणवत्ता का स्वास्थ्य पर न्यूनतम प्रभाव पड़ेगा, और यह बाहरी गतिविधियों के लिए पूरी तरह अनुकूल है।",
-        "sensitive_groups": "हालांकि पवई में वायु गुणवत्ता 'अच्छी' है और इसका स्वास्थ्य पर न्यूनतम प्रभाव पड़ेगा, फिर भी संवेदनशील समूहों (जैसे बच्चों और बुजुर्गों) को स्थानीय यातायात उत्सर्जन के प्रति सचेत रहना चाहिए। सामान्य तौर पर, सभी के लिए बाहरी गतिविधियां सुरक्षित हैं।"
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       },
       "marathi": {
-        "general_public": "पवई, मुंबई येथील हवेची गुणवत्ता सध्या 'चांगली' श्रेणीत असून, वाहतूक हा प्रदूषणाचा मुख्य स्त्रोत आहे. सीपीसीबी (CPCB) च्या मार्गदर्शक तत्त्वांनुसार, या हवेच्या गुणवत्तेचा आरोग्यावर अत्यंत कमी परिणाम होईल, ज्यामुळे बाहेरील क्रियाकलापांसाठी ही वेळ उत्तम आहे।",
-        "sensitive_groups": "पवईमध्ये हवेची गुणवत्ता 'चांगली' असून आरोग्यावर किमान परिणाम अपेक्षित असला, तरी संवेदनशील व्यक्तींनी (वृद्ध आणि मुले) स्थानिक वाहतूक उत्सर्जनाबाबत जागरूक राहावे. सामान्यतः, सर्वांसाठी बाहेरील क्रियाकलाप सुरक्षित आहेत।"
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

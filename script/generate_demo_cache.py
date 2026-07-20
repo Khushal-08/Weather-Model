@@ -10,8 +10,19 @@ from train_multi_horizon import load_and_prepare_data_multi
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-DATA_FILE = Path("data/processed/training_features.csv")
-DEMO_DIR = Path("data/demo")
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--city', type=str, default='mumbai', choices=['mumbai', 'delhi'])
+args, unknown = parser.parse_known_args()
+CITY = args.city.lower()
+
+if CITY == 'mumbai':
+    DATA_FILE = Path("data/processed/training_features.csv")
+    DEMO_DIR = Path("data/demo/mumbai")
+else:
+    DATA_FILE = Path(f"data/processed/{CITY}_training_features.csv")
+    DEMO_DIR = Path(f"data/demo/{CITY}")
+DEMO_DIR.mkdir(parents=True, exist_ok=True)
 
 def generate_cache():
     DEMO_DIR.mkdir(parents=True, exist_ok=True)

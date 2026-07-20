@@ -2,97 +2,97 @@
   "location": "Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",
   "latitude": 19.0974,
   "longitude": 72.8743,
-  "timestamp": "2023-07-28 00:00:00",
+  "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 14.95,
-      "aqi_category": "Good"
+      "pm25": 58.47,
+      "aqi_category": "Satisfactory"
     },
     "48h": {
-      "pm25": 14.05,
-      "aqi_category": "Good"
+      "pm25": 64.59,
+      "aqi_category": "Moderately Polluted"
     },
     "72h": {
-      "pm25": 16.88,
-      "aqi_category": "Good"
+      "pm25": 73.38,
+      "aqi_category": "Moderately Polluted"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "humidity_lag_1",
-        "impact": 1.22,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "pm25_rolling_mean_30_shifted",
-        "impact": 0.2,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "temperature_2m_mean",
-        "impact": 0.19,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "wind_speed_lag_1",
-        "impact": 0.17,
-        "direction": "increases pollution"
-      },
-      {
         "feature": "pm10_lag_1",
-        "impact": 0.12,
+        "impact": 10.01,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_7",
+        "impact": 6.23,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "o3_lag_1",
+        "impact": 3.76,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm10_lag_7",
+        "impact": 3.5,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm25_rolling_std_30_shifted",
+        "impact": 2.86,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
         "feature": "pm25",
-        "impact": -20.75,
+        "impact": -80.63,
         "direction": "reduces pollution"
       },
       {
-        "feature": "day_of_year_cos",
-        "impact": -3.44,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "precipitation_sum",
-        "impact": -1.8,
+        "feature": "pm10",
+        "impact": -45.3,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm25_rolling_mean_7_shifted",
-        "impact": -0.64,
+        "impact": -5.8,
         "direction": "reduces pollution"
       },
       {
-        "feature": "day_of_year_sin",
-        "impact": -0.56,
+        "feature": "co",
+        "impact": -2.1,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "month_cos",
+        "impact": -1.59,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-26.6"
-      },
-      {
-        "category": "Calendar",
-        "impact": "-1.23"
+        "impact": "-114.29"
       },
       {
         "category": "Meteorology",
-        "impact": "-0.36"
+        "impact": "+2.46"
+      },
+      {
+        "category": "Calendar",
+        "impact": "+1.61"
       }
     ]
   },
   "source_influence": {
-    "confidence": 0.939,
+    "confidence": 0.909,
     "sources": [
       {
         "name": "Traffic",
-        "contribution_percentage": 43.6,
+        "contribution_percentage": 48.1,
         "evidence": [
           "Road density within 5km is 2171.7 km.",
           "Nearest major road is 361 meters away."
@@ -102,32 +102,30 @@
       },
       {
         "name": "Industry",
-        "contribution_percentage": 25.4,
+        "contribution_percentage": 28.1,
         "evidence": [
           "Upwind sector (N) contains 0.54 sq km of industrial land use."
         ],
         "recommendation": "Inspect nearby industrial sources for emission compliance and stack height regulations.",
-        "confidence": 0.812
+        "confidence": 0.712
       },
       {
         "name": "Construction",
-        "contribution_percentage": 21.6,
+        "contribution_percentage": 13.4,
         "evidence": [
-          "Upwind sector (N) contains 0.13 sq km of construction/brownfield.",
-          "Pollutant signature (High PM10 vs PM2.5 ratio) strongly indicates coarse dust suspension."
+          "Upwind sector (N) contains 0.13 sq km of construction/brownfield."
         ],
         "recommendation": "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites.",
-        "confidence": 0.838
+        "confidence": 0.628
       },
       {
         "name": "Regional Background",
-        "contribution_percentage": 9.4,
+        "contribution_percentage": 10.4,
         "evidence": [
-          "Base atmospheric pollution level representing broader urban/regional accumulation.",
-          "High wind speeds (17.7 km/h) indicate strong long-range regional transport."
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
         ],
         "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
-        "confidence": 0.76
+        "confidence": 0.61
       }
     ]
   },
@@ -140,20 +138,20 @@
   "citizen_advisory": {
     "station": "Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",
     "forecast_horizon": "24h",
-    "aqi_category": "Good",
+    "aqi_category": "Satisfactory",
     "dominant_source": "Traffic",
     "advisories": {
       "english": {
-        "general_public": "The air quality at Chhatrapati Shivaji Intl. Airport (T2), Mumbai is currently Good, with traffic being the dominant source of emissions. Over the next 24 hours, the air quality is expected to have minimal impact on health. You can safely enjoy all outdoor activities and continue your normal daily routine.",
-        "sensitive_groups": "The air quality at Chhatrapati Shivaji Intl. Airport (T2), Mumbai is currently Good, with traffic being the dominant source of emissions. Over the next 24 hours, the air quality is expected to have minimal impact on health. Sensitive individuals, including children, the elderly, and those with respiratory conditions, can comfortably engage in outdoor activities."
+        "general_public": "The air quality is Satisfactory. Main pollution source is Traffic. Minor breathing discomfort to sensitive people.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Satisfactory due to Traffic. Minor breathing discomfort to sensitive people."
       },
       "hindi": {
-        "general_public": "छत्रपति शिवाजी इंटरनेशनल एयरपोर्ट (T2), मुंबई में वायु गुणवत्ता वर्तमान में 'अच्छी' श्रेणी में है, जिसमें मुख्य प्रदूषण स्रोत यातायात है। अगले 24 घंटों में, हवा की गुणवत्ता का स्वास्थ्य पर न्यूनतम प्रभाव पड़ने की संभावना है। आप बिना किसी चिंता के अपनी सामान्य बाहरी गतिविधियाँ जारी रख सकते हैं।",
-        "sensitive_groups": "छत्रपति शिवाजी इंटरनेशनल एयरपोर्ट (T2), मुंबई में वायु गुणवत्ता वर्तमान में 'अच्छी' श्रेणी में है, जिसमें मुख्य प्रदूषण स्रोत यातायात है। अगले 24 घंटों में, हवा की गुणवत्ता का स्वास्थ्य पर न्यूनतम प्रभाव पड़ने की संभावना है। संवेदनशील समूह, जैसे बच्चे, बुजुर्ग और सांस के रोगी, सुरक्षित रूप से अपनी बाहरी गतिविधियों का आनंद ले सकते हैं।"
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       },
       "marathi": {
-        "general_public": "छत्रपती शिवाजी आंतरराष्ट्रीय विमानतळ (T2), मुंबई येथील हवेची गुणवत्ता सध्या 'चांगली' श्रेणीत आहे, ज्यामध्ये वाहतूक हा मुख्य प्रदूषक स्त्रोत आहे. पुढील २४ तासांत हवेच्या गुणवत्तेचा आरोग्यावर अत्यंत कमी परिणाम होण्याची शक्यता आहे. तुम्ही कोणत्याही काळजीशिवाय तुमच्या नेहमीच्या बाहेरील क्रियाकलाप सुरू ठेवू शकता.",
-        "sensitive_groups": "छत्रपती शिवाजी आंतरराष्ट्रीय विमानतळ (T2), मुंबई येथील हवेची गुणवत्ता सध्या 'चांगली' श्रेणीत आहे, ज्यामध्ये वाहतूक हा मुख्य प्रदूषक स्त्रोत आहे. पुढील २४ तासांत हवेच्या गुणवत्तेचा आरोग्यावर अत्यंत कमी परिणाम होण्याची शक्यता आहे. संवेदनशील व्यक्ती, जसे की लहान मुले, वृद्ध आणि श्वसनाचा त्रास असलेले लोक सुरक्षितपणे बाहेरील क्रियाकलापांचा आनंद घेऊ शकतात."
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

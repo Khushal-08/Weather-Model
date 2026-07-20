@@ -24,9 +24,21 @@ logger = logging.getLogger(__name__)
 ox.settings.log_console = False
 ox.settings.use_cache = True
 
-STATIC_FEATURES_PATH = Path("data/geospatial/static_features.csv")
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--city', type=str, default='mumbai', choices=['mumbai', 'delhi'])
+args, unknown = parser.parse_known_args()
+CITY = args.city.lower()
+
+if CITY == 'mumbai':
+    STATIC_FEATURES_PATH = Path("data/geospatial/static_features.csv")
+    REPORTS_DIR = Path("reports/figures")
+else:
+    STATIC_FEATURES_PATH = Path(f"data/geospatial/{CITY}_static_features.csv")
+    REPORTS_DIR = Path(f"reports/{CITY}")
 STATIC_FEATURES_PATH.parent.mkdir(parents=True, exist_ok=True)
-REPORTS_DIR = Path("reports/figures")
+
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
 geod = Geod(ellps='WGS84')
@@ -151,7 +163,7 @@ def generate_static_features(target_station=None):
     
     logger.info(f"Static features cache missing for {target_station}. Generating...")
     
-    training_data_path = "data/processed/training_features.csv"
+    training_data_path = "data/processed/training_features.csv" if CITY == 'mumbai' else f"data/processed/{CITY}_training_features.csv"
     if not os.path.exists(training_data_path):
         raise FileNotFoundError(f"Could not find {training_data_path} to identify stations.")
     

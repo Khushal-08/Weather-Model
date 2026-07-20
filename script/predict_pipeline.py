@@ -18,8 +18,20 @@ from train_multi_horizon import load_and_prepare_data_multi
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-MODELS_DIR = Path("models")
-DATA_FILE = Path("data/processed/training_features.csv")
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--city', type=str, default='mumbai', choices=['mumbai', 'delhi'])
+args, unknown = parser.parse_known_args()
+CITY = args.city.lower()
+
+if CITY == 'mumbai':
+    MODELS_DIR = Path("models/mumbai")
+    DATA_FILE = Path("data/processed/training_features.csv")
+else:
+    MODELS_DIR = Path(f"models/{CITY}")
+    DATA_FILE = Path(f"data/processed/{CITY}_training_features.csv")
+
 
 def get_aqi_category(pm25):
     """Convert PM2.5 to Indian AQI category."""
