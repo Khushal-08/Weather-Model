@@ -224,18 +224,25 @@ if view_mode == "Administrator":
             stat_lon = df_hist[df_hist['station'] == selected_station]['longitude'].iloc[0] if 'longitude' in df_hist.columns else 72.8
             layers = get_map_layers(stat_lat, stat_lon)
             
+            # Determine which source layers to show based on >15% contribution
+            sources = intelligence_data.get('source_influence', {}).get('sources', [])
+            show_roads = any("traffic" in s.get('name', '').lower() and s.get('contribution_percentage', 0) > 15 for s in sources)
+            show_industry = any("industry" in s.get('name', '').lower() and s.get('contribution_percentage', 0) > 15 for s in sources)
+            show_construction = any("construction" in s.get('name', '').lower() and s.get('contribution_percentage', 0) > 15 for s in sources)
+            show_fires = any("biomass" in s.get('name', '').lower() and s.get('contribution_percentage', 0) > 15 for s in sources)
+            
             if 'roads' in layers:
-                folium.GeoJson(layers['roads'], name="Major Roads", style_function=lambda x: {'color':'gray','weight':2}, tooltip="Major Road", show=False).add_to(m)
+                folium.GeoJson(layers['roads'], name="Major Roads", style_function=lambda x: {'color':'gray','weight':2}, tooltip="Major Road", show=show_roads).add_to(m)
             if 'industry' in layers:
-                folium.GeoJson(layers['industry'], name="Industrial Zones", style_function=lambda x: {'fillColor':'purple','color':'purple','weight':1,'fillOpacity':0.4}, tooltip="Industrial Zone", show=False).add_to(m)
+                folium.GeoJson(layers['industry'], name="Industrial Zones", style_function=lambda x: {'fillColor':'purple','color':'purple','weight':1,'fillOpacity':0.4}, tooltip="Industrial Zone", show=show_industry).add_to(m)
             if 'construction' in layers:
-                folium.GeoJson(layers['construction'], name="Construction Zones", style_function=lambda x: {'fillColor':'orange','color':'orange','weight':1,'fillOpacity':0.4}, tooltip="Construction Zone", show=False).add_to(m)
+                folium.GeoJson(layers['construction'], name="Construction Zones", style_function=lambda x: {'fillColor':'orange','color':'orange','weight':1,'fillOpacity':0.4}, tooltip="Construction Zone", show=show_construction).add_to(m)
                 
             try:
                 from geospatial_features import fetch_nasa_firms_data
                 firms = fetch_nasa_firms_data()
                 if not firms.empty:
-                    fire_group = folium.FeatureGroup(name="Active Fires (FIRMS)", show=False)
+                    fire_group = folium.FeatureGroup(name="Active Fires (FIRMS)", show=show_fires)
                     for _, r in firms.iterrows():
                         folium.CircleMarker([r['latitude'], r['longitude']], radius=3, color='red', fill=True, popup="Active Fire").add_to(fire_group)
                     fire_group.add_to(m)
