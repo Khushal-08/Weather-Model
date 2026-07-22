@@ -6,6 +6,10 @@
 
 **Predict • Explain • Attribute • Act**
 
+<br>
+🌐 <b><a href="https://weather-model-g9pvryhj7tsfr5xvmgqpxi.streamlit.app/">Live Demo: Streamlit Community Cloud</a></b>
+<br><br>
+
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![XGBoost](https://img.shields.io/badge/XGBoost-Machine%20Learning-green)
 ![SHAP](https://img.shields.io/badge/Explainability-SHAP-orange)
