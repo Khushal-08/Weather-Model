@@ -1,0 +1,159 @@
+{
+  "location": "Punjabi Bagh",
+  "latitude": 28.662,
+  "longitude": 77.1242,
+  "timestamp": "2026-06-20 00:00:00",
+  "forecast": {
+    "24h": {
+      "pm25": 133.36,
+      "aqi_category": "Very Poor"
+    },
+    "48h": {
+      "pm25": 116.25,
+      "aqi_category": "Poor"
+    },
+    "72h": {
+      "pm25": 115.06,
+      "aqi_category": "Poor"
+    }
+  },
+  "model_explanation": {
+    "top_increasing_factors": [
+      {
+        "feature": "pm10_lag_1",
+        "impact": 3.74,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_week_sin",
+        "impact": 1.36,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_7",
+        "impact": 1.04,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_1",
+        "impact": 0.75,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_year_sin",
+        "impact": 0.65,
+        "direction": "increases pollution"
+      }
+    ],
+    "top_decreasing_factors": [
+      {
+        "feature": "pm25",
+        "impact": -22.84,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "co",
+        "impact": -4.81,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "day_of_year_cos",
+        "impact": -3.37,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "month_cos",
+        "impact": -2.14,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_7_shifted",
+        "impact": -2.09,
+        "direction": "reduces pollution"
+      }
+    ],
+    "main_drivers": [
+      {
+        "category": "Historical Pollution",
+        "impact": "-36.38"
+      },
+      {
+        "category": "Meteorology",
+        "impact": "-2.54"
+      },
+      {
+        "category": "Calendar",
+        "impact": "+1.83"
+      }
+    ]
+  },
+  "source_influence": {
+    "confidence": 0.88,
+    "sources": [
+      {
+        "name": "Traffic",
+        "contribution_percentage": 51.9,
+        "evidence": [
+          "Road density within 5km is 2860.2 km.",
+          "Nearest major road is 497 meters away."
+        ],
+        "recommendation": "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+        "confidence": 0.87
+      },
+      {
+        "name": "Industry",
+        "contribution_percentage": 31.5,
+        "evidence": [
+          "Upwind sector (N) contains 0.55 sq km of industrial land use."
+        ],
+        "recommendation": "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+        "confidence": 0.714
+      },
+      {
+        "name": "Regional Background",
+        "contribution_percentage": 11.5,
+        "evidence": [
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
+        ],
+        "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
+        "confidence": 0.61
+      },
+      {
+        "name": "Construction",
+        "contribution_percentage": 5.1,
+        "evidence": [
+          "Upwind sector (N) contains 0.04 sq km of construction/brownfield."
+        ],
+        "recommendation": "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites.",
+        "confidence": 0.577
+      }
+    ]
+  },
+  "recommendations": [
+    "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+    "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+    "Coordinate with state/regional authorities on broad emission reduction policies.",
+    "Review dust suppression compliance (water sprinkling, covers) at nearby construction sites."
+  ],
+  "citizen_advisory": {
+    "station": "Punjabi Bagh",
+    "forecast_horizon": "24h",
+    "aqi_category": "Very Poor",
+    "dominant_source": "Traffic",
+    "advisories": {
+      "english": {
+        "general_public": "The air quality is Very Poor. Main pollution source is Traffic. Respiratory illness on prolonged exposure.",
+        "sensitive_groups": "Caution for sensitive groups: The air quality is Very Poor due to Traffic. Respiratory illness on prolonged exposure."
+      },
+      "hindi": {
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
+      },
+      "marathi": {
+        "general_public": "Translation unavailable.",
+        "sensitive_groups": "Translation unavailable."
+      }
+    },
+    "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"
+  }
+}

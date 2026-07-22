@@ -5,85 +5,85 @@
   "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 102.45,
+      "pm25": 107.08,
       "aqi_category": "Poor"
     },
     "48h": {
-      "pm25": 102.44,
+      "pm25": 106.03,
       "aqi_category": "Poor"
     },
     "72h": {
-      "pm25": 100.81,
+      "pm25": 103.57,
       "aqi_category": "Poor"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "co_lag_7",
-        "impact": 2.73,
+        "feature": "temperature_lag_1",
+        "impact": 2.55,
         "direction": "increases pollution"
       },
       {
-        "feature": "temperature_2m_mean",
-        "impact": 2.33,
+        "feature": "co_lag_7",
+        "impact": 1.47,
         "direction": "increases pollution"
       },
       {
         "feature": "co_lag_1",
-        "impact": 1.79,
+        "impact": 1.34,
         "direction": "increases pollution"
       },
       {
         "feature": "day_of_week_sin",
-        "impact": 0.72,
+        "impact": 1.3,
         "direction": "increases pollution"
       },
       {
-        "feature": "humidity_lag_1",
-        "impact": 0.66,
+        "feature": "day_of_year_sin",
+        "impact": 0.75,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
         "feature": "pm25",
-        "impact": -44.45,
+        "impact": -46.69,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm10",
-        "impact": -10.87,
+        "impact": -8.01,
         "direction": "reduces pollution"
       },
       {
         "feature": "co",
-        "impact": -4.71,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "relative_humidity_2m_mean",
-        "impact": -2.52,
+        "impact": -3.67,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm25_rolling_mean_30_shifted",
-        "impact": -1.96,
+        "impact": -2.27,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_7_shifted",
+        "impact": -2.22,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-67.29"
+        "impact": "-66.24"
       },
       {
         "category": "Calendar",
-        "impact": "+0.81"
+        "impact": "+1.8"
       },
       {
         "category": "Meteorology",
-        "impact": "+0.24"
+        "impact": "+1.07"
       }
     ]
   },
@@ -142,16 +142,16 @@
     "dominant_source": "Traffic",
     "advisories": {
       "english": {
-        "general_public": "The air quality is Poor. Main pollution source is Traffic. Breathing discomfort to most people on prolonged exposure.",
-        "sensitive_groups": "Caution for sensitive groups: The air quality is Poor due to Traffic. Breathing discomfort to most people on prolonged exposure."
+        "general_public": "The air quality at Jawaharlal Nehru Stadium is forecasted to be 'Poor' over the next 24 hours, primarily driven by traffic emissions. Prolonged exposure to this air may cause breathing discomfort to most people. It is advisable to reduce heavy outdoor activities and limit time spent near busy roadways.",
+        "sensitive_groups": "The 24-hour forecast for Jawaharlal Nehru Stadium indicates 'Poor' air quality, with traffic being the dominant source of pollution. Prolonged exposure can cause breathing discomfort, particularly for children, the elderly, pregnant individuals, and those with respiratory or cardiac conditions. These sensitive groups should minimize outdoor exertion and avoid high-traffic areas."
       },
       "hindi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "जवाहरलाल नेहरू स्टेडियम में अगले 24 घंटों के लिए वायु गुणवत्ता 'खराब' श्रेणी में रहने का अनुमान है, जिसका मुख्य कारण यातायात से होने वाला प्रदूषण है। लंबे समय तक इस हवा के संपर्क में रहने से अधिकांश लोगों को सांस लेने में तकलीफ हो सकती है। कृपया भारी बाहरी गतिविधियों को कम करें और व्यस्त सड़कों के पास जाने से बचें।",
+        "sensitive_groups": "जवाहरलाल नेहरू स्टेडियम में अगले 24 घंटों के लिए वायु गुणवत्ता 'खराब' रहने का अनुमान है, जिसमें यातायात प्रदूषण का मुख्य स्रोत है। लंबे समय तक बाहर रहने से सांस लेने में तकलीफ हो सकती है, विशेष रूप से बच्चों, बुजुर्गों, गर्भवती महिलाओं और श्वसन या हृदय रोगियों के लिए। इन संवेदनशील समूहों को बाहर अधिक मेहनत वाले काम करने से बचना चाहिए और यातायात वाले क्षेत्रों से दूर रहना चाहिए।"
       },
       "marathi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "जवाहरलाल नेहरू स्टेडियम येथील हवेची गुणवत्ता पुढील २४ तासांत 'वाईट' श्रेणीत राहण्याचा अंदाज असून, वाहतूक हे याचे मुख्य कारण आहे. या हवेत जास्त वेळ राहिल्याने बहुतांश लोकांना श्वास घेण्यास त्रास होऊ शकतो. कृपया बाहेरील कष्टाची कामे कमी करा आणि गर्दीच्या रस्त्यांवर जाणे टाळा.",
+        "sensitive_groups": "जवाहरलाल नेहरू स्टेडियम येथील हवेची गुणवत्ता पुढील २४ तासांत 'वाईट' राहण्याचा अंदाज आहे, ज्यामध्ये वाहतूक प्रदूषण हा मुख्य घटक आहे. जास्त वेळ बाहेर राहिल्याने श्वास घेण्यास त्रास होऊ शकतो, विशेषतः लहान मुले, वृद्ध, गरोदर महिला आणि श्वसन किंवा हृदयविकार असलेल्या व्यक्तींना. या संवेदनशील गटांनी बाहेर जास्त श्रम करणे टाळावे आणि जास्त वाहतूक असलेल्या भागांपासून दूर राहावे."
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

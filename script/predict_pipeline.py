@@ -25,12 +25,11 @@ parser.add_argument('--city', type=str, default='mumbai', choices=['mumbai', 'de
 args, unknown = parser.parse_known_args()
 CITY = args.city.lower()
 
-if CITY == 'mumbai':
-    MODELS_DIR = Path("models/mumbai")
-    DATA_FILE = Path("data/processed/training_features.csv")
-else:
-    MODELS_DIR = Path(f"models/{CITY}")
-    DATA_FILE = Path(f"data/processed/{CITY}_training_features.csv")
+def get_models_dir(city):
+    if city == 'mumbai':
+        return Path("models/mumbai")
+    else:
+        return Path(f"models/{city}")
 
 
 def get_aqi_category(pm25):
@@ -49,19 +48,20 @@ def get_aqi_category(pm25):
         return "Severe"
 
 def generate_air_quality_intelligence(station, lat, lon, target_date, input_row, feature_names,
-                                      wind_dir, wind_speed, no2=None, co=None, pm10=None, pm25=None):
+                                      wind_dir, wind_speed, no2=None, co=None, pm10=None, pm25=None, city='mumbai'):
     """
     End-to-End Inference Orchestration Pipeline.
     Combines Multi-Horizon Forecasting, SHAP, and Attribution Agent into a single unified JSON.
     """
-    logger.info(f"Generating intelligence for {station} at {target_date}")
+    logger.info(f"Generating intelligence for {station} at {target_date} in {city}")
     
     # 1. Load Models & Forecast Multi-Horizon
     forecasts = {}
+    models_dir = get_models_dir(city)
     primary_predicted_pm25 = None
     
     for horizon in ["24h", "48h", "72h"]:
-        model_path = MODELS_DIR / f"xgboost_{horizon}.joblib"
+        model_path = models_dir / f"xgboost_{horizon}.joblib"
         if not model_path.exists():
             raise FileNotFoundError(f"Model not found at {model_path}")
             
@@ -94,7 +94,8 @@ def generate_air_quality_intelligence(station, lat, lon, target_date, input_row,
         no2=no2,
         co=co,
         pm10=pm10,
-        pm25=pm25
+        pm25=pm25,
+        city=city
     )
     
     # 4. Run Attribution Agent

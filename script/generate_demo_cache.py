@@ -69,7 +69,8 @@ def generate_cache():
                 no2=no2,
                 co=co,
                 pm10=pm10,
-                pm25=pm25_val
+                pm25=pm25_val,
+                city=CITY
             )
             
             output_file = DEMO_DIR / f"{station.replace(' ', '_').replace(',', '')}.json"

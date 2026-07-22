@@ -5,85 +5,85 @@
   "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 106.74,
+      "pm25": 104.0,
       "aqi_category": "Poor"
     },
     "48h": {
-      "pm25": 110.79,
+      "pm25": 110.51,
       "aqi_category": "Poor"
     },
     "72h": {
-      "pm25": 107.34,
+      "pm25": 109.38,
       "aqi_category": "Poor"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "co_lag_7",
-        "impact": 1.84,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "temperature_2m_mean",
-        "impact": 1.67,
-        "direction": "increases pollution"
-      },
-      {
         "feature": "temperature_lag_1",
-        "impact": 1.31,
+        "impact": 2.75,
         "direction": "increases pollution"
       },
       {
         "feature": "day_of_week_sin",
-        "impact": 1.25,
+        "impact": 1.38,
         "direction": "increases pollution"
       },
       {
-        "feature": "co_lag_1",
-        "impact": 0.85,
+        "feature": "co_lag_7",
+        "impact": 1.22,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_year_sin",
+        "impact": 0.79,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "wind_speed_lag_1",
+        "impact": 0.39,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
         "feature": "pm25",
-        "impact": -40.68,
+        "impact": -44.45,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm10",
-        "impact": -9.33,
+        "impact": -7.98,
         "direction": "reduces pollution"
       },
       {
         "feature": "co",
-        "impact": -4.86,
+        "impact": -4.51,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm25_rolling_mean_30_shifted",
-        "impact": -2.4,
+        "impact": -2.69,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm10_lag_1",
-        "impact": -2.23,
+        "impact": -2.49,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-65.47"
-      },
-      {
-        "category": "Meteorology",
-        "impact": "+2.04"
+        "impact": "-69.79"
       },
       {
         "category": "Calendar",
-        "impact": "+1.47"
+        "impact": "+1.93"
+      },
+      {
+        "category": "Meteorology",
+        "impact": "+1.4"
       }
     ]
   },
@@ -132,16 +132,16 @@
     "dominant_source": "Traffic",
     "advisories": {
       "english": {
-        "general_public": "The air quality is Poor. Main pollution source is Traffic. Breathing discomfort to most people on prolonged exposure.",
-        "sensitive_groups": "Caution for sensitive groups: The air quality is Poor due to Traffic. Breathing discomfort to most people on prolonged exposure."
+        "general_public": "The air quality at Dwarka Sector 8 is forecasted to remain 'Poor' over the next 24 hours, primarily driven by traffic emissions. Prolonged exposure to this air may cause breathing discomfort to most people. It is advisable to reduce heavy outdoor activities and limit time spent near busy roads.",
+        "sensitive_groups": "With the air quality at Dwarka Sector 8 expected to be 'Poor' for the next 24 hours due to traffic emissions, sensitive individuals including children, the elderly, and those with respiratory or heart conditions should exercise extra caution. Prolonged outdoor exposure may cause significant breathing discomfort. Consider limiting outdoor exertion and staying in well-ventilated indoor spaces."
       },
       "hindi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "द्वारका सेक्टर 8 में अगले 24 घंटों के दौरान वायु गुणवत्ता 'खराब' रहने का अनुमान है, जिसका मुख्य कारण यातायात से होने वाला प्रदूषण है। लंबे समय तक इस हवा के संपर्क में रहने से अधिकांश लोगों को सांस लेने में तकलीफ हो सकती है। कृपया बाहरी गतिविधियों को कम करें और व्यस्त सड़कों के पास जाने से बचें।",
+        "sensitive_groups": "द्वारका सेक्टर 8 में यातायात प्रदूषण के कारण अगले 24 घंटों में वायु गुणवत्ता 'खराब' श्रेणी में रहने की संभावना है। बुजुर्गों, बच्चों, गर्भवती महिलाओं और सांस या हृदय रोगियों जैसे संवेदनशील समूहों को विशेष सावधानी बरतनी चाहिए, क्योंकि लंबे समय तक बाहर रहने से सांस लेने में गंभीर तकलीफ हो सकती है।"
       },
       "marathi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "द्वारका सेक्टर ८ मधील हवेची गुणवत्ता पुढील २४ तासांत 'वाईट' राहण्याचा अंदाज असून, वाहतुकीचे उत्सर्जन हे याचे मुख्य कारण आहे. या हवेत जास्त वेळ राहिल्याने बहुतांश लोकांना श्वास घेण्यास त्रास होऊ शकतो. कृपया बाहेरील कष्टाची कामे कमी करा आणि गर्दीच्या रस्त्यांजवळ जाणे टाळा.",
+        "sensitive_groups": "द्वारका सेक्टर ८ मध्ये वाहतूक प्रदूषणामुळे पुढील २४ तासांत हवेची गुणवत्ता 'वाईट' श्रेणीत राहण्याची शक्यता आहे. वृद्ध, लहान मुले, गरोदर महिला आणि श्वसन किंवा हृदयविकार असलेल्या संवेदनशील व्यक्तींनी विशेष काळजी घ्यावी, कारण जास्त वेळ बाहेर राहिल्याने श्वास घेण्यास त्रास होऊ शकतो."
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

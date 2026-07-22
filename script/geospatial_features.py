@@ -31,15 +31,18 @@ parser.add_argument('--city', type=str, default='mumbai', choices=['mumbai', 'de
 args, unknown = parser.parse_known_args()
 CITY = args.city.lower()
 
-if CITY == 'mumbai':
-    STATIC_FEATURES_PATH = Path("data/geospatial/static_features.csv")
-    REPORTS_DIR = Path("reports/figures")
-else:
-    STATIC_FEATURES_PATH = Path(f"data/geospatial/{CITY}_static_features.csv")
-    REPORTS_DIR = Path(f"reports/{CITY}")
-STATIC_FEATURES_PATH.parent.mkdir(parents=True, exist_ok=True)
+def get_static_features_path(city):
+    if city == 'mumbai':
+        return Path("data/geospatial/static_features.csv")
+    else:
+        return Path(f"data/geospatial/{city}_static_features.csv")
 
-REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+def get_reports_dir(city):
+    if city == 'mumbai':
+        return Path("reports/figures")
+    else:
+        return Path(f"reports/{city}")
+
 
 geod = Geod(ellps='WGS84')
 
@@ -151,10 +154,13 @@ def extract_landuse_features(lat, lon):
 
     return features
 
-def generate_static_features(target_station=None):
-    """Generate and cache static features for Mumbai stations."""
-    if STATIC_FEATURES_PATH.exists():
-        static_df = pd.read_csv(STATIC_FEATURES_PATH)
+def generate_static_features(target_station=None, city='mumbai'):
+    """Generate and cache static features for stations."""
+    static_features_path = get_static_features_path(city)
+    static_features_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    if static_features_path.exists():
+        static_df = pd.read_csv(static_features_path)
         if target_station is None or target_station in static_df['station'].values:
             logger.info(f"Static features found in cache for {target_station}.")
             return static_df
@@ -163,7 +169,7 @@ def generate_static_features(target_station=None):
     
     logger.info(f"Static features cache missing for {target_station}. Generating...")
     
-    training_data_path = "data/processed/training_features.csv" if CITY == 'mumbai' else f"data/processed/{CITY}_training_features.csv"
+    training_data_path = "data/processed/training_features.csv" if city == 'mumbai' else f"data/processed/{city}_training_features.csv"
     if not os.path.exists(training_data_path):
         raise FileNotFoundError(f"Could not find {training_data_path} to identify stations.")
     
@@ -197,8 +203,8 @@ def generate_static_features(target_station=None):
             static_df = pd.concat([static_df, new_static_df], ignore_index=True)
         else:
             static_df = new_static_df
-        static_df.to_csv(STATIC_FEATURES_PATH, index=False)
-        logger.info(f"Successfully cached static features to {STATIC_FEATURES_PATH}")
+        static_df.to_csv(static_features_path, index=False)
+        logger.info(f"Successfully cached static features to {static_features_path}")
     
     return static_df
 
@@ -236,11 +242,11 @@ def calculate_upwind_factor(source_lat, source_lon, target_lat, target_lon, wind
     score = (angular_factor * max(1, wind_speed)) / (distance_km + 1)
     return score
 
-def generate_dynamic_features(target_date, station_name, wind_dir, wind_speed, no2=None, co=None, pm10=None, pm25=None):
+def generate_dynamic_features(target_date, station_name, wind_dir, wind_speed, no2=None, co=None, pm10=None, pm25=None, city='mumbai'):
     """
     Generate the evidence layer JSON dynamically using weather, fires, pollutants, and cached static data.
     """
-    static_df = generate_static_features(target_station=station_name)
+    static_df = generate_static_features(target_station=station_name, city=city)
     station_static = static_df[static_df['station'] == station_name]
     
     if station_static.empty:

@@ -37,14 +37,14 @@ TARGET_STATIONS_MUMBAI = [
 ]
 
 TARGET_STATIONS_DELHI = [
+    {"full_name": "Alipur", "latitude": 28.7973, "longitude": 77.1330},
     {"full_name": "Anand Vihar", "latitude": 28.6469, "longitude": 77.3159},
-    {"full_name": "Bawana", "latitude": 28.7997, "longitude": 77.0396},
     {"full_name": "Dwarka Sector 8", "latitude": 28.5710, "longitude": 77.0719},
-    {"full_name": "Jahangirpuri", "latitude": 28.7328, "longitude": 77.1706},
     {"full_name": "Jawaharlal Nehru Stadium", "latitude": 28.5818, "longitude": 77.2343},
-    {"full_name": "Mundka", "latitude": 28.6836, "longitude": 77.0149},
     {"full_name": "Okhla Phase II", "latitude": 28.5307, "longitude": 77.2736},
-    {"full_name": "RK Puram", "latitude": 28.5638, "longitude": 77.1869}
+    {"full_name": "Punjabi Bagh", "latitude": 28.6620, "longitude": 77.1242},
+    {"full_name": "RK Puram", "latitude": 28.5638, "longitude": 77.1869},
+    {"full_name": "Rohini", "latitude": 28.7299, "longitude": 77.1121}
 ]
 
 TARGET_STATIONS = TARGET_STATIONS_MUMBAI if CITY == 'mumbai' else TARGET_STATIONS_DELHI

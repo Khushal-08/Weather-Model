@@ -1,0 +1,149 @@
+{
+  "location": "Rohini",
+  "latitude": 28.7299,
+  "longitude": 77.1121,
+  "timestamp": "2026-06-20 00:00:00",
+  "forecast": {
+    "24h": {
+      "pm25": 118.49,
+      "aqi_category": "Poor"
+    },
+    "48h": {
+      "pm25": 110.11,
+      "aqi_category": "Poor"
+    },
+    "72h": {
+      "pm25": 110.67,
+      "aqi_category": "Poor"
+    }
+  },
+  "model_explanation": {
+    "top_increasing_factors": [
+      {
+        "feature": "temperature_lag_1",
+        "impact": 1.67,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_week_sin",
+        "impact": 1.34,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_year_sin",
+        "impact": 0.7,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "humidity_lag_1",
+        "impact": 0.55,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "wind_speed_lag_1",
+        "impact": 0.48,
+        "direction": "increases pollution"
+      }
+    ],
+    "top_decreasing_factors": [
+      {
+        "feature": "pm25",
+        "impact": -39.62,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_7_shifted",
+        "impact": -2.17,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "month_cos",
+        "impact": -2.08,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "co",
+        "impact": -1.9,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_14_shifted",
+        "impact": -1.82,
+        "direction": "reduces pollution"
+      }
+    ],
+    "main_drivers": [
+      {
+        "category": "Historical Pollution",
+        "impact": "-54.27"
+      },
+      {
+        "category": "Calendar",
+        "impact": "+2.08"
+      },
+      {
+        "category": "Meteorology",
+        "impact": "+0.23"
+      }
+    ]
+  },
+  "source_influence": {
+    "confidence": 0.933,
+    "sources": [
+      {
+        "name": "Industry",
+        "contribution_percentage": 47.9,
+        "evidence": [
+          "Upwind sector (N) contains 1.27 sq km of industrial land use."
+        ],
+        "recommendation": "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+        "confidence": 0.85
+      },
+      {
+        "name": "Traffic",
+        "contribution_percentage": 42.5,
+        "evidence": [
+          "Road density within 5km is 2713.1 km.",
+          "Nearest major road is 568 meters away."
+        ],
+        "recommendation": "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+        "confidence": 0.866
+      },
+      {
+        "name": "Regional Background",
+        "contribution_percentage": 9.6,
+        "evidence": [
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
+        ],
+        "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
+        "confidence": 0.61
+      }
+    ]
+  },
+  "recommendations": [
+    "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+    "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+    "Coordinate with state/regional authorities on broad emission reduction policies."
+  ],
+  "citizen_advisory": {
+    "station": "Rohini",
+    "forecast_horizon": "24h",
+    "aqi_category": "Poor",
+    "dominant_source": "Industry",
+    "advisories": {
+      "english": {
+        "general_public": "The air quality in Rohini is forecast to be 'Poor' over the next 24 hours, primarily driven by industrial emissions. Prolonged exposure to this air may cause breathing discomfort to most people. It is advisable to reduce heavy outdoor activities and limit time spent near industrial zones.",
+        "sensitive_groups": "With the air quality in Rohini expected to remain 'Poor' for the next 24 hours due to industrial pollution, vulnerable individuals may experience heightened breathing discomfort. Children, the elderly, pregnant individuals, and those with respiratory or cardiac conditions should strictly limit prolonged outdoor exposure and stay indoors as much as possible."
+      },
+      "hindi": {
+        "general_public": "रोहिणी में अगले 24 घंटों में वायु गुणवत्ता 'खराब' श्रेणी में रहने का अनुमान है, जिसका मुख्य कारण औद्योगिक उत्सर्जन है। लंबे समय तक इस हवा के संपर्क में रहने से अधिकांश लोगों को सांस लेने में तकलीफ हो सकती है। बाहरी गतिविधियों को कम करने और औद्योगिक क्षेत्रों के पास जाने से बचने की सलाह दी जाती है।",
+        "sensitive_groups": "रोहिणी में औद्योगिक प्रदूषण के कारण अगले 24 घंटों में वायु गुणवत्ता 'खराब' रहने की संभावना है, जिससे संवेदनशील समूहों को सांस लेने में अधिक कठिनाई हो सकती है। बच्चों, बुजुर्गों, गर्भवती महिलाओं और सांस या हृदय रोगियों को सलाह दी जाती है कि वे बाहर अधिक समय बिताने से बचें और सुरक्षित रहें।"
+      },
+      "marathi": {
+        "general_public": "रोहिणीमध्ये पुढील २४ तासांत हवेची गुणवत्ता 'वाईट' श्रेणीत राहण्याचा अंदाज असून, औद्योगिक उत्सर्जन हे याचे मुख्य कारण आहे. या हवेत जास्त वेळ राहिल्याने बहुतांश लोकांना श्वास घेण्यास त्रास होऊ शकतो. नागरिकांनी घराबाहेर जास्त वेळ थांबणे टाळावे आणि औद्योगिक क्षेत्राजवळ जाणे मर्यादित करावे।",
+        "sensitive_groups": "रोहिणीमध्ये औद्योगिक प्रदूषणामुळे पुढील २४ तासांत हवेची गुणवत्ता 'वाईट' राहण्याची शक्यता असल्याने संवेदनशील घटकांना श्वास घेण्यास अधिक त्रास होऊ शकतो. लहान मुले, वृद्ध, गरोदर महिला आणि श्वसन किंवा हृदयविकार असलेल्या व्यक्तींनी घराबाहेर जास्त वेळ थांबणे टाळावे आणि काळजी घ्यावी।"
+      }
+    },
+    "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"
+  }
+}

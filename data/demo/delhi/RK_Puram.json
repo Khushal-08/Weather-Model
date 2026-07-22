@@ -5,85 +5,85 @@
   "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 112.62,
+      "pm25": 109.04,
       "aqi_category": "Poor"
     },
     "48h": {
-      "pm25": 107.18,
+      "pm25": 106.92,
       "aqi_category": "Poor"
     },
     "72h": {
-      "pm25": 107.51,
+      "pm25": 110.35,
       "aqi_category": "Poor"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "co_lag_1",
-        "impact": 2.2,
+        "feature": "temperature_lag_1",
+        "impact": 1.92,
         "direction": "increases pollution"
       },
       {
         "feature": "day_of_week_sin",
-        "impact": 1.34,
+        "impact": 1.38,
         "direction": "increases pollution"
       },
       {
-        "feature": "temperature_2m_mean",
-        "impact": 1.25,
+        "feature": "day_of_year_sin",
+        "impact": 0.78,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_1",
+        "impact": 0.62,
         "direction": "increases pollution"
       },
       {
         "feature": "humidity_lag_1",
-        "impact": 0.63,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "pm25_rolling_std_7_shifted",
-        "impact": 0.47,
+        "impact": 0.54,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
         "feature": "pm25",
-        "impact": -36.34,
+        "impact": -41.46,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm10",
-        "impact": -9.06,
+        "impact": -5.94,
         "direction": "reduces pollution"
       },
       {
         "feature": "co",
-        "impact": -3.89,
+        "impact": -3.82,
         "direction": "reduces pollution"
       },
       {
-        "feature": "pm25_rolling_mean_30_shifted",
-        "impact": -2.06,
+        "feature": "month_cos",
+        "impact": -2.07,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm25_rolling_mean_7_shifted",
-        "impact": -1.7,
+        "impact": -2.0,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-58.02"
+        "impact": "-64.13"
       },
       {
         "category": "Calendar",
-        "impact": "+1.73"
+        "impact": "+2.0"
       },
       {
         "category": "Meteorology",
-        "impact": "+0.21"
+        "impact": "+0.72"
       }
     ]
   },
@@ -111,16 +111,16 @@
     "dominant_source": "Regional Background",
     "advisories": {
       "english": {
-        "general_public": "The air quality is Poor. Main pollution source is Regional Background. Breathing discomfort to most people on prolonged exposure.",
-        "sensitive_groups": "Caution for sensitive groups: The air quality is Poor due to Regional Background. Breathing discomfort to most people on prolonged exposure."
+        "general_public": "The air quality in RK Puram is forecast to remain 'Poor' over the next 24 hours, primarily driven by regional background sources. Prolonged exposure to this air may cause breathing discomfort to most people, so it is advisable to reduce heavy outdoor activities.",
+        "sensitive_groups": "With the air quality in RK Puram expected to be 'Poor' for the next 24 hours due to regional background factors, sensitive individuals including children, the elderly, and those with respiratory or heart conditions should be extra cautious. Prolonged outdoor exposure may cause significant breathing discomfort, so limiting outdoor exertion is recommended."
       },
       "hindi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "आरके पुरम में अगले 24 घंटों के दौरान वायु गुणवत्ता 'खराब' श्रेणी में रहने का अनुमान है, जिसका मुख्य कारण क्षेत्रीय पृष्ठभूमि प्रदूषण है। लंबे समय तक इस हवा के संपर्क में रहने से अधिकांश लोगों को सांस लेने में तकलीफ हो सकती है, इसलिए बाहरी गतिविधियों को कम करने की सलाह दी जाती है।",
+        "sensitive_groups": "आरके पुरम में क्षेत्रीय पृष्ठभूमि प्रदूषण के कारण अगले 24 घंटों में वायु गुणवत्ता 'खराब' रहने की संभावना है। बुजुर्गों, बच्चों और सांस या हृदय रोगियों जैसे संवेदनशील समूहों को विशेष सावधानी बरतनी चाहिए, क्योंकि लंबे समय तक बाहर रहने से सांस लेने में गंभीर तकलीफ हो सकती है।"
       },
       "marathi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "आरके पुरममधील हवेची गुणवत्ता पुढील २४ तासांत 'वाईट' श्रेणीत राहण्याचा अंदाज असून, प्रादेशिक पार्श्वभूमी हे याचे मुख्य कारण आहे. या हवेच्या दीर्घकाळ संपर्कात आल्यास बहुतांश लोकांना श्वास घेण्यास त्रास होऊ शकतो, त्यामुळे घराबाहेरील जास्त कष्टाची कामे टाळण्याचा सल्ला दिला जातो।",
+        "sensitive_groups": "प्रादेशिक पार्श्वभूमीच्या प्रदूषणामुळे आरके पुरममधील हवेची गुणवत्ता पुढील २४ तासांत 'वाईट' राहण्याची शक्यता आहे. लहान मुले, वृद्ध आणि श्वसन किंवा हृदयविकार असलेल्या संवेदनशील व्यक्तींनी विशेष काळजी घ्यावी, कारण दीर्घकाळ बाहेर राहिल्याने श्वास घेण्यास त्रास होऊ शकतो।"
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

@@ -28,7 +28,7 @@ with st.sidebar:
     selected_station = st.selectbox("Select Neighborhood / Station", station_list)
     
 if is_live:
-    intelligence_data = run_live_pipeline(selected_station, df_hist)
+    intelligence_data = run_live_pipeline(selected_station, df_hist, city=city)
 else:
     intelligence_data = load_demo_json(selected_station, city=city)
     if not intelligence_data:
@@ -55,56 +55,77 @@ elif aqi_cat == "Severe": color_class = "aqi-severe"
 col_giant, col_metrics = st.columns([1, 1])
 
 with col_giant:
-    st.markdown(f"""
-        <div style="border-radius:16px; background:white; padding:3rem; border:1px solid #e2e8f0; box-shadow:0 10px 15px -3px rgba(0,0,0,0.05); text-align:center;">
-            <p style="color:#64748b; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:0;">Current PM2.5</p>
-            <p class="aqi-giant {color_class}">{pm25_val:.0f}</p>
-            <p style="font-size:1.5rem; font-weight:700; margin-top:10px; color:#334155;">{aqi_cat}</p>
-        </div>
-    """, unsafe_allow_html=True)
-
-with col_metrics:
-    st.markdown("<h3 style='margin-bottom:1rem;'>Forecast Outlook</h3>", unsafe_allow_html=True)
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown(f"""
-            <div style="border-radius:12px; background:white; padding:1.5rem; border:1px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
-                <p style="color:#64748b; font-weight:600; margin-bottom:0;">Tomorrow (48h)</p>
-                <p style="font-size:2rem; font-weight:700; color:#0f172a; margin:0;">{intelligence_data['forecast']['48h']['pm25']:.0f} <span style="font-size:1rem; color:#64748b;">µg/m³</span></p>
-                <p style="color:#334155; margin-top:5px; margin-bottom:0;">{intelligence_data['forecast']['48h']['aqi_category']}</p>
-            </div>
-        """, unsafe_allow_html=True)
-    with c2:
-        st.markdown(f"""
-            <div style="border-radius:12px; background:white; padding:1.5rem; border:1px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
-                <p style="color:#64748b; font-weight:600; margin-bottom:0;">Day After (72h)</p>
-                <p style="font-size:2rem; font-weight:700; color:#0f172a; margin:0;">{intelligence_data['forecast']['72h']['pm25']:.0f} <span style="font-size:1rem; color:#64748b;">µg/m³</span></p>
-                <p style="color:#334155; margin-top:5px; margin-bottom:0;">{intelligence_data['forecast']['72h']['aqi_category']}</p>
-            </div>
-        """, unsafe_allow_html=True)
-        
+    st.markdown("<h3 style='margin-bottom:1rem; color:#f3f4f6;'>Current Status</h3>", unsafe_allow_html=True)
+    html_giant = f"""
+<div class="custom-card fade-in" style="text-align:center; padding:3rem 2rem;">
+<p style="color:#9ca3af; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:0;">Current PM2.5</p>
+<p class="aqi-giant {color_class}" style="margin: 0.5rem 0;">{pm25_val:.0f}</p>
+<p style="font-size:1.5rem; font-weight:700; margin-top:0; color:#ffffff;">{aqi_cat}</p>
+</div>
+"""
+    st.markdown(html_giant, unsafe_allow_html=True)
+    
     st.markdown("<br>", unsafe_allow_html=True)
     lang = st.selectbox("Advisory Language / भाषा", ["english", "hindi", "marathi"])
     group = st.radio("Who is this for?", ["General Public", "Sensitive Groups (Children, Elderly, Asthmatics)"])
 
+with col_metrics:
+    st.markdown("<h3 style='margin-bottom:1rem; color:#ffffff;'>Forecast Outlook</h3>", unsafe_allow_html=True)
+    c1, c2 = st.columns(2)
+    with c1:
+        html_c1 = f"""
+<div class="custom-card fade-in" style="animation-delay: 0.1s;">
+<p style="color:#9ca3af; font-weight:600; margin-bottom:0; text-transform:uppercase; letter-spacing:0.05em;">Tomorrow (48h)</p>
+<p style="font-family:'JetBrains Mono', monospace; font-size:2rem; font-weight:700; color:#ffffff; margin:0.5rem 0;">{intelligence_data['forecast']['48h']['pm25']:.0f} <span style="font-size:1rem; color:#9ca3af;">µg/m³</span></p>
+<p style="color:#e2e8f0; margin-bottom:0; font-weight:500;">{intelligence_data['forecast']['48h']['aqi_category']}</p>
+</div>
+"""
+        st.markdown(html_c1, unsafe_allow_html=True)
+    with c2:
+        html_c2 = f"""
+<div class="custom-card fade-in" style="animation-delay: 0.2s;">
+<p style="color:#9ca3af; font-weight:600; margin-bottom:0; text-transform:uppercase; letter-spacing:0.05em;">Day After (72h)</p>
+<p style="font-family:'JetBrains Mono', monospace; font-size:2rem; font-weight:700; color:#ffffff; margin:0.5rem 0;">{intelligence_data['forecast']['72h']['pm25']:.0f} <span style="font-size:1rem; color:#9ca3af;">µg/m³</span></p>
+<p style="color:#e2e8f0; margin-bottom:0; font-weight:500;">{intelligence_data['forecast']['72h']['aqi_category']}</p>
+</div>
+"""
+        st.markdown(html_c2, unsafe_allow_html=True)
+
 st.markdown("---")
-st.markdown("<h3>Personalized Health Advisory</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:#ffffff;'>Personalized Health Advisory</h3>", unsafe_allow_html=True)
 
 group_key = "general_public" if group == "General Public" else "sensitive_groups"
 advisory_text = intelligence_data['citizen_advisory']['advisories'].get(lang, {}).get(group_key, "Advisory not available in this language.")
 current_time = datetime.datetime.now().strftime("%I:%M %p")
 
-# Light mode Whatsapp preview
+# Generate Dynamic Quick Action Tags
+tags_html = ""
+if aqi_cat in ["Poor", "Very Poor", "Severe"]:
+    tags_html += '<div class="action-tag">😷 Wear Mask</div>'
+    tags_html += '<div class="action-tag">🏃 Avoid Outdoor Exercise</div>'
+    tags_html += '<div class="action-tag">🪟 Keep Windows Closed</div>'
+elif aqi_cat == "Moderately Polluted":
+    tags_html += '<div class="action-tag">😷 Mask for Sensitive Groups</div>'
+    tags_html += '<div class="action-tag">⏱️ Reduce Prolonged Exertion</div>'
+else:
+    tags_html += '<div class="action-tag">✅ Safe for Outdoor Activities</div>'
+    tags_html += '<div class="action-tag">🪟 Open Windows for Ventilation</div>'
+
+# Dark mode Whatsapp/Advisory preview
 whatsapp_html = f"""
-<div style="background-color: #f0f2f5; padding: 20px; border-radius: 12px; max-width: 600px; margin: 10px auto; font-family: 'Inter', sans-serif; border: 1px solid #e2e8f0;">
-    <div style="background-color: #ffffff; color: #1e293b; padding: 16px 20px; border-radius: 0px 12px 12px 12px; display: inline-block; max-width: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
-        <div style="color: #25D366; font-size: 0.85em; font-weight: 600; margin-bottom: 8px;">{city.capitalize()} Gov AQI Alerts ✓</div>
+<div style="margin-bottom: 15px;">
+    {tags_html}
+</div>
+<div style="background-color: #111827; padding: 20px; border-radius: 12px; max-width: 600px; margin: 10px 0; font-family: 'Inter', sans-serif; border: 1px solid #1f2937;">
+    <div style="background-color: #1f2937; color: #f3f4f6; padding: 16px 20px; border-radius: 0px 12px 12px 12px; display: inline-block; max-width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div style="color: #10b981; font-size: 0.85em; font-weight: 600; margin-bottom: 8px;">{city.capitalize()} Gov AQI Alerts ✓</div>
         <div style="font-size: 1.05em; line-height: 1.5; white-space: pre-wrap;">{advisory_text}</div>
-        <div style="color: #94a3b8; font-size: 0.75em; text-align: right; margin-top: 8px;">{current_time}</div>
+        <div style="color: #9ca3af; font-size: 0.75em; text-align: right; margin-top: 8px;">{current_time}</div>
     </div>
 </div>
 """
 st.markdown(whatsapp_html, unsafe_allow_html=True)
+st.caption("Air quality data sourced from CPCB/MPCB monitoring networks via AQICN.")
 
 st.markdown("<br>", unsafe_allow_html=True)
 col_sub1, col_sub2, col_sub3 = st.columns([1,2,1])
@@ -116,3 +137,5 @@ with col_sub2:
             st.toast(f"Success! Alerts for {selected_station} subscribed to {phone_input}.", icon="✅")
         else:
             st.toast("Please enter a mobile number first.", icon="⚠️")
+
+st.markdown('<div class="status-footer"><div style="display:flex; align-items:center;"><span class="live-badge-dot"></span><span class="live-badge-text">LIVE</span></div><div>Monitoring Stations: 16</div><div>Models: XGBoost 24h/48h/72h</div><div>Data Sources: CPCB, Open-Meteo, OSM</div></div>', unsafe_allow_html=True)

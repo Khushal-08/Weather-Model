@@ -1,0 +1,149 @@
+{
+  "location": "Alipur",
+  "latitude": 28.7973,
+  "longitude": 77.133,
+  "timestamp": "2026-06-20 00:00:00",
+  "forecast": {
+    "24h": {
+      "pm25": 135.7,
+      "aqi_category": "Very Poor"
+    },
+    "48h": {
+      "pm25": 123.26,
+      "aqi_category": "Very Poor"
+    },
+    "72h": {
+      "pm25": 119.41,
+      "aqi_category": "Poor"
+    }
+  },
+  "model_explanation": {
+    "top_increasing_factors": [
+      {
+        "feature": "pm10",
+        "impact": 8.09,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "pm10_lag_1",
+        "impact": 2.95,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "day_of_week_sin",
+        "impact": 1.32,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_1",
+        "impact": 1.24,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "co_lag_7",
+        "impact": 1.2,
+        "direction": "increases pollution"
+      }
+    ],
+    "top_decreasing_factors": [
+      {
+        "feature": "pm25",
+        "impact": -32.88,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "co",
+        "impact": -3.67,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_7_shifted",
+        "impact": -2.65,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "day_of_year_cos",
+        "impact": -2.64,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "month_cos",
+        "impact": -2.17,
+        "direction": "reduces pollution"
+      }
+    ],
+    "main_drivers": [
+      {
+        "category": "Historical Pollution",
+        "impact": "-33.34"
+      },
+      {
+        "category": "Meteorology",
+        "impact": "-2.86"
+      },
+      {
+        "category": "Calendar",
+        "impact": "+1.45"
+      }
+    ]
+  },
+  "source_influence": {
+    "confidence": 0.919,
+    "sources": [
+      {
+        "name": "Industry",
+        "contribution_percentage": 50.2,
+        "evidence": [
+          "Upwind sector (N) contains 2.37 sq km of industrial land use."
+        ],
+        "recommendation": "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+        "confidence": 0.85
+      },
+      {
+        "name": "Traffic",
+        "contribution_percentage": 39.8,
+        "evidence": [
+          "Road density within 5km is 1344.7 km.",
+          "Nearest major road is 1029 meters away."
+        ],
+        "recommendation": "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+        "confidence": 0.838
+      },
+      {
+        "name": "Regional Background",
+        "contribution_percentage": 10.0,
+        "evidence": [
+          "Base atmospheric pollution level representing broader urban/regional accumulation."
+        ],
+        "recommendation": "Coordinate with state/regional authorities on broad emission reduction policies.",
+        "confidence": 0.61
+      }
+    ]
+  },
+  "recommendations": [
+    "Inspect nearby industrial sources for emission compliance and stack height regulations.",
+    "Consider traffic management measures, reroute heavy vehicles, and enforce emission checks.",
+    "Coordinate with state/regional authorities on broad emission reduction policies."
+  ],
+  "citizen_advisory": {
+    "station": "Alipur",
+    "forecast_horizon": "24h",
+    "aqi_category": "Very Poor",
+    "dominant_source": "Industry",
+    "advisories": {
+      "english": {
+        "general_public": "The air quality in Alipur is forecast to remain 'Very Poor' over the next 24 hours, primarily driven by industrial emissions. Prolonged exposure to this air may cause respiratory illness, so it is advisable to limit outdoor activities. Consider reducing heavy physical exertion outdoors until conditions improve.",
+        "sensitive_groups": "With air quality in Alipur expected to be 'Very Poor' for the next 24 hours due to industrial pollution, vulnerable individuals are at a higher risk. Prolonged exposure can lead to respiratory illness, so children, the elderly, and those with pre-existing heart or lung conditions should avoid outdoor activities and remain indoors."
+      },
+      "hindi": {
+        "general_public": "अलीपुर में अगले 24 घंटों में वायु गुणवत्ता 'बहुत खराब' रहने का अनुमान है, जिसका मुख्य कारण औद्योगिक उत्सर्जन है। इस हवा के लंबे समय तक संपर्क में रहने से श्वसन संबंधी बीमारी हो सकती है, इसलिए बाहरी गतिविधियों को सीमित करने की सलाह दी जाती है। स्थिति में सुधार होने तक बाहर भारी शारीरिक श्रम कम करें।",
+        "sensitive_groups": "औद्योगिक प्रदूषण के कारण अलीपुर में अगले 24 घंटों के लिए वायु गुणवत्ता 'बहुत खराब' श्रेणी में रहने की संभावना है, जिससे संवेदनशील समूह अधिक जोखिम में हैं। लंबे समय तक संपर्क में रहने से श्वसन संबंधी बीमारी हो सकती है, इसलिए बच्चों, बुजुर्गों और पहले से सांस या हृदय रोग से पीड़ित लोगों को बाहरी गतिविधियों से बचना चाहिए और घर के अंदर रहना चाहिए।"
+      },
+      "marathi": {
+        "general_public": "अलिपूरमधील हवेची गुणवत्ता पुढील २४ तासांत 'अतिशय वाईट' राहण्याचा अंदाज आहे, ज्यासाठी प्रामुख्याने औद्योगिक उत्सर्जन कारणीभूत आहे. या हवेच्या दीर्घकाळ संपर्कात आल्याने श्वसनाचे आजार होऊ शकतात, त्यामुळे घराबाहेरील क्रियाकलाप मर्यादित ठेवण्याचा सल्ला दिला जातो। परिस्थिती सुधारेपर्यंत घराबाहेर जास्त शारीरिक श्रम करणे टाळावे।",
+        "sensitive_groups": "औद्योगिक प्रदूषणामुळे अलिपूरमधील हवेची गुणवत्ता पुढील २४ तासांसाठी 'अतिशय वाईट' श्रेणीत राहण्याची शक्यता असल्याने संवेदनशील घटकांना अधिक धोका आहे। दीर्घकाळ संपर्कात आल्याने श्वसनाचे आजार होऊ शकतात, त्यामुळे लहान मुले, वृद्ध आणि आधीच श्वसन किंवा हृदयविकार असलेल्या व्यक्तींनी घराबाहेर पडणे टाळावे आणि घरातच राहावे।"
+      }
+    },
+    "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"
+  }
+}

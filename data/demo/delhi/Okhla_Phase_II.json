@@ -5,85 +5,85 @@
   "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 99.3,
+      "pm25": 103.7,
       "aqi_category": "Poor"
     },
     "48h": {
-      "pm25": 100.31,
+      "pm25": 103.46,
       "aqi_category": "Poor"
     },
     "72h": {
-      "pm25": 100.45,
+      "pm25": 104.38,
       "aqi_category": "Poor"
     }
   },
   "model_explanation": {
     "top_increasing_factors": [
       {
-        "feature": "co_lag_7",
-        "impact": 1.9,
+        "feature": "temperature_lag_1",
+        "impact": 2.56,
         "direction": "increases pollution"
       },
       {
         "feature": "day_of_week_sin",
-        "impact": 0.96,
+        "impact": 1.47,
         "direction": "increases pollution"
       },
       {
-        "feature": "temperature_2m_mean",
-        "impact": 0.93,
+        "feature": "co_lag_7",
+        "impact": 1.32,
         "direction": "increases pollution"
       },
       {
-        "feature": "temperature_lag_1",
-        "impact": 0.8,
+        "feature": "day_of_year_sin",
+        "impact": 0.98,
         "direction": "increases pollution"
       },
       {
-        "feature": "co_lag_1",
-        "impact": 0.79,
+        "feature": "pm10_lag_1",
+        "impact": 0.51,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
         "feature": "pm25",
-        "impact": -46.86,
+        "impact": -47.97,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm10",
-        "impact": -11.23,
+        "impact": -7.7,
         "direction": "reduces pollution"
       },
       {
         "feature": "co",
-        "impact": -4.41,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "relative_humidity_2m_mean",
-        "impact": -2.1,
+        "impact": -4.4,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm25_rolling_mean_30_shifted",
-        "impact": -2.03,
+        "impact": -2.25,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm25_rolling_mean_7_shifted",
+        "impact": -2.25,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-70.15"
+        "impact": "-69.7"
       },
       {
         "category": "Calendar",
-        "impact": "+1.75"
+        "impact": "+2.28"
       },
       {
         "category": "Meteorology",
-        "impact": "-1.0"
+        "impact": "+0.67"
       }
     ]
   },
@@ -142,16 +142,16 @@
     "dominant_source": "Industry",
     "advisories": {
       "english": {
-        "general_public": "The air quality is Poor. Main pollution source is Industry. Breathing discomfort to most people on prolonged exposure.",
-        "sensitive_groups": "Caution for sensitive groups: The air quality is Poor due to Industry. Breathing discomfort to most people on prolonged exposure."
+        "general_public": "The air quality in Okhla Phase II is forecast to remain 'Poor' over the next 24 hours, primarily driven by industrial emissions. Prolonged exposure to this air may cause breathing discomfort to most people. It is advisable to reduce heavy outdoor activities and limit extended outdoor exposure.",
+        "sensitive_groups": "With the air quality in Okhla Phase II forecast to be 'Poor' for the next 24 hours due to industrial emissions, sensitive individuals may experience breathing discomfort. Children, the elderly, and those with respiratory or heart conditions should limit prolonged outdoor exertion and stay indoors as much as possible."
       },
       "hindi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "ओखला फेज II में अगले 24 घंटों के दौरान वायु गुणवत्ता 'खराब' रहने का अनुमान है, जिसका मुख्य कारण औद्योगिक उत्सर्जन है। इस हवा में लंबे समय तक रहने से अधिकांश लोगों को सांस लेने में तकलीफ हो सकती है। कृपया बाहर अधिक समय बिताने और भारी शारीरिक गतिविधियों से बचें।",
+        "sensitive_groups": "ओखला फेज II में औद्योगिक उत्सर्जन के कारण अगले 24 घंटों में वायु गुणवत्ता 'खराब' श्रेणी में रहने की संभावना है। बच्चों, बुजुर्गों और सांस या हृदय रोगियों जैसे संवेदनशील समूहों को सांस लेने में अधिक कठिनाई हो सकती है, इसलिए वे बाहर जाने से बचें और सुरक्षित रहें।"
       },
       "marathi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "ओखला फेज II मधील हवेची गुणवत्ता पुढील २४ तासांत 'वाईट' श्रेणीत राहण्याची शक्यता असून, औद्योगिक उत्सर्जन हे याचे मुख्य कारण आहे. या हवेत जास्त वेळ राहिल्याने बहुतांश लोकांना श्वास घेण्यास त्रास होऊ शकतो. नागरिकांनी घराबाहेर जास्त वेळ थांबणे आणि कष्टाची कामे करणे टाळावे.",
+        "sensitive_groups": "ओखला फेज II मध्ये औद्योगिक उत्सर्जनामुळे पुढील २४ तासांत हवेची गुणवत्ता 'वाईट' श्रेणीत राहण्याचा अंदाज आहे. लहान मुले, वृद्ध आणि श्वसन किंवा हृदयविकार असलेल्या संवेदनशील व्यक्तींना श्वास घेण्यास त्रास होऊ शकतो, त्यामुळे त्यांनी घराबाहेर पडणे मर्यादित ठेवावे."
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

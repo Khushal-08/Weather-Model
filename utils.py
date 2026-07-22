@@ -68,7 +68,7 @@ def load_demo_json(station_name, city='mumbai'):
             return json.load(f)
     return None
 
-def run_live_pipeline(station, df):
+def run_live_pipeline(station, df, city='mumbai'):
     """Run the actual Python pipeline with progress indicators."""
     if not LIVE_MODE_AVAILABLE:
         st.error("Live mode dependencies not found. Please switch to Demo Mode.")
@@ -126,7 +126,8 @@ def run_live_pipeline(station, df):
                 no2=no2,
                 co=co,
                 pm10=pm10,
-                pm25=pm25_val
+                pm25=pm25_val,
+                city=city
             )
             status.update(label="Live Intelligence Generated Successfully!", state="complete", expanded=False)
             return result

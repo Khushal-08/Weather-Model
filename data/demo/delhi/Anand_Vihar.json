@@ -5,15 +5,15 @@
   "timestamp": "2026-06-20 00:00:00",
   "forecast": {
     "24h": {
-      "pm25": 127.67,
+      "pm25": 127.39,
       "aqi_category": "Very Poor"
     },
     "48h": {
-      "pm25": 112.86,
+      "pm25": 119.04,
       "aqi_category": "Poor"
     },
     "72h": {
-      "pm25": 117.28,
+      "pm25": 116.65,
       "aqi_category": "Poor"
     }
   },
@@ -21,69 +21,69 @@
     "top_increasing_factors": [
       {
         "feature": "pm10",
-        "impact": 4.68,
+        "impact": 7.52,
         "direction": "increases pollution"
       },
       {
         "feature": "co_lag_1",
-        "impact": 2.31,
-        "direction": "increases pollution"
-      },
-      {
-        "feature": "co_lag_7",
-        "impact": 2.06,
+        "impact": 1.39,
         "direction": "increases pollution"
       },
       {
         "feature": "day_of_week_sin",
-        "impact": 1.27,
+        "impact": 1.36,
         "direction": "increases pollution"
       },
       {
-        "feature": "humidity_lag_1",
-        "impact": 0.68,
+        "feature": "co_lag_7",
+        "impact": 1.15,
+        "direction": "increases pollution"
+      },
+      {
+        "feature": "no2",
+        "impact": 0.41,
         "direction": "increases pollution"
       }
     ],
     "top_decreasing_factors": [
       {
         "feature": "pm25",
-        "impact": -30.8,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "temperature_lag_1",
-        "impact": -3.79,
+        "impact": -33.8,
         "direction": "reduces pollution"
       },
       {
         "feature": "pm25_rolling_mean_7_shifted",
+        "impact": -2.87,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "day_of_year_cos",
+        "impact": -2.83,
+        "direction": "reduces pollution"
+      },
+      {
+        "feature": "pm10_lag_1",
         "impact": -2.53,
         "direction": "reduces pollution"
       },
       {
-        "feature": "co",
-        "impact": -2.26,
-        "direction": "reduces pollution"
-      },
-      {
-        "feature": "relative_humidity_2m_mean",
-        "impact": -2.19,
+        "feature": "month_cos",
+        "impact": -2.11,
         "direction": "reduces pollution"
       }
     ],
     "main_drivers": [
       {
         "category": "Historical Pollution",
-        "impact": "-36.95"
+        "impact": "-40.71"
       },
       {
         "category": "Meteorology",
-        "impact": "-5.39"
+        "impact": "-3.89"
       },
       {
         "category": "Calendar",
-        "impact": "+1.32"
+        "impact": "+1.53"
       }
     ]
   },
@@ -132,16 +132,16 @@
     "dominant_source": "Traffic",
     "advisories": {
       "english": {
-        "general_public": "The air quality is Very Poor. Main pollution source is Traffic. Respiratory illness on prolonged exposure.",
-        "sensitive_groups": "Caution for sensitive groups: The air quality is Very Poor due to Traffic. Respiratory illness on prolonged exposure."
+        "general_public": "The air quality at Anand Vihar is forecast to remain in the 'Very Poor' category over the next 24 hours, primarily driven by traffic emissions. Prolonged exposure to this air may cause respiratory illness, so it is advisable to limit outdoor activities. Consider reducing time spent near heavy traffic areas to minimize exposure.",
+        "sensitive_groups": "With the air quality at Anand Vihar forecast to be 'Very Poor' over the next 24 hours due to heavy traffic emissions, sensitive individuals like children, the elderly, and those with respiratory or heart conditions should take extra care. Prolonged exposure can lead to respiratory illness. It is highly recommended to avoid outdoor exertion and stay indoors as much as possible."
       },
       "hindi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "आनंद विहार में अगले 24 घंटों में वायु गुणवत्ता 'बहुत खराब' श्रेणी में रहने का अनुमान है, जिसका मुख्य कारण यातायात से होने वाला प्रदूषण है। इस हवा में लंबे समय तक रहने से सांस की बीमारी हो सकती है, इसलिए बाहरी गतिविधियों को सीमित करने की सलाह दी जाती है। भारी यातायात वाले क्षेत्रों में जाने से बचें।",
+        "sensitive_groups": "आनंद विहार में यातायात प्रदूषण के कारण अगले 24 घंटों में वायु गुणवत्ता 'बहुत खराब' रहने की संभावना है, जिससे बच्चों, बुजुर्गों और सांस या हृदय रोगियों को अधिक खतरा हो सकता है। लंबे समय तक इस हवा के संपर्क में रहने से सांस की बीमारी हो सकती है। संवेदनशील समूह बाहरी गतिविधियों से बचें और सुरक्षित रहने के लिए घर के अंदर ही रहें।"
       },
       "marathi": {
-        "general_public": "Translation unavailable.",
-        "sensitive_groups": "Translation unavailable."
+        "general_public": "आनंद विहार येथील हवेची गुणवत्ता पुढील २४ तासांत 'अतिशय वाईट' श्रेणीत राहण्याचा अंदाज असून, वाहतुकीचे उत्सर्जन हे याचे मुख्य कारण आहे. या हवेच्या दीर्घकाळ संपर्कात आल्यास श्वसनाचे आजार होऊ शकतात, त्यामुळे घराबाहेरील वावर मर्यादित ठेवण्याचा सल्ला दिला जातो.",
+        "sensitive_groups": "वाहतूक प्रदूषणामुळे आनंद विहार येथील हवेची गुणवत्ता पुढील २४ तासांत 'अतिशय वाईट' राहण्याची शक्यता असल्याने लहान मुले, वृद्ध आणि श्वसन किंवा हृदयविकार असलेल्या व्यक्तींनी विशेष काळजी घ्यावी. या हवेच्या दीर्घकाळ संपर्कात आल्यास श्वसनाचे आजार होऊ शकतात. संवेदनशील गटांनी घराबाहेर पडणे टाळावे आणि सुरक्षित राहावे।"
       }
     },
     "guidance_source": "Based on CPCB National Air Quality Index standard health guidance categories"

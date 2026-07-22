@@ -78,7 +78,7 @@ def draw_metric_bar(horizon, m_data):
     fig.update_layout(
         barmode='overlay', 
         height=150, 
-        margin=dict(l=0, r=0, t=30, b=0),
+        margin=dict(t=30, b=0, r=20),
         xaxis_title="RMSE (Lower is better)",
         showlegend=True,
         title=f"{horizon} Horizon: +{m_data['imp']}% Improvement"
