@@ -42,3 +42,6 @@ data/*.gz
 models/*.bak
 cache/
 .ipynb_checkpoints/
+
+# Secrets and Configs
+.streamlit/secrets.toml

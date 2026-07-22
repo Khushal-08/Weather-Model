@@ -1,8 +1,14 @@
 import os
 import requests
 import pandas as pd
+from dotenv import load_dotenv
 
-API_KEY = "579b464db66ec23bdd000001891d9e4ca1334dd576c21415e1d35235"
+load_dotenv()
+
+API_KEY = os.getenv("DATAGOV_API_KEY")
+if not API_KEY:
+    print("DATAGOV_API_KEY not found in environment!")
+    exit(1)
 
 URL = "https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69"
 

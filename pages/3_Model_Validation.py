@@ -122,7 +122,12 @@ col_shap1, col_shap2 = st.columns(2)
 
 city_prefix = "" if city == 'mumbai' else "delhi_"
 shap_sum_path = os.path.join("reports", "figures", f"{city_prefix}shap_summary_plot.png")
+if not os.path.exists(shap_sum_path):
+    shap_sum_path = os.path.join("reports", "figures", "shap_summary_plot.png")
+    
 shap_bar_path = os.path.join("reports", "figures", f"{city_prefix}shap_feature_importance.png")
+if not os.path.exists(shap_bar_path):
+    shap_bar_path = os.path.join("reports", "figures", "shap_feature_importance.png")
 
 try:
     shap_summary = Image.open(shap_sum_path)

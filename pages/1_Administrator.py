@@ -14,44 +14,48 @@ from utils_charts import create_forecast_chart, create_source_attribution_chart,
 
 try:
     import osmnx as ox
-    @st.cache_data
-    def get_map_layers(lat, lon):
-        layers = {}
-        try:
-            roads = ox.features.features_from_point((lat, lon), tags={'highway': ['primary', 'trunk', 'motorway']}, dist=5000)
-            if not roads.empty:
-                roads = roads[roads.geometry.type == 'LineString'].copy()
-                if 'name' not in roads.columns:
-                    roads['name'] = 'Unknown Road'
-                else:
-                    roads['name'] = roads['name'].fillna('Unknown Road').astype(str)
-                layers['roads'] = roads.to_json()
-        except: pass
-        try:
-            industry = ox.features.features_from_point((lat, lon), tags={'landuse': 'industrial', 'man_made': 'works'}, dist=5000)
-            if not industry.empty:
-                industry = industry[industry.geometry.type.isin(['Polygon', 'MultiPolygon'])].copy()
-                if not industry.empty:
-                    if 'name' not in industry.columns:
-                        industry['name'] = 'Industrial Zone'
-                    else:
-                        industry['name'] = industry['name'].fillna('Industrial Zone').astype(str)
-                    layers['industry'] = industry.to_json()
-        except: pass
-        try:
-            construction = ox.features.features_from_point((lat, lon), tags={'landuse': ['construction', 'brownfield', 'quarry']}, dist=5000)
-            if not construction.empty:
-                construction = construction[construction.geometry.type.isin(['Polygon', 'MultiPolygon'])].copy()
-                if not construction.empty:
-                    if 'name' not in construction.columns:
-                        construction['name'] = 'Construction Site'
-                    else:
-                        construction['name'] = construction['name'].fillna('Construction Site').astype(str)
-                    layers['construction'] = construction.to_json()
-        except: pass
-        return layers
+    HAS_OSMNX = True
 except ImportError:
-    pass
+    HAS_OSMNX = False
+
+@st.cache_data
+def get_map_layers(lat, lon):
+    layers = {}
+    if not HAS_OSMNX:
+        return layers
+    try:
+        roads = ox.features.features_from_point((lat, lon), tags={'highway': ['primary', 'trunk', 'motorway']}, dist=5000)
+        if not roads.empty:
+            roads = roads[roads.geometry.type == 'LineString'].copy()
+            if 'name' not in roads.columns:
+                roads['name'] = 'Unknown Road'
+            else:
+                roads['name'] = roads['name'].fillna('Unknown Road').astype(str)
+            layers['roads'] = roads.to_json()
+    except: pass
+    try:
+        industry = ox.features.features_from_point((lat, lon), tags={'landuse': 'industrial', 'man_made': 'works'}, dist=5000)
+        if not industry.empty:
+            industry = industry[industry.geometry.type.isin(['Polygon', 'MultiPolygon'])].copy()
+            if not industry.empty:
+                if 'name' not in industry.columns:
+                    industry['name'] = 'Industrial Zone'
+                else:
+                    industry['name'] = industry['name'].fillna('Industrial Zone').astype(str)
+                layers['industry'] = industry.to_json()
+    except: pass
+    try:
+        construction = ox.features.features_from_point((lat, lon), tags={'landuse': ['construction', 'brownfield', 'quarry']}, dist=5000)
+        if not construction.empty:
+            construction = construction[construction.geometry.type.isin(['Polygon', 'MultiPolygon'])].copy()
+            if not construction.empty:
+                if 'name' not in construction.columns:
+                    construction['name'] = 'Construction Site'
+                else:
+                    construction['name'] = construction['name'].fillna('Construction Site').astype(str)
+                layers['construction'] = construction.to_json()
+    except: pass
+    return layers
 
 def create_kpi_card(title, value, subtitle="", icon="📊", trend_arrow=""):
     trend_html = f"<span style='color: {'#10b981' if '↓' in trend_arrow or 'Good' in trend_arrow else '#ef4444'}; margin-left: 5px; font-size:1rem; vertical-align:middle;'>{trend_arrow}</span>" if trend_arrow else ""
@@ -195,8 +199,6 @@ with macro_col_map:
     m.fit_bounds([[min_lat, min_lon], [max_lat, max_lon]])
 
     try:
-        if 'ox' in sys.modules or 'osmnx' in sys.modules:
-            pass # Keep block valid
         if not df_hist.empty:
             stat_lat = df_hist[df_hist['station'] == selected_station]['latitude'].iloc[0] if 'latitude' in df_hist.columns else 19.0
             stat_lon = df_hist[df_hist['station'] == selected_station]['longitude'].iloc[0] if 'longitude' in df_hist.columns else 72.8
