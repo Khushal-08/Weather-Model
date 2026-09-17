@@ -270,6 +270,19 @@ function mountLiveMaps() {
     L.circle([station.latitude, station.longitude], { radius:1800, color, fillColor:color, fillOpacity:.2, weight:2 }).addTo(map);
     L.circleMarker([station.latitude, station.longitude], { radius:10, color:'#fff', weight:4, fillColor:color, fillOpacity:1 }).addTo(map).bindPopup(`<strong>${station.name}</strong><br>${state.backend.liveConnected?'Live Open-Meteo':'Cached'} PM2.5: ${pm25.toFixed(1)} µg/m³<br>AQI estimate: ${aqi}`).openPopup();
     state.backend.stations.filter(item => item.id !== station.id).slice(0,8).forEach(item => L.circleMarker([item.latitude,item.longitude], { radius:5, color:'#0b6b63', fillColor:'#0b6b63', fillOpacity:.8 }).addTo(map).bindTooltip(item.name));
+    if(element.dataset.liveMap === 'evidence' && state.city === 'Mumbai') {
+      const sources = intelligence()?.source_influence?.sources || [];
+      const contribution = (name, fallback) => Number(sources.find(source => source.name === name)?.contribution_percentage || fallback);
+      L.polyline([[19.175,72.851],[19.205,72.856],[19.229,72.8649],[19.260,72.872],[19.286,72.879]], { color:'#c2413b', weight:7, opacity:.82 }).addTo(map)
+        .bindPopup(`<strong>Traffic corridor screening</strong><br>Western Express Highway vicinity<br>Relative source signal: ${contribution('Traffic',53.7)}%`);
+      L.circle([19.2355,72.875], { radius:620, color:'#d97706', dashArray:'7 5', weight:3, fillColor:'#f2b84b', fillOpacity:.18 }).addTo(map)
+        .bindPopup(`<strong>Construction screening zone</strong><br>Nearby mapped activity requires field verification.<br>Relative source signal: ${contribution('Construction',25)}%`);
+      L.circle([19.248,72.887], { radius:760, color:'#7157a8', dashArray:'7 5', weight:3, fillColor:'#8065b6', fillOpacity:.16 }).addTo(map)
+        .bindPopup(`<strong>Industrial land-use screening zone</strong><br>Correlation indicator—not verified emissions.<br>Relative source signal: ${contribution('Industry',10.2)}%`);
+      const legend = L.control({ position:'topright' });
+      legend.onAdd = () => { const div = L.DomUtil.create('div','map-evidence-legend'); div.innerHTML = '<strong>Source evidence</strong><div><i style="background:#c2413b"></i>Traffic corridor</div><div><i style="background:#d97706"></i>Construction zone</div><div><i style="background:#7157a8"></i>Industrial zone</div><small>Screening hypotheses</small>'; return div; };
+      legend.addTo(map);
+    }
     setTimeout(() => map.invalidateSize(), 0);
   });
 }
