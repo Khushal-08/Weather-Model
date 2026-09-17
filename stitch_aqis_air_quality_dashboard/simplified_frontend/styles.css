@@ -330,6 +330,9 @@ h1, h2, h3, .brand-name { font-family: "Manrope", sans-serif; }
 .guidance-item strong { display: block; margin: 8px 0 4px; }
 .citizen-map { height: 330px; border-radius: 15px; overflow: hidden; background: #e8efed; }
 .citizen-map > svg { width: 100%; height: 100%; }
+.citizen-map .leaflet-marker-icon { width: 22px !important; height: 36px !important; max-width: 22px !important; max-height: 36px !important; }
+.citizen-map .leaflet-marker-shadow { width: 34px !important; height: 34px !important; max-width: 34px !important; }
+.citizen-map .leaflet-control-attribution { font-size: 9px; }
 .citizen-plan-stack { display: grid; gap: 18px; }
 .alert-settings { display: grid; grid-template-columns: .75fr 1.25fr; gap: 24px; align-items: end; }
 .alert-settings h2 { margin: 10px 0 6px; }
