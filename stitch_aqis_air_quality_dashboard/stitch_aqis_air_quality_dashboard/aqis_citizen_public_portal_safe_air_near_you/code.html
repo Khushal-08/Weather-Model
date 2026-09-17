@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary-fixed-variant":"#3a485b","on-tertiary-container":"#dfeaff","outline-variant":"#bdc9c6","inverse-primary":"#80d5cb","tertiary-fixed":"#d5e3fc","surface-container-highest":"#dae2fd","on-surface":"#131b2e","surface-container-low":"#f2f3ff","primary":"#005c55","surface":"#faf8ff","surface-container":"#eaedff","tertiary":"#445266","tertiary-fixed-dim":"#b9c7df","inverse-surface":"#283044","inverse-on-surface":"#eef0ff","background":"#faf8ff","surface-tint":"#006a63","primary-fixed-dim":"#80d5cb","error-container":"#ffdad6","surface-container-lowest":"#ffffff","secondary-container":"#7bc2ff","on-secondary":"#ffffff","primary-container":"#0f766e","outline":"#6e7977","on-primary-fixed-variant":"#00504a","on-error":"#ffffff","surface-container-high":"#e2e7ff","surface-dim":"#d2d9f4","on-tertiary-fixed":"#0d1c2e","surface-bright":"#faf8ff","on-primary":"#ffffff","on-primary-fixed":"#00201d","on-background":"#131b2e","secondary":"#006399","primary-fixed":"#9cf2e8","on-surface-variant":"#3e4947","tertiary-container":"#5c6a7f","secondary-fixed":"#cde5ff","on-secondary-container":"#004f7b","on-primary-container":"#a3faef","on-error-container":"#93000a","error":"#ba1a1a","on-secondary-fixed":"#001d32","on-secondary-fixed-variant":"#004b74","surface-variant":"#dae2fd","secondary-fixed-dim":"#94ccff","on-tertiary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xl":"1.75rem","space-xs":"0.25rem","gutter-lg":"1.5rem","margin-lg":"2rem","space-lg":"1.25rem","margin-md":"1.5rem","gutter":"1rem","space-md":"0.75rem","space-sm":"0.5rem","margin":"1rem"},"fontFamily":{"body-sm":["Inter"],"label-md":["Inter"],"label-xs":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"body-md":["Inter"],"display-metric":["Inter"],"tabular-data":["Inter"],"headline-lg":["Inter"],"headline-sm":["Inter"]},"fontSize":{"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"500"}],"label-xs":["11px",{"lineHeight":"14px","letterSpacing":"0.025em","fontWeight":"500"}],"headline-md":["18px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"500"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg-mobile":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"500"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"display-metric":["36px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"500"}],"tabular-data":["13px",{"lineHeight":"16px","letterSpacing":"-0.005em","fontWeight":"500"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"500"}],"headline-sm":["15px",{"lineHeight":"20px","fontWeight":"500"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-margin-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">air</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">AQIS</span><span class="font-label-xs text-label-xs text-on-surface-variant leading-tight">Urban Air Intelligence • Citizen Portal</span></div></div><div class="relative hidden lg:block"><select class="appearance-none bg-surface-container-low text-on-surface font-label-md text-label-md py-space-xs pl-space-md pr-space-lg rounded-lg outline-none cursor-pointer hover:bg-surface-container transition-colors"><option value="mumbai">Mumbai</option><option value="delhi">Delhi</option></select><span class="material-symbols-outlined absolute right-space-xs top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[16px]">expand_more</span></div></div><div class="hidden md:flex items-center flex-1 max-w-md mx-space-md"><div class="relative w-full flex items-center bg-surface-container-low rounded-lg px-space-sm"><span class="material-symbols-outlined text-on-surface-variant text-[18px] mr-space-xs">search</span><input class="w-full bg-transparent text-on-surface placeholder:text-outline font-body-md text-body-md py-space-xs focus:outline-none" placeholder="Search neighborhood or monitoring station..." type="text"/><button class="flex items-center gap-space-xs px-space-xs py-space-xs rounded font-label-xs text-label-xs text-primary hover:bg-surface-container-high transition-colors whitespace-nowrap" type="button"><span class="material-symbols-outlined text-[16px]">my_location</span>GPS</button></div></div><div class="flex items-center gap-space-md"><nav class="hidden xl:flex items-center gap-space-sm" data-active-classes="bg-primary-container text-on-primary rounded-lg font-label-md text-label-md"><a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-primary-container text-on-primary rounded-lg font-label-md text-label-md" data-path="live-map" href="#">Live Air Map</a><a class="px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="station-directory" href="#">Stations</a><a class="px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="health-advisories" href="#">Health Guidance</a><a class="px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="trend-analytics" href="#">Trend Analytics</a></nav><div class="relative"><select class="appearance-none bg-surface-container-low text-on-surface font-label-xs text-label-xs py-space-xs pl-space-sm pr-space-lg rounded-lg outline-none cursor-pointer hover:bg-surface-container transition-colors"><option value="en">English</option><option value="hi">हिंदी</option><option value="mr">मराठी</option></select><span class="material-symbols-outlined absolute right-space-xs top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[14px]">arrow_drop_down</span></div><a class="hidden sm:inline-flex items-center px-space-md py-space-xs rounded-lg font-label-md text-label-md text-primary hover:bg-surface-container transition-colors" data-path="admin-portal" href="#">Admin Console</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<!-- Search & Location Context Hero -->
+<section class="w-full bg-surface-container-low px-margin-lg py-space-xl">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-lg">
+<!-- Greeting & Civic Context -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-xs text-label-xs text-primary uppercase tracking-wider font-semibold">Public Health Telemetry Feed</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-medium tracking-tight">How safe is the air near you?</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Live measurements, 3-day breathing forecast, and tailored wellness guidance for your neighborhood.</p>
+</div>
+<!-- City Switcher & Verified Sensor Badge -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-sm bg-surface p-space-xs rounded-xl shadow-sm">
+<div class="flex items-center bg-surface-container rounded-lg p-0.5">
+<button class="px-space-sm py-1 rounded-md font-label-md text-label-md bg-surface-container-lowest text-on-surface font-medium shadow-sm transition-all" id="city-mum">Mumbai</button>
+<button class="px-space-sm py-1 rounded-md font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" id="city-del">Delhi</button>
+</div>
+<div class="flex items-center gap-space-xs px-space-xs py-1">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span class="font-label-xs text-label-xs text-on-surface font-medium">Borivali East Govt Hospital Station • 6 mins ago • Verified Sensor</span>
+</div>
+</div>
+</div>
+<!-- Main Omnibox Search -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-col sm:flex-row items-stretch gap-space-xs bg-surface-container-lowest p-space-xs rounded-xl shadow-md">
+<div class="relative flex-1 flex items-center px-space-sm">
+<span class="material-symbols-outlined text-outline text-[20px] mr-space-xs">travel_explore</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none py-space-sm" placeholder="Search locality, landmark, or pin code (e.g. Borivali East, Bandra, Connaught Place)..." type="text" value="Borivali East, Mumbai"/>
+<button class="text-outline hover:text-on-surface transition-colors p-1" title="Clear search" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<button class="flex items-center justify-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-space-md py-space-sm rounded-lg font-label-md text-label-md font-medium transition-all shadow-sm active:scale-[0.99]" type="button">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+<span>Use My Location</span>
+</button>
+</div>
+<!-- Locality Chips -->
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Popular Neighborhoods:</span>
+<button class="bg-primary text-on-primary px-space-sm py-1 rounded-full font-label-xs text-label-xs font-medium flex items-center gap-1 shadow-sm">
+<span>Borivali East</span>
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary"></span>
+<span>AQI 168</span>
+</button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high px-space-sm py-1 rounded-full font-label-xs text-label-xs transition-colors">
+            Bandra West (142)
+          </button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high px-space-sm py-1 rounded-full font-label-xs text-label-xs transition-colors">
+            Colaba (98)
+          </button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high px-space-sm py-1 rounded-full font-label-xs text-label-xs transition-colors">
+            Andheri MIDC (188)
+          </button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high px-space-sm py-1 rounded-full font-label-xs text-label-xs transition-colors">
+            Kurla LBS Marg (214)
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Dashboard: Two Column High-Fidelity Citizen View -->
+<section class="w-full px-margin-lg py-space-xl">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg">
+<!-- LEFT COLUMN: Live Air Quality & Predictive Timeline (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-xl">
+<!-- 1. Hero Air Quality Status Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md p-space-lg flex flex-col gap-space-md">
+<!-- Card Header & Timestamp -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">location_on</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Borivali East Station Telemetry</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Updated 8 minutes ago • Next in 22 mins</span>
+</div>
+</div>
+<!-- Hero Gauge / Metric Display Area -->
+<div class="grid grid-cols-1 sm:grid-cols-12 gap-space-md items-center bg-surface-container-low p-space-md rounded-xl">
+<!-- Metric Block -->
+<div class="sm:col-span-6 flex flex-col gap-space-xs">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider font-semibold">Air Quality Index (AQI)</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-metric text-display-metric text-on-surface font-semibold tabular-nums leading-none">168</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-normal">/ 500 scale</span>
+</div>
+<div class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-950 px-space-sm py-1 rounded-md font-label-md text-label-md font-medium w-fit">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span>Poor • Sensitive Alert</span>
+</div>
+</div>
+<!-- Visual Donut Meter (SVG) -->
+<div class="sm:col-span-6 flex items-center justify-center sm:justify-end">
+<div class="relative w-28 h-28 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background Ring -->
+<circle class="text-surface-container" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="10"></circle>
+<!-- Progress Ring (168/500 ≈ 33.6% -> circumference ~251.2, offset ~166) -->
+<circle class="text-amber-500 transition-all duration-1000" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="166" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-amber-600 text-[26px]">masks</span>
+<span class="font-label-xs text-label-xs font-semibold text-on-surface mt-0.5">AQI 168</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Color Spectrum Scale Indicator -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between items-center font-label-xs text-label-xs text-on-surface-variant">
+<span>National Standard Scale</span>
+<span class="font-medium text-amber-700">Currently: Poor Category</span>
+</div>
+<div class="grid grid-cols-5 gap-1.5 h-3 rounded-full overflow-hidden bg-surface-container p-0.5">
+<div class="rounded-l-full bg-emerald-500 h-full" title="Good (0-50)"></div>
+<div class="bg-teal-400 h-full" title="Moderate (51-100)"></div>
+<div class="bg-amber-500 h-full relative" title="Poor (101-200) - ACTIVE">
+<div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-4 bg-on-surface rounded-full shadow-sm"></div>
+</div>
+<div class="bg-orange-500 h-full opacity-60" title="Unhealthy (201-300)"></div>
+<div class="rounded-r-full bg-rose-600 h-full opacity-40" title="Severe (301+)"></div>
+</div>
+<div class="grid grid-cols-5 text-center font-label-xs text-[10px] text-on-surface-variant">
+<span>Good (0-50)</span>
+<span>Satisfactory</span>
+<span class="font-semibold text-on-surface">Poor (101-200)</span>
+<span>Very Poor</span>
+<span>Severe (300+)</span>
+</div>
+</div>
+<!-- Dominant Pollutant Chip -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs bg-surface-container p-space-sm rounded-lg">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">blur_on</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-on-surface-variant">Primary Micro-Pollutant</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Fine Dust Particles (PM2.5) • 84 µg/m³</span>
+</div>
+</div>
+<span class="font-label-xs text-label-xs px-space-xs py-1 rounded bg-surface-container-lowest text-amber-800 font-medium">
+              2.8× WHO Daily Guideline
+            </span>
+</div>
+<!-- Plain English Plain-Language Explanation -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">info</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">What this means in plain words</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                The air today contains higher levels of fine dust particles, especially along traffic corridors and during early mornings. Healthy adults may feel mild throat tickle; children and sensitive groups should limit intense outdoor sports.
+              </p>
+</div>
+</div>
+</div>
+<!-- 2. 3-Day Forecast & Diurnal Day/Night Sparkline Curve -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md p-space-lg flex flex-col gap-space-lg">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-medium">3-Day Air Outlook for Borivali East</h2>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Continuous environmental forecast calibrated every 3 hours</span>
+</div>
+<span class="font-label-xs text-label-xs bg-surface-container text-primary font-medium px-space-sm py-1 rounded-full w-fit">
+              Wind direction: North-Westerly (12 km/h)
+            </span>
+</div>
+<!-- 3 Forecast Cards Array -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<!-- Day 1 (24h) -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-sm hover:bg-surface-container transition-colors">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs font-semibold text-on-surface-variant uppercase tracking-wider">Tomorrow</span>
+<span class="font-label-xs text-label-xs font-semibold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">Poor</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-display-metric text-[28px] font-semibold text-on-surface leading-tight">184</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">AQI est.</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Morning haze peak around 7:30 AM to 9:00 AM. Clearer winds by afternoon.</p>
+</div>
+<div class="flex items-center gap-1 text-amber-800 font-label-xs text-label-xs bg-amber-50 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+<span>Peak caution: 8:00 AM</span>
+</div>
+</div>
+<!-- Day 2 (48h) -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-sm hover:bg-surface-container transition-colors">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs font-semibold text-on-surface-variant uppercase tracking-wider">Day After</span>
+<span class="font-label-xs text-label-xs font-semibold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">Moderate/Poor</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-display-metric text-[28px] font-semibold text-on-surface leading-tight">145</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">AQI est.</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Light coastal breeze expected to disperse ground-level dust particles.</p>
+</div>
+<div class="flex items-center gap-1 text-teal-800 font-label-xs text-label-xs bg-teal-50 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[16px]">air</span>
+<span>Sea breeze clearing</span>
+</div>
+</div>
+<!-- Day 3 (72h) -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-sm hover:bg-surface-container transition-colors">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs font-semibold text-on-surface-variant uppercase tracking-wider">Weekend</span>
+<span class="font-label-xs text-label-xs font-semibold text-teal-700 bg-teal-100 px-1.5 py-0.5 rounded">Moderate</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-display-metric text-[28px] font-semibold text-on-surface leading-tight">118</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">AQI est.</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Favorable wind dispersion; safe window for morning cycling & walks.</p>
+</div>
+<div class="flex items-center gap-1 text-emerald-800 font-label-xs text-label-xs bg-emerald-50 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Good exercise window</span>
+</div>
+</div>
+</div>
+<!-- 24-Hour Diurnal Sparkline Curve (SVG) -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<span class="font-label-md text-label-md font-medium text-on-surface">Daily Breathing Clock (Cleanest vs. Riskiest Hours)</span>
+<div class="flex items-center gap-space-sm font-label-xs text-label-xs">
+<span class="flex items-center gap-1 text-rose-700 font-medium">
+<span class="w-2 h-2 rounded-full bg-rose-500"></span> Stay Indoors: 6:00 - 9:30 AM
+                </span>
+<span class="flex items-center gap-1 text-emerald-700 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Cleanest Air: 2:00 - 5:00 PM
+                </span>
+</div>
+</div>
+<!-- Diurnal Trend Chart SVG -->
+<div class="w-full h-32 pt-2">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 600 120">
+<defs>
+<lineargradient id="curveGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#f59e0b" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#0f766e" stop-opacity="0.05"></stop>
+</lineargradient>
+</defs>
+<!-- Guideline line (moderate threshold = 100) -->
+<line stroke="#94a3b8" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="600" y1="75" y2="75"></line>
+<text class="fill-outline font-label-xs text-[9px]" x="6" y="70">Moderate safe threshold (AQI 100)</text>
+<!-- Gradient Fill Area -->
+<path d="M 0,60 Q 75,25 150,15 T 300,70 T 420,95 T 520,65 T 600,45 L 600,120 L 0,120 Z" fill="url(#curveGradient)"></path>
+<!-- Smooth Wave Line -->
+<path d="M 0,60 Q 75,25 150,15 T 300,70 T 420,95 T 520,65 T 600,45" fill="none" stroke="#0f766e" stroke-linecap="round" stroke-width="3"></path>
+<!-- Peak Marker (8:00 AM) -->
+<circle class="fill-rose-500 stroke-surface stroke-[2]" cx="160" cy="16" r="4.5"></circle>
+<text class="fill-rose-700 font-label-xs text-[10px] font-semibold" text-anchor="middle" x="160" y="8">188 Peak (8 AM)</text>
+<!-- Trough Marker (3:30 PM) -->
+<circle class="fill-emerald-600 stroke-surface stroke-[2]" cx="430" cy="95" r="4.5"></circle>
+<text class="fill-emerald-700 font-label-xs text-[10px] font-semibold" text-anchor="middle" x="430" y="112">112 Cleanest (3:30 PM)</text>
+</svg>
+</div>
+<!-- Time Axis Labels -->
+<div class="flex justify-between items-center pt-2 font-label-xs text-[11px] text-on-surface-variant border-t border-surface-container">
+<span>Midnight</span>
+<span>4:00 AM</span>
+<span class="font-semibold text-rose-700">8:00 AM (Peak)</span>
+<span>12:00 PM</span>
+<span class="font-semibold text-emerald-700">3:30 PM (Clean)</span>
+<span>8:00 PM</span>
+<span>11:00 PM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Personalized Health Action & Alert Subscription (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-xl">
+<!-- 3. Audience-Specific Health Guidance Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center gap-space-xs pb-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">vital_signs</span>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-medium">Personalized Health & Outdoor Advice</h2>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Tailored recommendations for today's air quality</span>
+</div>
+</div>
+<!-- Audience Switcher Pills -->
+<div class="grid grid-cols-2 gap-1.5 p-1 bg-surface-container-low rounded-xl" id="audience-selector">
+<button class="aud-btn px-space-xs py-2 rounded-lg font-label-xs text-label-xs text-on-surface-variant hover:text-on-surface transition-all" data-target="general">
+              General Public
+            </button>
+<button class="aud-btn px-space-xs py-2 rounded-lg font-label-xs text-label-xs bg-surface-container-lowest text-primary font-semibold shadow-sm transition-all" data-target="children">
+              Children & Students
+            </button>
+<button class="aud-btn px-space-xs py-2 rounded-lg font-label-xs text-label-xs text-on-surface-variant hover:text-on-surface transition-all" data-target="elderly">
+              Seniors (65+)
+            </button>
+<button class="aud-btn px-space-xs py-2 rounded-lg font-label-xs text-label-xs text-on-surface-variant hover:text-on-surface transition-all" data-target="asthma">
+              Asthma / Heart Care
+            </button>
+</div>
+<!-- Dynamic Guidance Content (Active: Children & Students) -->
+<div class="flex flex-col gap-space-sm pt-space-xs" id="guidance-content">
+<!-- School & Sports Assembly -->
+<div class="flex items-start gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md font-medium text-on-surface">Schools & Morning Assemblies</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+                  Keep morning assemblies indoors. Shift high-intensity recess outdoor sports to post-11:00 AM when particulates lift. Ensure students stay hydrated.
+                </p>
+</div>
+</div>
+<!-- Outdoor Exercise -->
+<div class="flex items-start gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">directions_run</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md font-medium text-on-surface">Outdoor Sports & Play</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+                  Reschedule outdoor football or running to late afternoon (3:00 PM – 6:00 PM). Alternatively, opt for gym-based or indoor training.
+                </p>
+</div>
+</div>
+<!-- Commute Advisory -->
+<div class="flex items-start gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">masks</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md font-medium text-on-surface">Commute Advisory</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+                  Wear a well-fitting N95/FFP2 mask if riding two-wheelers or waiting at bus stops along Western Express Highway during peak rush hours.
+                </p>
+</div>
+</div>
+<!-- Home Ventilation Tips -->
+<div class="flex items-start gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">window</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md font-medium text-on-surface">Home Ventilation Tips</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+                  Keep street-facing windows closed between 6:00 AM and 9:30 AM when cooler ground air traps exhaust dust. Air rooms out in the early afternoon.
+                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Primary Civic Action: Unhealthy Air Notification Subscription -->
+<div class="bg-primary text-on-primary rounded-xl shadow-xl p-space-lg flex flex-col gap-space-md relative overflow-hidden">
+<!-- Subtle graphic background shape -->
+<div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-primary-container/40 pointer-events-none"></div>
+<div class="flex flex-col gap-space-xs relative z-10">
+<div class="inline-flex items-center gap-1.5 bg-on-primary/10 w-fit px-space-sm py-1 rounded-full text-on-primary-container font-label-xs text-label-xs font-semibold">
+<span class="material-symbols-outlined text-[16px]">notifications_active</span>
+<span>Free Civic Public Health Service</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-medium text-on-primary">Get Free Air Quality Alerts</h3>
+<p class="font-body-sm text-body-sm text-on-primary/80 leading-relaxed">
+              Receive a simple message when air quality is predicted to turn unhealthy, so you can plan morning runs, school drop-offs, and breathing medicine in advance.
+            </p>
+</div>
+<!-- Interactive Subscription Form -->
+<form class="flex flex-col gap-space-sm relative z-10" id="alert-form" onsubmit="event.preventDefault(); showSuccessState();">
+<!-- Channel Checkboxes -->
+<div class="flex items-center gap-space-lg pt-space-xs">
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-0 bg-surface-container-lowest" type="checkbox"/>
+<span class="font-label-sm text-label-md text-on-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">chat</span> WhatsApp Daily
+                </span>
+</label>
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-0 bg-surface-container-lowest" type="checkbox"/>
+<span class="font-label-sm text-label-md text-on-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">sms</span> SMS (Spike Alerts)
+                </span>
+</label>
+</div>
+<!-- Mobile Input -->
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-label-xs text-on-primary/80 font-medium">Your Mobile Number</label>
+<div class="flex items-center bg-surface-container-lowest text-on-surface rounded-lg px-space-sm py-1 shadow-sm">
+<span class="font-label-md text-label-md text-on-surface-variant font-medium pr-space-xs">+91</span>
+<input class="w-full bg-transparent font-body-md text-body-md py-1.5 focus:outline-none" pattern="[0-9]{10}" placeholder="98200 12345" required="" type="tel"/>
+</div>
+</div>
+<!-- Neighborhood Selection & Threshold Dropdown -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-xs">
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-label-xs text-on-primary/80">Neighborhood</label>
+<div class="bg-primary-container text-on-primary px-space-sm py-2 rounded-lg font-label-xs text-label-xs flex items-center justify-between">
+<span class="font-semibold truncate">Borivali East</span>
+<button class="text-primary-fixed hover:underline text-[11px]" type="button">Change</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-label-xs text-on-primary/80">Alert Trigger</label>
+<select class="bg-surface-container-lowest text-on-surface rounded-lg px-space-xs py-2 font-label-xs text-label-xs focus:outline-none">
+<option>AQI > 150 (Poor air)</option>
+<option>AQI > 200 (Very Poor)</option>
+<option>Daily 7 AM morning forecast</option>
+</select>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full mt-space-xs bg-surface-container-lowest hover:bg-surface text-primary py-space-sm px-space-md rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs shadow-md transition-all active:scale-[0.98]" type="submit">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+<span>Send Me Free Alerts (No App Required)</span>
+</button>
+<!-- Helper OTP Note -->
+<div class="flex items-center justify-center gap-space-xs text-center font-label-xs text-[11px] text-on-primary/75 pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>One-time SMS confirmation • No password • Reply 'STOP' anytime to pause</span>
+</div>
+</form>
+<!-- Success Feedback Overlay State (hidden by default) -->
+<div class="hidden absolute inset-0 bg-primary-container p-space-lg flex flex-col items-center justify-center text-center gap-space-sm z-20" id="subscription-success">
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">check_circle</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-primary font-medium">Alerts Activated!</h4>
+<p class="font-body-sm text-body-sm text-on-primary-container max-w-xs">
+              We sent a verification SMS to your phone. You will now receive daily morning breathing summaries for Borivali East.
+            </p>
+<button class="mt-space-xs bg-surface-container-lowest text-primary px-space-md py-1.5 rounded-lg font-label-xs text-label-xs font-semibold" onclick="hideSuccessState()">
+              Dismiss
+            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BOTTOM SECTION: Neighborhood Sensor Credibility & Active Civic Advisory -->
+<section class="w-full bg-surface-container-low px-margin-lg py-space-xl">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-lg">
+<!-- Active Public Health Civic Advisory Banner -->
+<div class="bg-amber-50 rounded-xl p-space-md shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-amber-500 text-surface-container-lowest flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">campaign</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-xs text-label-xs font-bold text-amber-900 uppercase tracking-wider">Active Civic Health Notice</span>
+<span class="font-label-xs text-label-xs text-amber-800 bg-amber-200/70 px-1.5 py-0.5 rounded font-medium">Ward R-Central</span>
+</div>
+<p class="font-body-md text-body-md text-amber-950 font-medium">
+              Morning particulate haze advisory active until 10:00 AM tomorrow. Municipal street-sweeping water sprinklers are operational across S.V. Road & Link Road.
+            </p>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-space-xs">
+<span class="font-label-xs text-label-xs text-amber-900 font-medium">Issued by Municipal Health Dept</span>
+</div>
+</div>
+<!-- Station Credibility & Nearby Sensors Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-stretch">
+<!-- Interactive Static Neighborhood Station Map -->
+<div class="lg:col-span-6 flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-medium">Sensor Stations in Your Area</h3>
+<span class="font-label-xs text-label-xs text-primary font-medium">3 verified monitors within 5 km</span>
+</div>
+<div class="relative w-full h-72 rounded-xl overflow-hidden shadow-md">
+<!-- Map Container with Data-Location for Map Pipeline -->
+<div class="w-full h-full bg-cover bg-center" data-location="Borivali East, Mumbai" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA79XCYgH5LeeZYLS-90CHKyPwjkDENtNbkM7llgVA3LlCEE7LKcanOGZaI-RphMzn5CDNtDuxzOinWSn8Bh8dQtVjUWxJynTywuRdihdlGlNfahVpk43D3Yq9qNJqSUzs0DSwwuBrFbJz1SD2vVWy_QjsACBgrADvoOktzVwX0lViP6Bn77MxCzo8-wzTpSxyJ7xatlNJye57NXstip0aaiF8dln6EJ7g4rKB0VPmXdhOxNrTPDDJs')"></div>
+<!-- Overlay Station Pin Highlights -->
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent flex flex-col justify-end p-space-md text-on-primary">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-amber-400 animate-ping"></span>
+<span class="font-label-md text-label-md font-semibold">Active Sensor: Borivali East Govt Hospital</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-primary/80">Continuous Beta-Attenuation Mass Monitor (Dual-BAM) • Lat 19.229° N, Long 72.857° E</span>
+</div>
+</div>
+</div>
+<!-- Credibility & Neighboring Stations Telemetry List -->
+<div class="lg:col-span-6 bg-surface-container-lowest rounded-xl shadow-md p-space-lg flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">How We Measure Your Air</span>
+</div>
+<span class="font-label-xs text-label-xs bg-emerald-100 text-emerald-900 px-space-xs py-0.5 rounded-full font-medium">
+                Live & Certified
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              AQIS citizen feeds use continuous regulatory monitoring grade instrumentation (CAAQMS). Data is calibrated against meteorological humidity and temperature sensors to prevent false spikes from fog or moisture.
+            </p>
+</div>
+<!-- Nearby Station Comparisons -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-semibold uppercase tracking-wider">Nearby Official Stations</span>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Borivali East (Govt Hospital)</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">0.8 km away • Primary reporting station</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-right">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">168</span>
+<span class="font-label-xs text-label-xs text-amber-700 font-semibold bg-amber-100 px-1.5 py-0.5 rounded">Poor</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Kandivali West (Charkop Sector 8)</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">2.4 km away • Coastal station</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-right">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">154</span>
+<span class="font-label-xs text-label-xs text-amber-700 font-semibold bg-amber-100 px-1.5 py-0.5 rounded">Poor</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Malad East (Dindoshi Traffic Junction)</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">4.1 km away • Highway monitor</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-right">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">172</span>
+<span class="font-label-xs text-label-xs text-amber-800 font-semibold bg-amber-100 px-1.5 py-0.5 rounded">Poor</span>
+</div>
+</div>
+</div>
+<!-- Bottom Assurance Micro-Footer -->
+<div class="flex items-center justify-between text-on-surface-variant font-label-xs text-[11px] pt-space-xs border-t border-surface-container">
+<span>Audit Standard: ISO 17025 Certified Telemetry</span>
+<a class="text-primary font-medium hover:underline flex items-center gap-0.5" href="#">
+<span>View Sensor Calibration Logs</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Dynamic Tab Switcher for Audience Health Guidance
+  const guidanceData = {
+    general: [
+      {
+        icon: 'directions_walk',
+        title: 'Outdoor Walks & Daily Exercise',
+        desc: 'Safe for moderate walks during mid-day and afternoon. If exercising outdoors, take frequent water breaks and avoid busy main roads.'
+      },
+      {
+        icon: 'masks',
+        title: 'Facial Protection',
+        desc: 'Consider a simple mask when traveling in open-air transport like auto-rickshaws or walking along highway junctions.'
+      },
+      {
+        icon: 'window',
+        title: 'Home Ventilation',
+        desc: 'Keep windows open during bright afternoon hours (1:00 PM to 4:00 PM) to allow fresh air flow; seal windows during morning traffic hours.'
+      },
+      {
+        icon: 'local_florist',
+        title: 'Indoor Plants & Air Flow',
+        desc: 'Natural indoor plants like Areca Palms and Snake Plants help maintain pleasant indoor humidity and freshness.'
+      }
+    ],
+    children: [
+      {
+        icon: 'school',
+        title: 'Schools & Morning Assemblies',
+        desc: 'Keep morning assemblies indoors. Shift high-intensity recess outdoor sports to post-11:00 AM when particulates lift. Ensure students stay hydrated.'
+      },
+      {
+        icon: 'directions_run',
+        title: 'Outdoor Sports & Play',
+        desc: 'Reschedule outdoor football or running to late afternoon (3:00 PM – 6:00 PM). Alternatively, opt for gym-based or indoor training.'
+      },
+      {
+        icon: 'masks',
+        title: 'Commute Advisory',
+        desc: 'Wear a well-fitting N95/FFP2 mask if riding two-wheelers or waiting at bus stops along Western Express Highway during peak rush hours.'
+      },
+      {
+        icon: 'window',
+        title: 'Home Ventilation Tips',
+        desc: 'Keep street-facing windows closed between 6:00 AM and 9:30 AM when cooler ground air traps exhaust dust. Air rooms out in the early afternoon.'
+      }
+    ],
+    elderly: [
+      {
+        icon: 'elderly',
+        title: 'Senior Morning Walk Schedule',
+        desc: 'Postpone routine 6:30 AM morning walks to 10:00 AM or later when the sun has dispersed ground-level winter haze.'
+      },
+      {
+        icon: 'medication',
+        title: 'Daily Medication & Nebulizer Preparedness',
+        desc: 'Ensure regular prescribed inhalers and blood pressure medications are kept close at hand. Consult doctor if cough persists.'
+      },
+      {
+        icon: 'balcony',
+        title: 'Balcony & Garden Sitting',
+        desc: 'Enjoy outdoor balconies in the warm afternoon rather than the cold dawn hours when particulate dust settles lowest.'
+      },
+      {
+        icon: 'airware',
+        title: 'Air Purifier Usage',
+        desc: 'If using an indoor air purifier in the bedroom, run it on low setting throughout the night to ensure calm sleep.'
+      }
+    ],
+    asthma: [
+      {
+        icon: 'cardiology',
+        title: 'Asthma / Respiratory Precaution',
+        desc: 'High particulate PM2.5 can trigger airway irritation. Keep your quick-relief bronchodilator inhaler accessible whenever outside.'
+      },
+      {
+        icon: 'warning',
+        title: 'Avoid Peak Traffic Corridors',
+        desc: 'Avoid walking near diesel truck corridors, heavy bus stops, and construction zones where dust levels exceed 200 AQI.'
+      },
+      {
+        icon: 'masks',
+        title: 'Certified N95 Mask Mandatory',
+        desc: 'Use a snug-fitting N95 respirator mask with an exhale valve if you must spend more than 20 minutes in heavy traffic.'
+      },
+      {
+        icon: 'thermostat',
+        title: 'Warm Steam & Hydration',
+        desc: 'Drink warm water and use mild steam inhalation before bed to soothe throat passages irritated by ambient dust.'
+      }
+    ]
+  };
+
+  const audienceButtons = document.querySelectorAll('.aud-btn');
+  const guidanceContainer = document.getElementById('guidance-content');
+
+  audienceButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active states
+      audienceButtons.forEach(b => {
+        b.classList.remove('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-sm');
+        b.classList.add('text-on-surface-variant');
+      });
+
+      // Add active state to clicked button
+      btn.classList.remove('text-on-surface-variant');
+      btn.classList.add('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-sm');
+
+      const target = btn.dataset.target;
+      const items = guidanceData[target] || guidanceData.children;
+
+      // Render new cards
+      guidanceContainer.innerHTML = items.map(item => `
+        <div class="flex items-start gap-space-sm bg-surface-container-low p-space-md rounded-xl animate-fadeIn">
+          <div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+            <span class="material-symbols-outlined text-[20px]">${item.icon}</span>
+          </div>
+          <div class="flex flex-col gap-0.5">
+            <span class="font-label-md text-label-md font-medium text-on-surface">${item.title}</span>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">${item.desc}</p>
+          </div>
+        </div>
+      `).join('');
+    });
+  });
+
+  // Simple Notification form UI states
+  function showSuccessState() {
+    const successOverlay = document.getElementById('subscription-success');
+    if (successOverlay) {
+      successOverlay.classList.remove('hidden');
+    }
+  }
+
+  function hideSuccessState() {
+    const successOverlay = document.getElementById('subscription-success');
+    if (successOverlay) {
+      successOverlay.classList.add('hidden');
+    }
+  }
+
+  // City Toggle
+  const cityMum = document.getElementById('city-mum');
+  const cityDel = document.getElementById('city-del');
+  if (cityMum && cityDel) {
+    cityMum.addEventListener('click', () => {
+      cityMum.className = 'px-space-sm py-1 rounded-md font-label-md text-label-md bg-surface-container-lowest text-on-surface font-medium shadow-sm transition-all';
+      cityDel.className = 'px-space-sm py-1 rounded-md font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all';
+    });
+    cityDel.addEventListener('click', () => {
+      cityDel.className = 'px-space-sm py-1 rounded-md font-label-md text-label-md bg-surface-container-lowest text-on-surface font-medium shadow-sm transition-all';
+      cityMum.className = 'px-space-sm py-1 rounded-md font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all';
+    });
+  }
+</script></main><footer class="w-full bg-surface-container-low"><div class="w-full px-margin-lg py-space-xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-lg pb-space-lg"><div class="md:col-span-2 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[16px]">air</span></div><span class="font-headline-sm text-headline-sm text-on-surface font-medium">Air Quality Intelligence System</span></div><p class="font-body-md text-body-md text-on-surface-variant max-w-xl">A public utility initiative delivering transparent, real-time particulate matter and environmental telemetry for citizen wellness, public awareness, and civic resilience.</p><div class="flex flex-col gap-space-xs mt-space-xs"><span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider font-semibold">Institutional Stewardship</span><span class="font-body-sm text-body-sm text-on-surface">Municipal Corporation of Greater Mumbai (MCGM) & Central Pollution Control Board (CPCB)</span></div></div><div class="flex flex-col gap-space-sm"><span class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider">Telemetry & Guidance</span><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-on-surface transition-colors" data-path="station-directory" href="#">Station Directory (24 CAAQMS)</a></li><li><a class="hover:text-on-surface transition-colors" data-path="health-advisories" href="#">Mask & Exposure Guidelines</a></li><li><a class="hover:text-on-surface transition-colors" data-path="emergency-contacts" href="#">Emergency Respiratory Support</a></li><li><a class="hover:text-on-surface transition-colors" data-path="sensor-infrastructure" href="#">IMD & Satellite Feeds</a></li></ul></div><div class="flex flex-col gap-space-sm"><span class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider">Civic Architecture</span><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-on-surface transition-colors" data-path="about-aqis" href="#">About AQIS Engine</a></li><li><a class="hover:text-on-surface transition-colors" data-path="open-data-api" href="#">Open Air Telemetry API</a></li><li><a class="hover:text-on-surface transition-colors" data-path="admin-portal" href="#">Municipal Command Console</a></li><li><a class="hover:text-on-surface transition-colors" data-path="accessibility" href="#">Citizen Accessibility Policy</a></li></ul></div></div><div class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm"><p class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-left">AQIS public air health intelligence is provided for community wellness and preventive planning.</p><p class="font-label-xs text-label-xs text-on-surface-variant">© 2025 MCGM • CPCB Environmental Intelligence Initiative</p></div></div></footer></body></html>

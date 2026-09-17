@@ -1,0 +1,623 @@
+<!DOCTYPE html><html lang="en" style="width: 1280px; height: 1914px; overflow: hidden; position: relative;"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "tertiary": "#445266",
+          "on-tertiary-fixed": "#0d1c2e",
+          "on-primary-fixed-variant": "#00504a",
+          "on-secondary-fixed": "#001d32",
+          "surface": "#faf8ff",
+          "on-surface-variant": "#3e4947",
+          "error-container": "#ffdad6",
+          "inverse-surface": "#283044",
+          "primary-fixed": "#9cf2e8",
+          "secondary-fixed": "#cde5ff",
+          "secondary-container": "#7bc2ff",
+          "surface-bright": "#faf8ff",
+          "on-primary-fixed": "#00201d",
+          "surface-dim": "#d2d9f4",
+          "secondary-fixed-dim": "#94ccff",
+          "secondary": "#006399",
+          "surface-container": "#eaedff",
+          "inverse-primary": "#80d5cb",
+          "on-error": "#ffffff",
+          "on-primary-container": "#a3faef",
+          "on-secondary-fixed-variant": "#004b74",
+          "tertiary-container": "#5c6a7f",
+          "on-surface": "#131b2e",
+          "primary-fixed-dim": "#80d5cb",
+          "on-error-container": "#93000a",
+          "on-tertiary-fixed-variant": "#3a485b",
+          "on-primary": "#ffffff",
+          "tertiary-fixed-dim": "#b9c7df",
+          "outline-variant": "#bdc9c6",
+          "background": "#faf8ff",
+          "on-tertiary-container": "#dfeaff",
+          "surface-container-high": "#e2e7ff",
+          "inverse-on-surface": "#eef0ff",
+          "error": "#ba1a1a",
+          "surface-variant": "#dae2fd",
+          "primary": "#005c55",
+          "primary-container": "#0f766e",
+          "surface-tint": "#006a63",
+          "on-secondary": "#ffffff",
+          "on-tertiary": "#ffffff",
+          "on-background": "#131b2e",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#f2f3ff",
+          "tertiary-fixed": "#d5e3fc",
+          "outline": "#6e7977",
+          "on-secondary-container": "#004f7b",
+          "surface-container-highest": "#dae2fd"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xs": "0.25rem",
+          "space-sm": "0.5rem",
+          "gutter": "1rem",
+          "margin-md": "1.5rem",
+          "gutter-lg": "1.5rem",
+          "space-lg": "1.25rem",
+          "margin-lg": "2rem",
+          "space-md": "0.75rem",
+          "margin": "1rem",
+          "space-xl": "1.75rem"
+        },
+        "fontFamily": {
+          "tabular-data": ["Inter"],
+          "display-metric": ["Inter"],
+          "label-md": ["Inter"],
+          "headline-lg-mobile": ["Inter"],
+          "body-md": ["Inter"],
+          "body-lg": ["Inter"],
+          "headline-lg": ["Inter"],
+          "headline-md": ["Inter"],
+          "label-xs": ["Inter"],
+          "headline-sm": ["Inter"],
+          "body-sm": ["Inter"]
+        },
+        "fontSize": {
+          "tabular-data": ["13px", {"lineHeight": "16px", "letterSpacing": "-0.005em", "fontWeight": "500"}],
+          "display-metric": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+          "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+          "headline-lg-mobile": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+          "body-md": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+          "body-lg": ["15px", {"lineHeight": "22px", "fontWeight": "400"}],
+          "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "500"}],
+          "headline-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+          "label-xs": ["11px", {"lineHeight": "14px", "letterSpacing": "0.025em", "fontWeight": "500"}],
+          "headline-sm": ["15px", {"lineHeight": "20px", "fontWeight": "500"}],
+          "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+        }
+      }
+    }
+  };</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest border-r border-outline-variant/40 z-50 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between border-b border-outline-variant/30"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">air</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight leading-tight">AQIS</span><span class="font-label-xs text-label-xs text-on-surface-variant leading-none uppercase tracking-wider">Urban Air Intel</span></div></div><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-outline-variant/30 text-on-surface-variant font-label-xs text-label-xs"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>BOM-084</div></div><div class="px-space-md py-space-sm"><div class="font-label-xs text-label-xs text-on-surface-variant font-medium px-space-sm py-1 uppercase tracking-wider">Operations Command</div></div><nav class="flex flex-col gap-1 px-space-md" data-active-classes="bg-primary-container text-on-primary font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="city-pulse" href="#"><span class="material-symbols-outlined text-[18px]">monitoring</span><span class="font-body-md text-body-md">City Pulse</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-2.5 transition-colors bg-primary-container text-on-primary font-medium rounded-lg" data-path="forecast" href="#"><span class="material-symbols-outlined text-[18px]">insights</span><span class="font-body-md text-body-md">Forecast</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="evidence-explorer" href="#"><span class="material-symbols-outlined text-[18px]">dataset</span><span class="font-body-md text-body-md">Evidence Explorer</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="action-studio" href="#"><span class="material-symbols-outlined text-[18px]">alt_route</span><span class="font-body-md text-body-md">Action Studio</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="alert-composer" href="#"><span class="material-symbols-outlined text-[18px]">notification_important</span><span class="font-body-md text-body-md">Alert Composer</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="model-card" href="#"><span class="material-symbols-outlined text-[18px]">science</span><span class="font-body-md text-body-md">Model Card</span></a></nav></div><div class="flex flex-col border-t border-outline-variant/30 p-space-md gap-1 bg-surface-container-lowest"><div class="font-label-xs text-label-xs text-on-surface-variant font-medium px-space-sm py-1 uppercase tracking-wider">Diagnostics &amp; System</div><nav class="flex flex-col gap-1" data-active-classes="bg-surface-container-low text-on-surface font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="data-sources" href="#"><span class="material-symbols-outlined text-[16px]">sync_alt</span><span class="font-body-sm text-body-sm">Data Sources</span></a><a class="flex items-center gap-space-sm px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="help-and-docs" href="#"><span class="material-symbols-outlined text-[16px]">description</span><span class="font-body-sm text-body-sm">Help &amp; Docs</span></a><a class="flex items-center gap-space-sm px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="system-status" href="#"><span class="material-symbols-outlined text-[16px]">check_circle</span><span class="font-body-sm text-body-sm">System Status</span></a></nav><div class="mt-space-sm pt-space-sm border-t border-outline-variant/20 px-space-sm flex items-center justify-between"><span class="font-label-xs text-label-xs text-on-surface-variant">Admin Console</span><span class="font-label-xs text-label-xs px-1.5 py-0.5 rounded bg-surface-container-low text-on-surface font-tabular-data text-tabular-data">v4.2</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/40 z-40 flex items-center justify-between px-gutter-lg gap-gutter"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm whitespace-nowrap"><span class="font-medium text-on-surface">Mumbai</span><span class="text-outline">/</span><span class="text-on-surface-variant">City Pulse</span><span class="text-outline">/</span><span class="text-primary font-medium">Forecast</span></div><div class="h-4 w-[1px] bg-outline-variant/40"></div><div class="flex items-center gap-2 px-space-sm py-1 rounded-lg bg-surface-container-low border border-outline-variant/40 hover:border-outline transition-colors cursor-pointer"><span class="material-symbols-outlined text-primary text-[18px]">location_on</span><span class="font-body-sm text-body-sm font-medium text-on-surface truncate max-w-[210px]">Borivali East, Mumbai - MPCB</span><span class="font-label-xs text-label-xs px-1 py-0.5 rounded bg-surface-container text-on-surface-variant font-tabular-data text-tabular-data">(BOM-084)</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">arrow_drop_down</span></div></div><div class="flex items-center gap-space-md"><div class="relative w-72"><span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span><input class="w-full h-9 pl-9 pr-3 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface placeholder:text-outline text-body-sm font-body-sm focus:outline-none focus:border-primary-container transition-colors" placeholder="Search station, ward or arterial..." type="text"></div><div class="flex items-center gap-1.5 h-7 px-2.5 rounded-full bg-surface-container-low border border-outline-variant/40 text-on-surface font-label-xs text-label-xs font-tabular-data text-tabular-data whitespace-nowrap"><span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span><span class="font-medium">Live Telemetry</span><span class="text-on-surface-variant">·</span><span class="text-on-surface-variant">8m ago</span></div><button class="relative w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-5 w-[1px] bg-outline-variant/40"></div><div class="flex items-center gap-space-sm pl-1 cursor-pointer group"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col text-left leading-tight hidden lg:flex"><span class="font-body-sm text-body-sm font-medium text-on-surface group-hover:text-primary transition-colors">Dr. R. Varma</span><span class="font-label-xs text-label-xs text-on-surface-variant">MCGM Admin</span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px]">keyboard_arrow_down</span></div></div></header><main class="w-full pt-16 bg-background flex-1 px-gutter-lg py-margin-md"><div class="flex flex-col w-full max-w-[1360px] mx-auto pb-24">
+<script>
+    /* Highlight Action Studio in Persistent Sidebar */
+    (function activateStudioNav() {
+      const activeNavClasses = "bg-primary-container text-on-primary font-medium rounded-lg";
+      const studioLink = document.querySelector('aside a[data-path="action-studio"]');
+      if (studioLink) {
+        document.querySelectorAll('aside a[data-path]').forEach(link => {
+          link.className = "flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors";
+        });
+        studioLink.className = `flex items-center gap-space-sm px-space-md py-2.5 transition-colors ${activeNavClasses}`;
+      }
+    })();
+  </script>
+<!-- Page Header & Horizon Meta -->
+<header class="flex flex-col gap-space-sm mb-space-lg">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Action Studio</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-0.5">Turn air-quality evidence into a coordinated response</p>
+</div>
+<div class="flex items-center gap-space-sm self-start lg:self-auto">
+<a class="inline-flex items-center gap-1.5 px-space-md py-2 rounded-lg bg-surface-container text-primary font-body-sm text-body-sm font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span>View supporting evidence</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Status Strip / Scope Pill -->
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-2 px-space-md py-2.5 rounded-lg bg-surface-container-lowest shadow-sm text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="text-on-surface-variant font-medium">Selected Event:</span>
+<span class="font-semibold text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+          Borivali East, Mumbai
+        </span>
+</div>
+<span class="text-outline-variant font-light">|</span>
+<div class="flex items-center gap-2">
+<span class="text-on-surface-variant font-medium">Forecast Horizon:</span>
+<span class="font-medium text-on-surface">Next 24 hours</span>
+</div>
+<span class="text-outline-variant font-light">|</span>
+<div class="flex items-center gap-2">
+<span class="text-on-surface-variant font-medium">Risk Level:</span>
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-xs text-label-xs font-semibold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+          High Risk
+        </span>
+</div>
+</div>
+</header>
+<!-- Two-Column Workspace Layout (60% / 40%) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-start">
+<!-- LEFT COLUMN: 60% (7 cols on 12-col grid) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Section 1: Event Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">insights</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Event Telemetry Snapshot</h2>
+</div>
+<span class="font-label-xs text-label-xs font-tabular-data text-on-surface-variant">Validated 8m ago</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-md">
+<div class="flex flex-col p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Predicted PM2.5</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-display-metric text-headline-lg font-bold text-on-surface font-tabular-data">92</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">µg/m³</span>
+</div>
+</div>
+<div class="flex flex-col p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Expected AQI</span>
+<div class="mt-1 flex items-center">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error-container text-on-error-container font-headline-sm text-headline-sm font-semibold">Poor (214)</span>
+</div>
+</div>
+<div class="flex flex-col p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Peak Anticipated</span>
+<span class="font-headline-sm text-headline-sm font-medium text-on-surface mt-1">Tomorrow, 8 AM</span>
+</div>
+<div class="flex flex-col p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Highest Source Likelihood</span>
+<div class="flex items-center gap-1.5 mt-1 font-headline-sm text-headline-sm font-medium text-on-surface">
+<span class="material-symbols-outlined text-primary text-[18px]">directions_car</span>
+<span>Traffic (58%)</span>
+</div>
+</div>
+<div class="flex flex-col p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Evidence Confidence</span>
+<div class="flex items-center gap-1.5 mt-1 font-headline-sm text-headline-sm font-medium text-on-surface">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Medium Confidence</span>
+</div>
+</div>
+<div class="flex flex-col p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Affected Area</span>
+<span class="font-headline-sm text-headline-sm font-medium text-on-surface mt-1 truncate" title="Borivali East &amp; nearby wards">Borivali East + Wards</span>
+</div>
+</div>
+</section>
+<!-- Section 2: Choose Response Actions (Exactly 3 Cards) -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Recommended Actions</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Select evidence-backed field interventions for this 24-hour cycle</p>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-1 rounded bg-surface-container text-on-surface-variant font-tabular-data" id="selectedCounter">6 of 6 selected</span>
+</div>
+<!-- Card 1: Traffic Management -->
+<article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">traffic</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Traffic Management</h3>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-label-xs text-label-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                High Evidence
+              </span>
+<a class="font-label-xs text-label-xs text-primary font-medium hover:underline inline-flex items-center gap-0.5" href="#">
+<span>View evidence</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">Recommended because traffic evidence is high and vehicular congestion aligns directly with predicted peak spikes.</p>
+<div class="flex flex-col gap-2.5 pt-space-xs">
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low/60 hover:bg-surface-container-low cursor-pointer transition-colors select-none">
+<input checked="" class="action-check mt-0.5 w-4 h-4 rounded text-primary-container accent-primary-container focus:ring-primary" data-action-id="act-1" data-action-text="Reroute heavy vehicles from 7 AM to 11 AM at arterial intersections" type="checkbox">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-medium text-on-surface">Reroute heavy vehicles during peak hours</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Divert freight through Western Express bypass corridors from 7:00 AM to 11:00 AM.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low/60 hover:bg-surface-container-low cursor-pointer transition-colors select-none">
+<input checked="" class="action-check mt-0.5 w-4 h-4 rounded text-primary-container accent-primary-container focus:ring-primary" data-action-id="act-2" data-action-text="Conduct roadside emission checks on Western Express Highway" type="checkbox">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-medium text-on-surface">Conduct roadside emission checks</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Deploy joint RTO-traffic monitoring squads at Western Express Highway entry points.</span>
+</div>
+</label>
+</div>
+</article>
+<!-- Card 2: Construction Dust Control -->
+<article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">construction</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Construction Dust Control</h3>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-xs text-label-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Medium Evidence
+              </span>
+<a class="font-label-xs text-label-xs text-primary font-medium hover:underline inline-flex items-center gap-0.5" href="#">
+<span>View evidence</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">Recommended because construction evidence is medium, with 14 active infrastructure projects upwind.</p>
+<div class="flex flex-col gap-2.5 pt-space-xs">
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low/60 hover:bg-surface-container-low cursor-pointer transition-colors select-none">
+<input checked="" class="action-check mt-0.5 w-4 h-4 rounded text-primary-container accent-primary-container focus:ring-primary" data-action-id="act-3" data-action-text="Inspect active construction sites for mandatory dust suppression" type="checkbox">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-medium text-on-surface">Inspect active construction sites</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dispatch ward engineers to spot-audit dust barricades and earth-moving activities.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low/60 hover:bg-surface-container-low cursor-pointer transition-colors select-none">
+<input checked="" class="action-check mt-0.5 w-4 h-4 rounded text-primary-container accent-primary-container focus:ring-primary" data-action-id="act-4" data-action-text="Verify water sprinkling and material covers across vulnerable sectors" type="checkbox">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-medium text-on-surface">Verify water sprinkling and material covers</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Enforce continuous anti-smog misting and tarp coverage on all transit aggregate stockpiles.</span>
+</div>
+</label>
+</div>
+</article>
+<!-- Card 3: Public Health Communication -->
+<article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">campaign</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Public Health Communication</h3>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-xs text-label-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                Recommended
+              </span>
+<a class="font-label-xs text-label-xs text-primary font-medium hover:underline inline-flex items-center gap-0.5" href="#">
+<span>View evidence</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">Recommended because exposure risk is high during morning peak, affecting vulnerable community populations.</p>
+<div class="flex flex-col gap-2.5 pt-space-xs">
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low/60 hover:bg-surface-container-low cursor-pointer transition-colors select-none">
+<input checked="" class="action-check mt-0.5 w-4 h-4 rounded text-primary-container accent-primary-container focus:ring-primary" data-action-id="act-5" data-action-text="Notify sensitive groups, elder centers, and schools via SMS / WhatsApp" type="checkbox">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-medium text-on-surface">Notify sensitive groups</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Send targeted notifications to primary schools, daycares, and senior care homes.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low/60 hover:bg-surface-container-low cursor-pointer transition-colors select-none">
+<input checked="" class="action-check mt-0.5 w-4 h-4 rounded text-primary-container accent-primary-container focus:ring-primary" data-action-id="act-6" data-action-text="Publish multilingual health advisory &amp; curtail outdoor physical education" type="checkbox">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-medium text-on-surface">Publish multilingual health advisory &amp; reduce outdoor activity</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Circulate Hindi, Marathi, and English recommendations to restrict morning sports.</span>
+</div>
+</label>
+</div>
+</article>
+</section>
+<!-- Section 3: Response Details Form -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center gap-2 pb-space-sm mb-space-md">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Response Plan Details</h2>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Title -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="planTitleInput">Response-Plan Title</label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-container" id="planTitleInput" type="text" value="Borivali East Morning Peak Mitigation Plan">
+</div>
+<!-- Dept & Officer -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="deptSelect">Responsible Department</label>
+<select class="h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-container cursor-pointer" id="deptSelect">
+<option selected="" value="Ward Environment &amp; Sanitation">Ward Environment &amp; Sanitation</option>
+<option value="Traffic Management Branch">Traffic Management Branch</option>
+<option value="Public Health Directorate">Public Health Directorate</option>
+<option value="Disaster Management Cell">Disaster Management Cell</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="assignOfficerInput">Assign Team or Officer</label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-container" id="assignOfficerInput" type="text" value="Ward Quick-Response Team (R-Central)">
+</div>
+</div>
+<!-- Priority & Deadline -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md items-start">
+<div class="flex flex-col gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-medium">Priority</span>
+<div class="flex items-center gap-2 h-10 p-1 rounded-lg bg-surface-container-low" id="priorityPillGroup">
+<button class="flex-1 py-1 px-3 rounded text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors" data-priority="Low" type="button">Low</button>
+<button class="flex-1 py-1 px-3 rounded text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors" data-priority="Medium" type="button">Medium</button>
+<button class="flex-1 py-1 px-3 rounded bg-surface-container-lowest text-error font-semibold font-label-md text-label-md shadow-sm transition-colors" data-priority="High" type="button">High</button>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="deadlineInput">Completion Deadline</label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-container" id="deadlineInput" type="text" value="Tomorrow, 06:00 AM (Before peak rush)">
+</div>
+</div>
+<!-- Affected Wards -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="wardsInput">Affected Wards</label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-container" id="wardsInput" type="text" value="Ward R-Central (Borivali East), Ward P-North">
+</div>
+<!-- Optional Notes -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="notesInput">Field Operational Notes (Optional)</label>
+<textarea class="p-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-container" id="notesInput" rows="2">Focus misting and vehicle diversion at Western Express Highway intersection.</textarea>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: 40% (5 cols on 12-col grid) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg lg:sticky lg:top-20">
+<!-- Section 4: Live Plan Summary (Executive Preview Card) -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-md flex flex-col gap-space-md">
+<!-- Live Sync Header -->
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Live Plan Summary</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-xs text-label-xs font-semibold">Editable Preview</span>
+</div>
+<div class="flex items-center gap-1.5 font-label-xs text-label-xs text-on-surface-variant font-tabular-data">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span>Live Sync</span>
+</div>
+</div>
+<!-- Plan Document Preview Box -->
+<div class="p-space-md rounded-lg bg-surface-container-low/70 flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-2">
+<div>
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-semibold">Executive Directive</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface leading-tight mt-0.5" id="previewTitle">Borivali East Morning Peak Mitigation Plan</h3>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-xs text-label-xs font-bold uppercase tracking-wider whitespace-nowrap" id="previewPriorityBadge">High</span>
+</div>
+<!-- Key Meta Properties -->
+<div class="grid grid-cols-2 gap-y-2 gap-x-3 pt-space-xs font-body-sm text-body-sm">
+<div>
+<span class="text-on-surface-variant font-medium">Location:</span>
+<p class="font-semibold text-on-surface">Borivali East</p>
+</div>
+<div>
+<span class="text-on-surface-variant font-medium">Risk Window:</span>
+<p class="font-semibold text-on-surface">Next 24 hours</p>
+</div>
+<div>
+<span class="text-on-surface-variant font-medium">Assigned To:</span>
+<p class="font-semibold text-on-surface truncate" id="previewAssignee">Ward Quick-Response Team</p>
+</div>
+<div>
+<span class="text-on-surface-variant font-medium">Deadline:</span>
+<p class="font-semibold text-on-surface" id="previewDeadline">Tomorrow, 06:00 AM</p>
+</div>
+<div class="col-span-2">
+<span class="text-on-surface-variant font-medium">Affected Wards:</span>
+<p class="font-semibold text-on-surface" id="previewWards">Ward R-Central (Borivali East), Ward P-North</p>
+</div>
+</div>
+</div>
+<!-- Selected Actions Preview List -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Selected Actions (Click any line to edit)</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Real-time sync</span>
+</div>
+<!-- Dynamic Numbered Actions List -->
+<ol class="flex flex-col gap-2 list-none p-0 m-0 font-body-md text-body-md" id="previewActionList">
+<!-- Populated via script & user interactions -->
+</ol>
+</div>
+<!-- Operational Notes Preview -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1">
+<span class="font-label-xs text-label-xs font-semibold uppercase tracking-wider text-on-surface-variant">Field Directive Note</span>
+<p class="font-body-sm text-body-sm text-on-surface italic" id="previewNotes">"Focus misting and vehicle diversion at Western Express Highway intersection."</p>
+</div>
+<!-- Visual Verification Map Snapshot -->
+<div class="flex flex-col gap-1.5 pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs font-semibold uppercase tracking-wider text-on-surface-variant">Intervention Geometry</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant font-tabular-data">2 Active Hotspots</span>
+</div>
+<div class="w-full h-36 bg-cover bg-center rounded-lg shadow-inner relative flex items-end p-2.5 overflow-hidden" data-location="Borivali East, Mumbai" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8_IFHwRJPkGA1u5I3ZXcDZmqMUB8zC6Bxy0NWJLMLCogi9rxCuiN2Bowain5JmKdLvdgvyRa1Y-xAvS0Q6ochfNVAwMEowBaAyLnBQC4HyD8FRPUHKFUrfI4vgdFXs6Tf_UxvZUgKqUvJW3l4F_N6uAL0GFQve9w2ISQj24NNihyaCyESr1NdHf8XAmZHhktALz2-kOpbfJ04iQxx8IG1TKYTNmLLkw0e60gPPrFnsmcxSNwmlemI')">
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent"></div>
+<div class="relative z-10 flex items-center justify-between w-full text-inverse-on-surface font-label-xs text-label-xs font-medium">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">share_location</span>
+                R-Central Hotspot Zone
+              </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/20 backdrop-blur-sm text-inverse-on-surface">Radius: 3.2 km</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Bottom Action Bar (Floating / Fixed-like Prominent Footer) -->
+<aside aria-label="Action Execution Bar" class="fixed bottom-0 left-64 right-0 h-16 bg-surface-container-lowest/95 backdrop-blur-md shadow-xl z-30 px-gutter-lg flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<button class="h-9 px-space-md rounded-lg font-body-sm text-body-sm font-medium text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center gap-1.5" id="saveDraftBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">drafts</span>
+<span>Save Draft</span>
+</button>
+<span class="font-label-xs text-label-xs text-primary font-medium hidden" id="draftSavedStatus">Saved 12:41 PM</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-9 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm font-medium hover:bg-surface-container-low shadow-sm transition-colors flex items-center gap-1.5" id="previewAlertBtn" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">notifications_active</span>
+<span>Preview Citizen Alert</span>
+</button>
+<button class="h-9 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm font-medium hover:bg-surface-container-low shadow-sm transition-colors flex items-center gap-1.5" id="exportPlanBtn" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">file_download</span>
+<span>Export Plan</span>
+</button>
+<button class="h-9 px-space-lg rounded-lg bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary transition-colors flex items-center gap-2 shadow-sm" id="createPlanBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Create Response Plan</span>
+</button>
+</div>
+</aside>
+<!-- Interactive Client Behavior Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const planTitleInput = document.getElementById('planTitleInput');
+      const previewTitle = document.getElementById('previewTitle');
+      const assignOfficerInput = document.getElementById('assignOfficerInput');
+      const previewAssignee = document.getElementById('previewAssignee');
+      const deadlineInput = document.getElementById('deadlineInput');
+      const previewDeadline = document.getElementById('previewDeadline');
+      const wardsInput = document.getElementById('wardsInput');
+      const previewWards = document.getElementById('previewWards');
+      const notesInput = document.getElementById('notesInput');
+      const previewNotes = document.getElementById('previewNotes');
+      const checkboxes = document.querySelectorAll('.action-check');
+      const actionListContainer = document.getElementById('previewActionList');
+      const selectedCounter = document.getElementById('selectedCounter');
+      const priorityButtons = document.querySelectorAll('#priorityPillGroup button');
+      const previewPriorityBadge = document.getElementById('previewPriorityBadge');
+
+      // Sync Title
+      planTitleInput.addEventListener('input', (e) => {
+        previewTitle.textContent = e.target.value.trim() || 'Untitled Air Quality Response Plan';
+      });
+
+      // Sync Assignee
+      assignOfficerInput.addEventListener('input', (e) => {
+        previewAssignee.textContent = e.target.value.trim() || 'Unassigned';
+      });
+
+      // Sync Deadline
+      deadlineInput.addEventListener('input', (e) => {
+        previewDeadline.textContent = e.target.value.trim() || 'Immediate';
+      });
+
+      // Sync Wards
+      wardsInput.addEventListener('input', (e) => {
+        previewWards.textContent = e.target.value.trim() || 'Station perimeter';
+      });
+
+      // Sync Notes
+      notesInput.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        previewNotes.textContent = val ? `"${val}"` : 'No additional field directives.';
+      });
+
+      // Priority Selector
+      priorityButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          priorityButtons.forEach(b => {
+            b.className = "flex-1 py-1 px-3 rounded text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors";
+          });
+          btn.className = "flex-1 py-1 px-3 rounded bg-surface-container-lowest text-on-surface font-semibold font-label-md text-label-md shadow-sm transition-colors";
+          
+          const p = btn.dataset.priority;
+          previewPriorityBadge.textContent = p;
+          if (p === 'High') {
+            previewPriorityBadge.className = "inline-flex items-center px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-xs text-label-xs font-bold uppercase tracking-wider whitespace-nowrap";
+            btn.classList.add('text-error');
+          } else if (p === 'Medium') {
+            previewPriorityBadge.className = "inline-flex items-center px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-bold uppercase tracking-wider whitespace-nowrap";
+          } else {
+            previewPriorityBadge.className = "inline-flex items-center px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-xs text-label-xs font-bold uppercase tracking-wider whitespace-nowrap";
+          }
+        });
+      });
+
+      // Render Dynamic Actions List into Preview
+      function updateActionPreview() {
+        actionListContainer.innerHTML = '';
+        let checkedCount = 0;
+
+        checkboxes.forEach((cb, idx) => {
+          if (cb.checked) {
+            checkedCount++;
+            const text = cb.getAttribute('data-action-text');
+            const li = document.createElement('li');
+            li.className = "flex items-start gap-2 p-2 rounded-md hover:bg-surface-container transition-colors group";
+            li.innerHTML = `
+              <span class="w-5 h-5 rounded-full bg-primary-container text-on-primary font-label-xs text-label-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">${checkedCount}</span>
+              <div class="flex-1 flex items-center justify-between gap-1">
+                <input type="text" value="${text}" class="w-full bg-transparent border-0 text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:p-1 rounded transition-all" />
+                <span class="material-symbols-outlined text-[16px] text-outline opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">edit</span>
+              </div>
+            `;
+            
+            const liveInput = li.querySelector('input');
+            liveInput.addEventListener('input', (e) => {
+              cb.setAttribute('data-action-text', e.target.value);
+            });
+
+            actionListContainer.appendChild(li);
+          }
+        });
+
+        if (checkedCount === 0) {
+          actionListContainer.innerHTML = `<li class="p-3 text-center text-on-surface-variant font-body-sm text-body-sm bg-surface-container-low rounded-lg">No actions selected. Choose at least one action from the left panel.</li>`;
+        }
+
+        selectedCounter.textContent = `${checkedCount} of ${checkboxes.length} selected`;
+      }
+
+      checkboxes.forEach(cb => {
+        cb.addEventListener('change', updateActionPreview);
+      });
+
+      // Initial Call
+      updateActionPreview();
+
+      // Micro-interactions for buttons
+      const saveDraftBtn = document.getElementById('saveDraftBtn');
+      const draftSavedStatus = document.getElementById('draftSavedStatus');
+      saveDraftBtn.addEventListener('click', () => {
+        draftSavedStatus.classList.remove('hidden');
+        setTimeout(() => draftSavedStatus.classList.add('hidden'), 3000);
+      });
+
+      const createPlanBtn = document.getElementById('createPlanBtn');
+      createPlanBtn.addEventListener('click', () => {
+        const originalText = createPlanBtn.innerHTML;
+        createPlanBtn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">sync</span><span>Creating &amp; Dispatching...</span>`;
+        createPlanBtn.disabled = true;
+        setTimeout(() => {
+          createPlanBtn.innerHTML = `<span class="material-symbols-outlined text-[18px]">check</span><span>Plan Dispatched</span>`;
+          setTimeout(() => {
+            createPlanBtn.innerHTML = originalText;
+            createPlanBtn.disabled = false;
+          }, 2500);
+        }, 1200);
+      });
+    });
+  </script>
+</div></main></div><div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

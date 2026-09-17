@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"secondary-container":"#7bc2ff","on-secondary-fixed-variant":"#004b74","error-container":"#ffdad6","surface-tint":"#006a63","on-tertiary-fixed":"#0d1c2e","primary":"#005c55","on-surface-variant":"#3e4947","surface":"#faf8ff","background":"#faf8ff","tertiary":"#445266","outline":"#6e7977","on-tertiary":"#ffffff","tertiary-fixed-dim":"#b9c7df","inverse-surface":"#283044","surface-container-highest":"#dae2fd","on-error":"#ffffff","on-primary-container":"#a3faef","outline-variant":"#bdc9c6","error":"#ba1a1a","secondary-fixed":"#cde5ff","primary-fixed":"#9cf2e8","primary-fixed-dim":"#80d5cb","on-primary":"#ffffff","secondary":"#006399","inverse-primary":"#80d5cb","surface-bright":"#faf8ff","tertiary-fixed":"#d5e3fc","on-surface":"#131b2e","surface-container":"#eaedff","on-primary-fixed-variant":"#00504a","secondary-fixed-dim":"#94ccff","on-tertiary-container":"#dfeaff","on-error-container":"#93000a","on-secondary-container":"#004f7b","on-secondary":"#ffffff","on-primary-fixed":"#00201d","surface-dim":"#d2d9f4","on-tertiary-fixed-variant":"#3a485b","surface-variant":"#dae2fd","surface-container-high":"#e2e7ff","tertiary-container":"#5c6a7f","surface-container-lowest":"#ffffff","on-secondary-fixed":"#001d32","surface-container-low":"#f2f3ff","inverse-on-surface":"#eef0ff","primary-container":"#0f766e","on-background":"#131b2e"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-md":"0.75rem","space-lg":"1.25rem",margin:"1rem",gutter:"1rem","gutter-lg":"1.5rem","space-sm":"0.5rem","margin-md":"1.5rem","space-xs":"0.25rem","margin-lg":"2rem","space-xl":"1.75rem"},fontFamily:{"headline-lg":["Inter"],"display-metric":["Inter"],"label-md":["Inter"],"body-lg":["Inter"],"headline-sm":["Inter"],"tabular-data":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"body-md":["Inter"],"headline-lg-mobile":["Inter"],"label-xs":["Inter"]},fontSize:{"headline-lg":["24px",{lineHeight:"32px",letterSpacing:"-0.015em",fontWeight:"500"}],"display-metric":["36px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"500"}],"label-md":["12px",{lineHeight:"16px",fontWeight:"500"}],"body-lg":["15px",{lineHeight:"22px",fontWeight:"400"}],"headline-sm":["15px",{lineHeight:"20px",fontWeight:"500"}],"tabular-data":["13px",{lineHeight:"16px",letterSpacing:"-0.005em",fontWeight:"500"}],"headline-md":["18px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"500"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["13px",{lineHeight:"18px",fontWeight:"400"}],"headline-lg-mobile":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"500"}],"label-xs":["11px",{lineHeight:"14px",letterSpacing:"0.025em",fontWeight:"500"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest border-r border-outline-variant/30 z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm border-b border-outline-variant/20"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary"><span class="material-symbols-outlined text-[20px]">airwave</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">AQIS</span><span class="font-label-xs text-label-xs text-outline">Urban Air Intel</span></div></div><nav class="flex flex-col gap-1 p-space-sm" data-active-classes="bg-primary text-on-primary font-medium shadow-sm"><a aria-current="page" class="flex items-center gap-3 px-space-md py-space-sm rounded-lg transition-colors bg-primary text-on-primary font-medium shadow-sm" data-path="city-pulse" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-md text-body-md">City Pulse</span></a><a class="flex items-center gap-3 px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="forecast" href="#"><span class="material-symbols-outlined text-[20px]">timeline</span><span class="font-body-md text-body-md">Forecast</span></a><a class="flex items-center gap-3 px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="evidence-explorer" href="#"><span class="material-symbols-outlined text-[20px]">saved_search</span><span class="font-body-md text-body-md">Evidence Explorer</span></a><a class="flex items-center gap-3 px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="action-studio" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span class="font-body-md text-body-md">Action Studio</span></a><a class="flex items-center gap-3 px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="citizen-alerts" href="#"><span class="material-symbols-outlined text-[20px]">crisis_alert</span><span class="font-body-md text-body-md">Citizen Alerts</span></a><a class="flex items-center gap-3 px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="model-card" href="#"><span class="material-symbols-outlined text-[20px]">memory</span><span class="font-body-md text-body-md">Model Card</span></a></nav></div><div class="p-space-sm border-t border-outline-variant/20 flex flex-col gap-1"><a class="flex items-center gap-3 px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="data-sources" href="#"><span class="material-symbols-outlined text-[18px]">sensors</span><span class="font-body-sm text-body-sm">Data Sources</span></a><a class="flex items-center gap-3 px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="help-and-docs" href="#"><span class="material-symbols-outlined text-[18px]">library_books</span><span class="font-body-sm text-body-sm">Help &amp; Docs</span></a><div class="mt-space-xs p-space-sm bg-surface-container-low rounded-xl border border-outline-variant/30 flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface truncate w-24">Dr. R. Varma</span><span class="font-label-xs text-label-xs text-outline truncate w-24">Municipal Admin</span></div></div><span class="material-symbols-outlined text-outline text-[16px]">more_vert</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 z-40 px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><div class="relative"><select aria-label="City selector" class="appearance-none bg-surface-container-low border border-outline-variant/40 rounded-lg pl-3 pr-8 py-1.5 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary"><option selected="">Mumbai</option><option>Delhi</option></select><span class="material-symbols-outlined text-outline text-[18px] absolute right-2 top-2 pointer-events-none">expand_more</span></div><span class="hidden xl:inline text-outline-variant/60">/</span><span class="hidden xl:inline font-body-sm text-body-sm text-outline">Forecast pollution. Understand the evidence. Take action.</span></div><div class="relative hidden md:flex items-center"><span class="material-symbols-outlined text-outline text-[18px] absolute left-3 pointer-events-none">search</span><input class="w-72 bg-surface-container-low border border-outline-variant/40 rounded-lg pl-9 pr-3 py-1.5 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary" placeholder="Search neighborhood, ward or station..." type="text"/></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low p-0.5 rounded-lg border border-outline-variant/30 text-label-xs font-label-xs"><button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-medium shadow-sm" type="button">Admin</button><button class="px-2.5 py-1 rounded text-outline hover:text-on-surface" type="button">Citizen</button></div><div class="hidden lg:flex items-center gap-1.5 text-label-xs font-label-xs text-outline"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span>Live: 8m ago</span></div><div class="hidden sm:flex items-center gap-1 bg-secondary-fixed/50 text-on-secondary-fixed-variant px-2.5 py-1 rounded-full text-label-xs font-label-xs"><span class="material-symbols-outlined text-[14px]">satellite_alt</span><span>Live telemetry</span></div><button aria-label="Notifications" class="relative p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-background min-h-screen px-space-lg py-space-lg"><div class="flex flex-col w-full gap-space-lg">
+<!-- TOP CONTEXT STRIP: Breadcrumbs, Scope, Telemetry Badge -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-xs border-b border-outline-variant/30">
+<div class="flex flex-wrap items-center gap-space-xs text-label-xs font-label-xs text-outline">
+<span class="text-on-surface-variant font-medium">Mumbai</span>
+<span>/</span>
+<span>Operations Command</span>
+<span>/</span>
+<span class="text-primary font-medium">Model Card &amp; Governance</span>
+<span class="mx-1 text-outline-variant/60">•</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-tabular-data text-[11px]">MMR Core · 24 CAAQMS Stations</span>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low border border-outline-variant/40 text-label-xs font-label-xs text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-medium text-on-surface">Audit QA Passed</span>
+<span class="text-outline">·</span>
+<span class="text-outline">Retrain: Weekly Rolling</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-fixed/30 text-on-secondary-fixed-variant text-label-xs font-label-xs">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+<span>MoEFCC Verified</span>
+</div>
+</div>
+</div>
+<!-- PAGE HEADER: Executive Title, Model Version Badge, Action CTAs -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg border border-outline-variant/30 flex flex-col xl:flex-row xl:items-start justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-4xl">
+<div class="flex items-center gap-space-sm flex-wrap">
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">
+          Model Card &amp; Operational Transparency
+        </h1>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary-container text-on-primary text-label-xs font-label-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span>
+          v4.3.2-Production
+        </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-outline text-label-xs font-label-xs font-tabular-data">
+          Active In-Inference
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        Technical specification, validation benchmarks, feature lineage, and statutory guardrails for the AQIS Ensemble Atmospheric Predictor. Calibrated for municipal intervention planning across the 603 km² Mumbai Metropolitan urban canopy.
+      </p>
+<!-- Metadata Pills Bar -->
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs text-label-xs font-label-xs">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low border border-outline-variant/30 text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-primary">event_available</span>
+<span class="text-outline">Trained:</span>
+<span class="font-medium font-tabular-data">Oct 28, 2024</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low border border-outline-variant/30 text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-secondary">update</span>
+<span class="text-outline">Scheduled:</span>
+<span class="font-medium font-tabular-data">Nov 04, 2024 · 02:00 IST</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low border border-outline-variant/30 text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-primary">hub</span>
+<span class="text-outline">Arch:</span>
+<span class="font-medium">WRF-Chem + XGBoost + TreeSHAP</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low border border-outline-variant/30 text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-tertiary">balance</span>
+<span class="text-outline">Compliance:</span>
+<span class="font-medium">CPCB AI &amp; MoEFCC SOP</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex sm:flex-row flex-col items-stretch sm:items-center gap-space-xs flex-shrink-0">
+<button class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-on-surface text-body-sm font-body-sm font-medium hover:bg-surface-container transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">download</span>
+<span>Audit PDF</span>
+</button>
+<button class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-on-surface text-body-sm font-body-sm font-medium hover:bg-surface-container transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px] text-outline">table_view</span>
+<span>CSV Benchmarks</span>
+</button>
+<button class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-primary-container text-on-primary text-body-sm font-body-sm font-medium hover:bg-primary transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">account_tree</span>
+<span>Retrain Pipeline</span>
+</button>
+</div>
+</div>
+<!-- SECTION 1: MODEL OVERVIEW & TRAINING GEOMETRY -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Card A: Objective & Scope -->
+<div class="lg:col-span-4 bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline font-semibold">Scope &amp; Intent</span>
+<span class="inline-flex items-center gap-1 text-label-xs font-label-xs text-primary font-medium">
+<span class="material-symbols-outlined text-[14px]">track_changes</span> 24h–72h Horizon
+          </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Objective Specification</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Short-to-medium range (24h–72h) localized PM2.5 and AQI exceedance forecasting at 500m ward-resolution across Mumbai Metropolitan Region to drive proactive municipal interventions and citizen exposure reduction.
+        </p>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-outline">Target Variable</span>
+<span class="font-medium text-on-surface text-right truncate max-w-[200px]">Continuous PM2.5 (µg/m³)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-outline">Secondary Task</span>
+<span class="font-medium text-on-surface text-right">NAAQS Exceedance Binary</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-outline">Inference Cycle</span>
+<span class="font-medium text-on-surface text-right font-tabular-data">1-hr rolling / 6-hr assimilation</span>
+</div>
+</div>
+</div>
+<!-- Card B: Spatial & Sensor Network -->
+<div class="lg:col-span-4 bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline font-semibold">Observational Rigor</span>
+<span class="inline-flex items-center gap-1 text-label-xs font-label-xs text-secondary font-medium font-tabular-data">
+            24 Stations · 603 km²
+          </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Training Geometry &amp; Sensor Base</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Continuous ground network comprising 24 CAAQMS stations operated by MPCB, CPCB, and SAFAR across the Mumbai urban canopy (e.g., BOM-084 Borivali East, BOM-029 Kurla, BOM-012 Colaba, BOM-045 Andheri West).
+        </p>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-outline">Reference Equipment</span>
+<span class="font-medium text-on-surface">Dual BAM-1020 + OPC Co-locate</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-outline">Sensor Network Uptime</span>
+<span class="font-medium text-primary font-tabular-data">98.4% (Kalman imputed)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-outline">Quality Assurance</span>
+<span class="font-medium text-on-surface text-right">Auto Zero/Span Drift Drift-Checked</span>
+</div>
+</div>
+</div>
+<!-- Card C: Chronological Split Breakdown -->
+<div class="lg:col-span-4 bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline font-semibold">Data Partition</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed/40 text-on-primary-fixed-variant text-label-xs font-label-xs font-medium">Strict Chronological</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">No-Lookahead Partitioning</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          4.75 years historical time-series (Jan 2020 – Sept 2024). Zero data leakage; evaluated strictly out-of-time.
+        </p>
+<!-- Visual Stacked Bar -->
+<div class="mt-space-sm">
+<div class="h-4 w-full rounded-md overflow-hidden flex bg-surface-container">
+<div class="bg-primary h-full transition-all" style="width: 70%" title="Training: 70%"></div>
+<div class="bg-secondary h-full transition-all" style="width: 15%" title="Validation: 15%"></div>
+<div class="bg-primary-container h-full transition-all" style="width: 15%" title="Holdout Test: 15%"></div>
+</div>
+<div class="flex justify-between text-label-xs font-label-xs text-outline mt-1 font-tabular-data">
+<span>2020</span>
+<span>2022</span>
+<span>2023</span>
+<span>Sept 2024</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-space-sm pt-space-xs border-t border-outline-variant/20 text-center">
+<div class="p-1.5 rounded bg-surface-container-low">
+<div class="text-label-xs font-label-xs text-outline">Train (70%)</div>
+<div class="font-tabular-data text-body-sm font-semibold text-on-surface">26,304h</div>
+<div class="text-[10px] text-outline truncate">2020–2022</div>
+</div>
+<div class="p-1.5 rounded bg-surface-container-low">
+<div class="text-label-xs font-label-xs text-outline">Val (15%)</div>
+<div class="font-tabular-data text-body-sm font-semibold text-secondary">8,760h</div>
+<div class="text-[10px] text-outline truncate">2023 Tuning</div>
+</div>
+<div class="p-1.5 rounded bg-surface-container-low">
+<div class="text-label-xs font-label-xs text-outline">Test (15%)</div>
+<div class="font-tabular-data text-body-sm font-semibold text-primary">6,552h</div>
+<div class="text-[10px] text-outline truncate">2024 Holdout</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: MULTI-HORIZON PERFORMANCE BENCHMARK & CHARTS -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden">
+<div class="p-space-md lg:p-space-lg border-b border-outline-variant/20 flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">ssid_chart</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Forecast Horizon Evaluation vs. Persistence Baseline
+          </h2>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-label-xs font-label-xs font-tabular-data">
+            Holdout Set: 6,552 hrs
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Benchmarked against standardized lag persistence (y<sub>t+h</sub> = y<sub>t</sub>) and numerical dispersion simulations across MMR territory.
+        </p>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant/30 text-label-xs font-label-xs text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-medium">Evaluation Criterion:</span>
+<span class="text-outline">NAAQS Exceedance Threshold (PM2.5 &gt; 60 µg/m³ &amp; Severe &gt; 120 µg/m³)</span>
+</div>
+</div>
+<!-- Horizon Benchmark Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/70 border-b border-outline-variant/30 text-label-xs font-label-xs text-outline uppercase tracking-wider">
+<th class="py-3 px-space-md font-semibold">Lead Horizon</th>
+<th class="py-3 px-space-md font-semibold">Target Lead Window</th>
+<th class="py-3 px-space-md font-semibold text-right">AQIS RMSE</th>
+<th class="py-3 px-space-md font-semibold text-right">AQIS MAE</th>
+<th class="py-3 px-space-md font-semibold text-right">R² Score</th>
+<th class="py-3 px-space-md font-semibold text-right">Persistence MAE</th>
+<th class="py-3 px-space-md font-semibold text-right">Gain vs. Persist</th>
+<th class="py-3 px-space-md font-semibold text-right">Critical Recall (AQI &gt; 200)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20 font-body-sm text-body-sm">
+<!-- Row 24h -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-semibold text-on-surface">24 Hours</span>
+<span class="text-[11px] px-1.5 py-0.2 rounded bg-primary-fixed/30 text-on-primary-fixed-variant font-medium">Primary</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-tabular-data text-on-surface-variant">00:00 – 24:00 h</td>
+<td class="py-3.5 px-space-md text-right font-tabular-data font-semibold text-on-surface">14.2 <span class="text-[11px] text-outline font-normal">µg/m³</span></td>
+<td class="py-3.5 px-space-md text-right font-tabular-data font-semibold text-primary">9.8 <span class="text-[11px] text-outline font-normal">µg/m³</span></td>
+<td class="py-3.5 px-space-md text-right font-tabular-data text-on-surface">0.912</td>
+<td class="py-3.5 px-space-md text-right font-tabular-data text-outline">22.4 <span class="text-[11px] text-outline font-normal">µg/m³</span></td>
+<td class="py-3.5 px-space-md text-right font-tabular-data">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-primary-fixed/40 text-on-primary-fixed-variant font-semibold text-[11px]">
+                +56.2%
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-tabular-data font-semibold text-on-surface">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<span>94.6%</span>
+<div class="w-12 h-1.5 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-primary h-full" style="width: 94.6%"></div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 48h -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-semibold text-on-surface">48 Hours</span>
+<span class="text-[11px] px-1.5 py-0.2 rounded bg-surface-container text-outline">Intervention</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-tabular-data text-on-surface-variant">24:00 – 48:00 h</td>
+<td class="py-3.5 px-space-md text-right font-tabular-data font-semibold text-on-surface">18.6 <span class="text-[11px] text-outline font-normal">µg/m³</span></td>
+<td class="py-3.5 px-space-md text-right font-tabular-data font-semibold text-secondary">13.1 <span class="text-[11px] text-outline font-normal">µg/m³</span></td>
+<td class="py-3.5 px-space-md text-right font-tabular-data text-on-surface">0.864</td>
+<td class="py-3.5 px-space-md text-right font-tabular-data text-outline">28.7 <span class="text-[11px] text-outline font-normal">µg/m³</span></td>
+<td class="py-3.5 px-space-md text-right font-tabular-data">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-primary-fixed/40 text-on-primary-fixed-variant font-semibold text-[11px]">
+                +54.3%
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-tabular-data font-semibold text-on-surface">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<span>89.2%</span>
+<div class="w-12 h-1.5 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-secondary h-full" style="width: 89.2%"></div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 72h -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-semibold text-on-surface">72 Hours</span>
+<span class="text-[11px] px-1.5 py-0.2 rounded bg-surface-container text-outline">Strategic</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-tabular-data text-on-surface-variant">48:00 – 72:00 h</td>
+<td class="py-3.5 px-space-md text-right font-tabular-data font-semibold text-on-surface">23.8 <span class="text-[11px] text-outline font-normal">µg/m³</span></td>
+<td class="py-3.5 px-space-md text-right font-tabular-data font-semibold text-tertiary">17.5 <span class="text-[11px] text-outline font-normal">µg/m³</span></td>
+<td class="py-3.5 px-space-md text-right font-tabular-data text-on-surface">0.798</td>
+<td class="py-3.5 px-space-md text-right font-tabular-data text-outline">34.2 <span class="text-[11px] text-outline font-normal">µg/m³</span></td>
+<td class="py-3.5 px-space-md text-right font-tabular-data">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-primary-fixed/40 text-on-primary-fixed-variant font-semibold text-[11px]">
+                +48.8%
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-tabular-data font-semibold text-on-surface">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<span>82.5%</span>
+<div class="w-12 h-1.5 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-tertiary h-full" style="width: 82.5%"></div>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Error Progression Micro-Chart Subpanel -->
+<div class="p-space-md bg-surface-container-low/30 border-t border-outline-variant/30 flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md text-body-sm font-body-sm">
+<span class="font-medium text-on-surface">Error Drift Curve:</span>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-1 bg-primary rounded-full"></span>
+<span class="text-on-surface text-label-xs font-label-xs">AQIS Ensemble (MAE)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-1 bg-outline-variant rounded-full"></span>
+<span class="text-outline text-label-xs font-label-xs">Persistence Baseline (MAE)</span>
+</div>
+</div>
+</div>
+<!-- Inline SVG Sparkline Diagram -->
+<div class="flex items-center gap-3">
+<svg class="w-48 h-8 overflow-visible" fill="none" viewbox="0 0 200 32" xmlns="http://www.w3.org/2000/svg">
+<!-- Persistence upper curve -->
+<path d="M 10,26 Q 100,16 190,6" fill="none" stroke="#bdc9c6" stroke-dasharray="3 3" stroke-width="2"></path>
+<!-- AQIS model lower curve -->
+<path d="M 10,28 Q 100,24 190,18" fill="none" stroke="#005c55" stroke-width="2.5"></path>
+<!-- Markers -->
+<circle cx="10" cy="28" fill="#005c55" r="3"></circle>
+<circle cx="100" cy="24" fill="#005c55" r="3"></circle>
+<circle cx="190" cy="18" fill="#005c55" r="3"></circle>
+<circle cx="190" cy="6" fill="#6e7977" r="3"></circle>
+</svg>
+<span class="text-label-xs font-label-xs text-outline font-tabular-data">Gap: +16.7 µg/m³ @ 72h</span>
+</div>
+</div>
+</div>
+<!-- SECTION 3: SEASONAL INVERSION STRESS-TEST & RADAR SUMMARY -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-space-md lg:p-space-lg border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">ac_unit</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">
+              Winter Performance &amp; Nocturnal Inversion Stress-Testing
+            </h3>
+</div>
+<span class="px-2.5 py-0.5 rounded bg-error-container text-on-error-container text-label-xs font-label-xs font-semibold">
+            High-Risk Regime
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs leading-relaxed">
+          Evaluation during high-risk inversion months (November – February), characterized by shallow Planetary Boundary Layer Height (PBLH &lt; 350m) and nocturnal thermal traps over the MMR coastal basin.
+        </p>
+<!-- 4 Critical Winter Metrics Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm mt-space-md">
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/20 flex flex-col justify-between">
+<span class="text-label-xs font-label-xs text-outline font-medium">Winter Season MAE</span>
+<div class="mt-2">
+<span class="font-display-metric text-display-metric text-on-surface font-tabular-data">12.4</span>
+<span class="text-label-xs font-label-xs text-outline block">µg/m³ (vs 9.8 annual)</span>
+</div>
+<div class="mt-2 text-[11px] text-secondary font-medium font-tabular-data">+2.6 µg/m³ delta</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/20 flex flex-col justify-between">
+<span class="text-label-xs font-label-xs text-outline font-medium">False Alarm Rate (FAR)</span>
+<div class="mt-2">
+<span class="font-display-metric text-display-metric text-primary font-tabular-data">6.8%</span>
+<span class="text-label-xs font-label-xs text-outline block">Severe AQI Alerts</span>
+</div>
+<div class="mt-2 text-[11px] text-primary font-medium">Within Target &lt; 10%</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/20 flex flex-col justify-between">
+<span class="text-label-xs font-label-xs text-outline font-medium">Peak Smog Timing Dev.</span>
+<div class="mt-2">
+<span class="font-display-metric text-display-metric text-on-surface font-tabular-data">±48</span>
+<span class="text-label-xs font-label-xs text-outline block">Minutes on 08:00 Spike</span>
+</div>
+<div class="mt-2 text-[11px] text-outline font-medium">Diurnal Traffic Inversion</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/20 flex flex-col justify-between">
+<span class="text-label-xs font-label-xs text-outline font-medium">Inversion F1-Score</span>
+<div class="mt-2">
+<span class="font-display-metric text-display-metric text-primary font-tabular-data">0.908</span>
+<span class="text-label-xs font-label-xs text-outline block">Boundary Trap Events</span>
+</div>
+<div class="mt-2 text-[11px] text-primary font-medium font-tabular-data">PBLH &lt; 300m recall 92%</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant/20 flex items-center justify-between text-label-xs font-label-xs text-outline">
+<span>Assimilated Soundings: Santacruz Radio-Sonde (00:00 &amp; 12:00 UTC)</span>
+<span class="text-primary font-medium">Automatic WRF-Chem thermal boundary compensation active</span>
+</div>
+</div>
+<!-- Radar / Seasonality Breakdown Card -->
+<div class="lg:col-span-4 bg-surface-container-lowest rounded-xl p-space-md lg:p-space-lg border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20">
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Seasonal Accuracy Variance</h4>
+<span class="text-label-xs font-label-xs text-outline font-tabular-data">MAE Breakdown</span>
+</div>
+<div class="flex flex-col gap-3.5 mt-space-md">
+<!-- Winter -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="font-medium text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span> Winter (Nov–Feb)
+              </span>
+<span class="font-tabular-data font-semibold text-on-surface">12.4 µg/m³ <span class="font-normal text-outline text-[11px]">(R² 0.88)</span></span>
+</div>
+<div class="h-2 w-full rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<!-- Post-Monsoon -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="font-medium text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Post-Monsoon (Oct)
+              </span>
+<span class="font-tabular-data font-semibold text-on-surface">10.1 µg/m³ <span class="font-normal text-outline text-[11px]">(R² 0.91)</span></span>
+</div>
+<div class="h-2 w-full rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 62%"></div>
+</div>
+</div>
+<!-- Summer -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="font-medium text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Summer (Mar–May)
+              </span>
+<span class="font-tabular-data font-semibold text-on-surface">8.7 µg/m³ <span class="font-normal text-outline text-[11px]">(R² 0.93)</span></span>
+</div>
+<div class="h-2 w-full rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 50%"></div>
+</div>
+</div>
+<!-- Monsoon -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="font-medium text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Monsoon (Jun–Sep)
+              </span>
+<span class="font-tabular-data font-semibold text-on-surface">5.2 µg/m³ <span class="font-normal text-outline text-[11px]">(R² 0.96)</span></span>
+</div>
+<div class="h-2 w-full rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 32%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-sm p-2 rounded bg-surface-container-low text-label-xs font-label-xs text-outline text-center">
+        Monsoon precipitation washout yields lowest operational variance; Winter thermal inversion imposes maximum non-linear advection bias.
+      </div>
+</div>
+</div>
+<!-- SECTION 4: FEATURE LINEAGE & INPUT GROUPS -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md lg:p-space-lg border border-outline-variant/30 flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-xs border-b border-outline-variant/20">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+          Feature Lineage &amp; Predictive Weight Attribution
+        </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          SHAP global importance attribution partitioned across four physical observational classes.
+        </p>
+</div>
+<div class="flex items-center gap-1.5 text-label-xs font-label-xs text-outline">
+<span>Methodology:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-medium">TreeSHAP Kernel (Lundberg et al.)</span>
+</div>
+</div>
+<!-- 4-Column Feature Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Feature 1 -->
+<div class="rounded-lg p-space-md bg-surface-container-low/40 border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded text-label-xs font-label-xs font-semibold bg-primary-fixed/40 text-on-primary-fixed-variant">
+              Weight: 34%
+            </span>
+<span class="material-symbols-outlined text-primary text-[18px]">sensors</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Ground In-Situ Telemetry</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Real-time chemical criteria pollutants recorded across 24 CAAQMS nodes.
+          </p>
+<div class="mt-space-sm flex flex-col gap-1.5 text-label-xs font-label-xs">
+<div class="font-semibold text-outline uppercase tracking-wider text-[10px]">Parameters Included</div>
+<div class="flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">PM2.5</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">PM10</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">NO2</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">SO2</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">CO</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">O3</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">NH3</span>
+</div>
+</div>
+<div class="mt-space-sm flex flex-col gap-1 text-label-xs font-label-xs">
+<div class="font-semibold text-outline uppercase tracking-wider text-[10px]">Engineered Transforms</div>
+<span class="text-on-surface-variant">1h, 3h, 6h, 12h, 24h deltas; rolling means; rolling standard deviation; diurnal harmonics.</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs border-t border-outline-variant/20 text-[11px] text-primary font-medium">
+          Source: MPCB / CPCB CAAQMS Grid
+        </div>
+</div>
+<!-- Feature 2 -->
+<div class="rounded-lg p-space-md bg-surface-container-low/40 border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded text-label-xs font-label-xs font-semibold bg-secondary-fixed/50 text-on-secondary-fixed-variant">
+              Weight: 28%
+            </span>
+<span class="material-symbols-outlined text-secondary text-[18px]">air</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Numerical Weather (WRF/ECMWF)</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Dynamic boundary layer dynamics, thermal stratification, and transport vectors.
+          </p>
+<div class="mt-space-sm flex flex-col gap-1.5 text-label-xs font-label-xs">
+<div class="font-semibold text-outline uppercase tracking-wider text-[10px]">Parameters Included</div>
+<div class="flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">PBLH (m)</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">2m Temp</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">Relative Hum.</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">10m U/V Wind</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">Ventilation Coeff.</span>
+</div>
+</div>
+<div class="mt-space-sm flex flex-col gap-1 text-label-xs font-label-xs">
+<div class="font-semibold text-outline uppercase tracking-wider text-[10px]">Engineered Transforms</div>
+<span class="text-on-surface-variant">Inversion strength index (dθ/dz); sea-breeze convergence frontline vectors; stagnation duration.</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs border-t border-outline-variant/20 text-[11px] text-secondary font-medium">
+          Source: IMD WRF + ECMWF IFS Reanalysis
+        </div>
+</div>
+<!-- Feature 3 -->
+<div class="rounded-lg p-space-md bg-surface-container-low/40 border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded text-label-xs font-label-xs font-semibold bg-tertiary-fixed text-on-tertiary-fixed-variant">
+              Weight: 22%
+            </span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">satellite_alt</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Earth Observation Satellites</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Transboundary plumes, aerosol optical depth, and peripheral thermal fire events.
+          </p>
+<div class="mt-space-sm flex flex-col gap-1.5 text-label-xs font-label-xs">
+<div class="font-semibold text-outline uppercase tracking-wider text-[10px]">Parameters Included</div>
+<div class="flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">Sentinel-5P NO2</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">MODIS AOD</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">VIIRS Thermal Fire</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">CO Total Column</span>
+</div>
+</div>
+<div class="mt-space-sm flex flex-col gap-1 text-label-xs font-label-xs">
+<div class="font-semibold text-outline uppercase tracking-wider text-[10px]">Engineered Transforms</div>
+<span class="text-on-surface-variant">100km radius thermal fire pixel count; upwind transboundary trajectory flux; cloud masking imputation.</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs border-t border-outline-variant/20 text-[11px] text-tertiary font-medium">
+          Source: NASA FIRMS + ESA Copernicus
+        </div>
+</div>
+<!-- Feature 4 -->
+<div class="rounded-lg p-space-md bg-surface-container-low/40 border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded text-label-xs font-label-xs font-semibold bg-surface-container text-on-surface-variant">
+              Weight: 16%
+            </span>
+<span class="material-symbols-outlined text-outline text-[18px]">commute</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Mobility &amp; Urban Proxies</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Ward-scale anthropogenic emissions, construction activities, and arterial choke points.
+          </p>
+<div class="mt-space-sm flex flex-col gap-1.5 text-label-xs font-label-xs">
+<div class="font-semibold text-outline uppercase tracking-wider text-[10px]">Parameters Included</div>
+<div class="flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">Congestion Index</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">Freight Windows</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">Building Permits</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded border border-outline-variant/30 text-on-surface">CEMS Telemetry</span>
+</div>
+</div>
+<div class="mt-space-sm flex flex-col gap-1 text-label-xs font-label-xs">
+<div class="font-semibold text-outline uppercase tracking-wider text-[10px]">Engineered Transforms</div>
+<span class="text-on-surface-variant">Arterial road bottleneck delay index; festival calendar indicators; diurnal heavy commercial entry gates.</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs border-t border-outline-variant/20 text-[11px] text-on-surface-variant font-medium">
+          Source: MCGM Smart City + Traffic Police
+        </div>
+</div>
+</div>
+</div>
+<!-- SECTION 5: PRIMARY DATA PROVENANCE REGISTRY -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden">
+<div class="p-space-md border-b border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">database</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Primary Data Sources &amp; Provenance Registry</h3>
+</div>
+<span class="text-label-xs font-label-xs text-outline font-tabular-data">6 Integrated Public Feeds</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-outline-variant/20 border-b border-outline-variant/20">
+<div class="p-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm font-semibold text-on-surface">MPCB (State Board)</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface text-[10px] font-tabular-data">15-Min Stream</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Continuous in-situ monitoring data covering Chembur, Kurla, Bandra, Worli stations via EPA-compliant BAM.</p>
+<span class="text-[11px] text-outline mt-1 font-tabular-data">Licensing: CPCB Open Data Protocol</span>
+</div>
+<div class="p-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm font-semibold text-on-surface">IMD (Met Department)</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface text-[10px] font-tabular-data">Hourly Synoptic</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Atmospheric soundings, Colaba Doppler radar reflectivity, synoptic surface pressure gradients and sea-breeze transitions.</p>
+<span class="text-[11px] text-outline mt-1 font-tabular-data">Protocol: WMO Global Telecom System</span>
+</div>
+<div class="p-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm font-semibold text-on-surface">ECMWF / Copernicus</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface text-[10px] font-tabular-data">6-Hr Cycle</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">ERA5 meteorological reanalysis and IFS boundary conditions, vertical wind shear profile up to 700 hPa.</p>
+<span class="text-[11px] text-outline mt-1 font-tabular-data">Terms: Copernicus Open Access</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-outline-variant/20">
+<div class="p-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm font-semibold text-on-surface">NASA Earthdata (FIRMS)</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface text-[10px] font-tabular-data">3-Hr Orbit</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">375m VIIRS thermal fire anomaly detections in the upwind periphery of Mumbai and western Maharashtra.</p>
+<span class="text-[11px] text-outline mt-1 font-tabular-data">Format: HDF5 / NetCDF4 Georeferenced</span>
+</div>
+<div class="p-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm font-semibold text-on-surface">MCGM Smart City Hub</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface text-[10px] font-tabular-data">5-Min Kafka</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ward boundary GIS polygon indices, building development approvals, and live arterial street speed vectors.</p>
+<span class="text-[11px] text-outline mt-1 font-tabular-data">Auth: MCGM Internal Municipal API</span>
+</div>
+<div class="p-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm font-semibold text-on-surface">SAFAR Network</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface text-[10px] font-tabular-data">Hourly QA/QC</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">National Institute of Tropical Meteorology micro-scale urban monitors positioned across airport corridors.</p>
+<span class="text-[11px] text-outline mt-1 font-tabular-data">Standards: MoES Standardized Protocol</span>
+</div>
+</div>
+</div>
+<!-- SECTION 6: OPERATIONAL LIMITATIONS, FAILURE MODES & STATUTORY GUARDRAILS -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-md">
+<!-- Limitations & Edge Cases -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md lg:p-space-lg border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-2 pb-space-xs border-b border-outline-variant/20">
+<span class="material-symbols-outlined text-outline text-[20px]">warning</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Known Operational Limitations &amp; Failure Modes</h3>
+</div>
+<div class="flex flex-col gap-space-sm mt-1">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-error flex-shrink-0 mt-0.5">report_problem</span>
+<div class="flex flex-col">
+<span class="font-body-sm font-semibold text-on-surface">Unregistered Biomass &amp; Debris Flaring</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Sudden unpredicted open biomass burning or municipal dump fire outside the 15km satellite raster buffer may produce localized PM2.5 under-predictions up to 2 hours until nearest ground station picks up anomalous plume.
+              </p>
+</div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">cloud</span>
+<div class="flex flex-col">
+<span class="font-body-sm font-semibold text-on-surface">Monsoon Optical Satellite Attenuation</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Persistent overcast stratus cloud decks during active southwest monsoon (July–August) blind optical AOD sensors. The ensemble autonomously switches weights to ground BAM telemetry and numerical advection.
+              </p>
+</div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-outline flex-shrink-0 mt-0.5">apartment</span>
+<div class="flex flex-col">
+<span class="font-body-sm font-semibold text-on-surface">Street-Canyon Microscale Turbulence</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                The 500m ward-grid cannot resolve building-scale eddy vortexes inside narrow urban street canyons (e.g., Lower Parel, Dadar TT). Spatial estimates reflect aggregated ward ambient air, not individual lane micro-climates.
+              </p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant/20 text-label-xs font-label-xs text-outline">
+        Failure Alert: Model pipeline flags confidence uncertainty if sensor ping latency exceeds 45 minutes.
+      </div>
+</div>
+<!-- Statutory Decision Guardrails -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md lg:p-space-lg border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-2 pb-space-xs border-b border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[20px]">gavel</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Statutory Decision Guardrails &amp; Responsible Use</h3>
+</div>
+<div class="flex flex-col gap-space-sm mt-1">
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/20 flex flex-col gap-1">
+<span class="font-body-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">policy</span>
+              Decision-Support, Not Automated Enforcement
+            </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              AQIS forecasts serve as statutory advisory triggers to schedule ward inspection patrols, mist-cannon deployment, and traffic diversion. Physical on-site ground verification by MCGM field officers is legally mandated prior to issuing punitive stop-work notices under the Air (Prevention and Control of Pollution) Act 1981.
+            </p>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/20 flex flex-col gap-1">
+<span class="font-body-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">science</span>
+              Statistical Proxy, Not Chemical Apportionment
+            </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Feature importance vectors indicate spatiotemporal correlation likelihood and do not substitute for lab-grade Chemical Mass Balance (CMB) or Positive Matrix Factorization (PMF) speciation analyses in court appeals.
+            </p>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/20 flex flex-col gap-1">
+<span class="font-body-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">verified</span>
+              ISO/IEC 42001 &amp; MoEFCC AI Transparency
+            </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              This card constitutes formal compliance with the Ministry of Environment, Forest and Climate Change AI Governance circular for Urban Local Bodies (ULBs).
+            </p>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant/20 text-label-xs font-label-xs text-primary font-medium flex items-center justify-between">
+<span>Audited by MCGM Legal &amp; Technical Review Committee</span>
+<span>Certificate # AQIS-MMR-2024-Q3</span>
+</div>
+</div>
+</div>
+<!-- FOOTER: PROVENANCE STAMP & REVISION REGISTER -->
+<div class="rounded-xl p-space-md bg-surface-container-low border border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-space-sm text-label-xs font-label-xs text-outline">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-semibold text-on-surface">AQIS System ID:</span>
+<span class="font-tabular-data text-on-surface-variant">MMR-AI-BOM-v4.3.2</span>
+<span>•</span>
+<span>Evaluated jointly with IIT Bombay Atmospheric Sciences &amp; Climate Studies Dept.</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-tabular-data">Hash: <span class="text-on-surface font-mono">sha256:7f4c9a8...e3b1</span></span>
+<span class="text-outline">·</span>
+<span class="text-primary font-medium">Production Node: BOM-CENTRAL-01</span>
+</div>
+</div>
+</div></main></div></body></html>
