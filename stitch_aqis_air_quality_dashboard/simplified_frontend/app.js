@@ -12,11 +12,11 @@ const state = {
   alertLanguage: 'English',
   forecast: { pollutant: 'PM2.5', horizon: '72', aggregation: 'Hourly', confidence: true, thresholds: true, mapHour: '24', scenarioPackage: 'targeted', trafficReduction: 25, constructionControl: true, industryReduction: 10 },
   plan: { department: 'Ward Environment Team', priority: 'High', owner: 'Ward Response Officer', deadline: '2026-09-18T06:00', status: 'Draft', reportId: 'AQIS-MUM-2026-0917-01' },
-  backend: { loading: true, connected: false, mode: 'frontend-fallback', stations: [], stationId: 'Borivali_East_Mumbai_-_MPCB', intelligence: null, metrics: null }
+  backend: { loading: true, connected: false, liveConnected: false, mode: 'frontend-fallback', stations: [], stationId: 'Borivali_East_Mumbai_-_MPCB', intelligence: null, live: null, metrics: null }
 };
 
 function intelligence() { return state.backend.intelligence?.data || null; }
-function cachedForecast(horizon) { return intelligence()?.forecast?.[`${horizon}h`] || null; }
+function cachedForecast(horizon) { return state.backend.live?.forecast?.[`${horizon}h`] || intelligence()?.forecast?.[`${horizon}h`] || null; }
 function pm25ToAqi(value) {
   const ranges = [[0,30,0,50],[31,60,51,100],[61,90,101,200],[91,120,201,300],[121,250,301,400],[251,500,401,500]];
   const [cLow,cHigh,iLow,iHigh] = ranges.find(([low,high]) => value >= low && value <= high) || ranges[ranges.length-1];
@@ -24,9 +24,46 @@ function pm25ToAqi(value) {
 }
 function backendStatusText() {
   if(state.backend.loading) return 'Connecting model service…';
+  if(state.backend.liveConnected) return 'Live air data · Open-Meteo';
   if(!state.backend.connected) return 'Frontend fallback data';
   const date = intelligence()?.timestamp?.split(' ')[0];
   return `Model cache connected${date ? ` · ${date}` : ''}`;
+}
+
+const fallbackStations = {
+  mumbai: [{ id:'Borivali_East_Mumbai_-_MPCB', name:'Borivali East, Mumbai - MPCB', latitude:19.229, longitude:72.8649 }],
+  delhi: [{ id:'Anand_Vihar_Delhi_-_DPCC', name:'Anand Vihar, Delhi - DPCC', latitude:28.6469, longitude:77.3160 }]
+};
+
+function selectedStation() {
+  return state.backend.stations.find(station => station.id === state.backend.stationId) || state.backend.stations[0] || fallbackStations[state.city.toLowerCase()][0];
+}
+
+function categoryForPm25(pm25) {
+  const aqi = pm25ToAqi(pm25);
+  return aqi <= 50 ? 'Good' : aqi <= 100 ? 'Satisfactory' : aqi <= 200 ? 'Moderate' : aqi <= 300 ? 'Poor' : aqi <= 400 ? 'Very Poor' : 'Severe';
+}
+
+async function loadLiveAirQuality() {
+  const station = selectedStation();
+  if(!station) return;
+  try {
+    const url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${station.latitude}&longitude=${station.longitude}&current=pm2_5,pm10,nitrogen_dioxide&hourly=pm2_5,pm10,nitrogen_dioxide&forecast_days=4&timezone=auto`;
+    const response = await fetch(url);
+    if(!response.ok) throw new Error('Live feed unavailable');
+    const data = await response.json();
+    const currentIndex = Math.max(0, data.hourly.time.findIndex(time => new Date(time) >= new Date()));
+    const at = hours => Number(data.hourly.pm2_5[Math.min(currentIndex + hours, data.hourly.pm2_5.length - 1)]);
+    const makeForecast = hours => ({ pm25: at(hours), aqi_category: categoryForPm25(at(hours)) });
+    state.backend.live = {
+      source:'Open-Meteo Air Quality API', observedAt:data.current?.time || new Date().toISOString(),
+      current:{ pm25:Number(data.current?.pm2_5), pm10:Number(data.current?.pm10), no2:Number(data.current?.nitrogen_dioxide) },
+      forecast:{ '24h':makeForecast(24), '48h':makeForecast(48), '72h':makeForecast(72) }
+    };
+    state.backend.liveConnected = true;
+  } catch(error) {
+    state.backend.liveConnected = false;
+  }
 }
 
 const icons = {
@@ -136,7 +173,7 @@ function loginPage(role) {
 
 function adminShell(page) {
   return `<div class="shell"><aside class="sidebar" id="sidebar">${brand()}<nav class="side-nav">${adminNav.map(([id,label,icon]) => `<button class="${page===id?'active':''}" data-admin="${id}"><span class="nav-icon">${iconSvg(icon)}</span>${label}</button>`).join('')}</nav><div class="sidebar-footer"><button class="btn btn-secondary btn-small" style="width:100%;margin-bottom:10px" data-go="landing">Sign out</button><div class="profile"><div class="avatar">KR</div><div><strong>Khushal</strong><small>Demo administrator</small></div></div></div></aside>
-  <div class="workspace"><header class="topbar"><div class="topbar-left"><button class="btn btn-secondary btn-small mobile-menu" data-menu>☰</button><select id="citySelect" class="btn btn-secondary btn-small" data-city-select><option value="Mumbai" ${state.city==='Mumbai'?'selected':''}>Mumbai</option><option value="Delhi" ${state.city==='Delhi'?'selected':''}>Delhi</option></select><select class="top-search" data-station-select>${state.backend.stations.length ? state.backend.stations.map(s=>`<option value="${s.id}" ${state.backend.stationId===s.id?'selected':''}>${s.name.replace(/, (Mumbai|Delhi).*$/,'')}</option>`).join('') : '<option>Borivali East</option>'}</select></div><div class="topbar-actions"><span class="status-pill ${state.backend.connected?'connected':''}">${backendStatusText()}</span><button class="btn btn-secondary btn-small" data-mode>${state.backend.connected?'Cached model':'Demo data'}</button></div></header>${adminPage(page)}</div></div>`;
+  <div class="workspace"><header class="topbar"><div class="topbar-left"><button class="btn btn-secondary btn-small mobile-menu" data-menu>☰</button><select id="citySelect" class="btn btn-secondary btn-small" data-city-select><option value="Mumbai" ${state.city==='Mumbai'?'selected':''}>Mumbai</option><option value="Delhi" ${state.city==='Delhi'?'selected':''}>Delhi</option></select><select class="top-search" data-station-select>${state.backend.stations.length ? state.backend.stations.map(s=>`<option value="${s.id}" ${state.backend.stationId===s.id?'selected':''}>${s.name.replace(/, (Mumbai|Delhi).*$/,'')}</option>`).join('') : '<option>Borivali East</option>'}</select></div><div class="topbar-actions"><span class="status-pill ${state.backend.connected||state.backend.liveConnected?'connected':''}">${backendStatusText()}</span><button class="btn btn-secondary btn-small" data-mode>${state.backend.liveConnected?'Live feed':state.backend.connected?'Cached model':'Fallback'}</button></div></header>${adminPage(page)}</div></div>`;
 }
 
 function pageHeading(title, subtitle, action='') {
@@ -152,7 +189,8 @@ function kpis() {
 }
 
 function mapCard(showTooltip = true) {
-  return `<section class="card map-card"><div class="map-head"><div><strong>Source evidence map</strong><div class="tiny subtle">Borivali East · 5 km context · overlay prototype</div></div><div class="map-head-actions"><span class="tag tag-blue">OpenStreetMap-ready</span><button class="btn btn-secondary btn-small" data-layer-toggle>Layers</button></div></div><div class="map-stage">${mapSvg()}<div class="layers hidden" id="layers"><strong class="tiny">Map layers</strong>${Object.entries(state.layers).map(([id,on]) => `<label><input type="checkbox" data-layer="${id}" ${on?'checked':''}/> ${id[0].toUpperCase()+id.slice(1)}</label>`).join('')}</div><div class="map-controls"><button>+</button><button>−</button></div>${showTooltip ? `<div class="map-tooltip"><span class="tag tag-red">High likelihood</span><h3 style="margin-top:9px">Western Express Highway</h3><p>364 m from the station and directly upwind during the forecast window.</p><button class="btn btn-soft btn-small" data-admin="evidence">View evidence</button></div>`:''}</div><div class="timeline"><strong class="tiny">Time</strong>${[['now','Now'],['24','+24h'],['48','+48h'],['72','+72h']].map(([id,label])=>`<button class="${state.horizon===id?'active':''}" data-horizon="${id}">${label}</button>`).join('')}</div></section>`;
+  const station = selectedStation();
+  return `<section class="card map-card"><div class="map-head"><div><strong>Live station map</strong><div class="tiny subtle">${station.name} · OpenStreetMap context</div></div><div class="map-head-actions"><span class="tag tag-green">Interactive OSM</span></div></div><div class="map-stage"><div class="leaflet-map" data-live-map="evidence"></div><div class="map-live-badge">${state.backend.liveConnected?'● Live air feed':'Cached fallback'} · ${Number(cachedForecast(24)?.pm25 || 0).toFixed(1)} µg/m³ PM2.5</div></div><div class="timeline"><strong class="tiny">Time</strong>${[['now','Now'],['24','+24h'],['48','+48h'],['72','+72h']].map(([id,label])=>`<button class="${state.horizon===id?'active':''}" data-horizon="${id}">${label}</button>`).join('')}</div></section>`;
 }
 
 function pulsePage() {
@@ -177,7 +215,7 @@ function pollutantData() {
   const apiPeakIndex = apiAvailable ? apiValues.indexOf(apiPeak) : 1;
   const apiPath = apiAvailable ? apiValues.map((value,index)=>`${index===0?'M':'L'}${[60,330,600,870][index]} ${Math.max(45,260-(value/120)*205)}`).join(' ') : 'M60 228 C160 238,220 195,310 201 S430 105,530 132 S680 185,870 164';
   return {
-    'PM2.5': { unit:'µg/m³', values:apiAvailable?apiValues:[88,92,78,69], peak:apiAvailable?apiPeak.toFixed(1):'92', time:apiAvailable?['Now','+24 hours','+48 hours','+72 hours'][apiPeakIndex]:'Tomorrow · 8 AM', change:apiAvailable?'Cached inference':'+4.5%', path:apiPath },
+    'PM2.5': { unit:'µg/m³', values:apiAvailable?apiValues:[88,92,78,69], peak:apiAvailable?apiPeak.toFixed(1):'92', time:apiAvailable?['Now','+24 hours','+48 hours','+72 hours'][apiPeakIndex]:'Tomorrow · 8 AM', change:apiAvailable?(state.backend.liveConnected?'Live forecast':'Cached inference'):'+4.5%', path:apiPath },
     'PM10': { unit:'µg/m³', values:[132,148,126,108], peak:'148', time:'Tomorrow · 10 AM', change:'+12.1%', path:'M60 214 C170 220,235 178,330 188 S455 86,555 112 S700 170,870 178' },
     'NO₂': { unit:'µg/m³', values:[46,61,52,42], peak:'61', time:'Tomorrow · 9 AM', change:'+32.6%', path:'M60 235 C165 230,230 205,325 214 S450 145,550 158 S700 205,870 218' }
   }[state.forecast.pollutant];
@@ -214,26 +252,39 @@ function spatialForecastMap() {
   const fallback = configs[state.forecast.mapHour];
   const colorFor = value => value > 200 ? '#c2413b' : value > 100 ? '#e0792d' : value > 50 ? '#d6a125' : '#0b8b70';
   const m = apiAqi === null ? fallback : { main:apiAqi, north:Math.max(0,Math.round(apiAqi*.93)), east:Math.max(0,Math.round(apiAqi*.82)), south:Math.max(0,Math.round(apiAqi*.75)), color:colorFor(apiAqi), radius:Math.max(48,Math.min(118,48+apiAqi*.35)) };
-  return `<svg viewBox="0 0 900 470" preserveAspectRatio="xMidYMid slice" aria-label="Spatial AQI forecast map">
-    <defs><pattern id="forecastGrid" width="52" height="52" patternUnits="userSpaceOnUse"><path d="M52 0H0V52" fill="none" stroke="#d5dfdc"/></pattern><radialGradient id="forecastHot"><stop offset="0" stop-color="${m.color}" stop-opacity=".48"/><stop offset="1" stop-color="${m.color}" stop-opacity="0"/></radialGradient></defs>
-    <rect width="900" height="470" fill="#edf3f1"/><rect width="900" height="470" fill="url(#forecastGrid)"/>
-    <path d="M-30 115 C180 165 240 55 390 115 S660 175 930 80" fill="none" stroke="#fff" stroke-width="24"/><path d="M120 500 C190 370 315 330 425 205 S650 70 790 -30" fill="none" stroke="#d2d9d7" stroke-width="15"/>
-    <circle cx="430" cy="300" r="${m.radius}" fill="url(#forecastHot)"/><circle cx="430" cy="300" r="15" fill="#0b6b63" stroke="white" stroke-width="6"/>
-    <g font-family="DM Sans" text-anchor="middle"><g transform="translate(430 248)"><rect x="-38" y="-19" width="76" height="38" rx="10" fill="white"/><text y="5" font-size="17" font-weight="800" fill="${m.color}">${m.main} AQI</text></g><g transform="translate(270 150)"><circle r="9" fill="#0b6b63"/><text y="-16" font-size="12" fill="#405552">Kandivali · ${m.north}</text></g><g transform="translate(650 205)"><circle r="9" fill="#0b6b63"/><text y="-16" font-size="12" fill="#405552">Dahisar · ${m.east}</text></g><g transform="translate(310 390)"><circle r="9" fill="#0b6b63"/><text y="24" font-size="12" fill="#405552">Malad · ${m.south}</text></g><text x="430" y="334" font-size="12" fill="#405552">Borivali East</text></g>
-  </svg>`;
+  return `<div class="leaflet-map" data-live-map="forecast" data-aqi="${m.main}"></div>`;
+}
+
+function mountLiveMaps() {
+  if(!window.L) return;
+  const station = selectedStation();
+  document.querySelectorAll('[data-live-map]').forEach(element => {
+    if(element.dataset.mapReady) return;
+    element.dataset.mapReady = 'true';
+    const map = L.map(element).setView([station.latitude, station.longitude], element.dataset.liveMap === 'forecast' ? 12 : 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'&copy; OpenStreetMap contributors' }).addTo(map);
+    const horizon = state.forecast.mapHour === 'now' ? 24 : Number(state.forecast.mapHour);
+    const pm25 = Number(cachedForecast(horizon)?.pm25 || state.backend.live?.current?.pm25 || 0);
+    const aqi = pm25ToAqi(pm25);
+    const color = aqi <= 50 ? '#15803d' : aqi <= 100 ? '#d97706' : aqi <= 200 ? '#ea580c' : '#dc2626';
+    L.circle([station.latitude, station.longitude], { radius:1800, color, fillColor:color, fillOpacity:.2, weight:2 }).addTo(map);
+    L.circleMarker([station.latitude, station.longitude], { radius:10, color:'#fff', weight:4, fillColor:color, fillOpacity:1 }).addTo(map).bindPopup(`<strong>${station.name}</strong><br>${state.backend.liveConnected?'Live Open-Meteo':'Cached'} PM2.5: ${pm25.toFixed(1)} µg/m³<br>AQI estimate: ${aqi}`).openPopup();
+    state.backend.stations.filter(item => item.id !== station.id).slice(0,8).forEach(item => L.circleMarker([item.latitude,item.longitude], { radius:5, color:'#0b6b63', fillColor:'#0b6b63', fillOpacity:.8 }).addTo(map).bindTooltip(item.name));
+    setTimeout(() => map.invalidateSize(), 0);
+  });
 }
 
 function forecastPage() {
   const d = pollutantData();
   const scenario = scenarioResult();
-  const decisionNote = state.backend.connected && scenario.baseline <= 100
-    ? 'Cached forecasts remain within the Good or Satisfactory AQI bands. Continue monitoring; no restrictive intervention is indicated from this model snapshot.'
+  const decisionNote = (state.backend.connected || state.backend.liveConnected) && scenario.baseline <= 100
+    ? `${state.backend.liveConnected?'Live Open-Meteo':'Cached'} forecasts remain within the Good or Satisfactory AQI bands. Continue monitoring; no restrictive intervention is indicated.`
     : 'Tomorrow morning has the highest operational concern. Low wind and a shallow mixing layer may reduce dispersion. Confirm against the latest station QA flag before issuing an action.';
   return `<main class="page">
     ${pageHeading('Forecast Operations','Interrogate the forecast before using it for a city response.', `<button class="btn btn-secondary" data-download-forecast>Download CSV</button>`)}
     <section class="card forecast-controls"><div><label>Pollutant</label><div class="segmented">${['PM2.5','PM10','NO₂'].map(x=>`<button class="${state.forecast.pollutant===x?'active':''}" data-forecast-pollutant="${x}">${x}</button>`).join('')}</div></div><div><label>Horizon</label><div class="segmented">${['24','48','72'].map(x=>`<button class="${state.forecast.horizon===x?'active':''}" data-forecast-horizon="${x}">${x}h</button>`).join('')}</div></div><div class="field compact-field"><label>Aggregation</label><select data-forecast-aggregation><option ${state.forecast.aggregation==='Hourly'?'selected':''}>Hourly</option><option ${state.forecast.aggregation==='Daily'?'selected':''}>Daily</option></select></div><label class="control-check"><input type="checkbox" data-forecast-option="confidence" ${state.forecast.confidence?'checked':''}/> Confidence band</label><label class="control-check"><input type="checkbox" data-forecast-option="thresholds" ${state.forecast.thresholds?'checked':''}/> CPCB thresholds</label></section>
     <div class="grid forecast-layout"><section class="card chart-card"><div class="card-title"><div><h2>${state.forecast.pollutant} outlook · ${state.forecast.horizon} hours</h2><span class="tiny subtle">${state.forecast.aggregation} forecast · shaded region is the 80% prediction interval</span></div><span class="tag tag-blue">Model v4.2</span></div><div class="chart-wrap">${chartSvg()}</div></section><div class="side-stack"><section class="card"><div class="card-title"><h2>Operational summary</h2><span class="tag tag-amber">Review</span></div><div class="metric-list"><div class="metric-row"><span>Predicted peak</span><strong>${d.peak} ${d.unit}</strong></div><div class="metric-row"><span>Peak time</span><strong>${d.time}</strong></div><div class="metric-row"><span>vs current</span><strong>${d.change}</strong></div><div class="metric-row"><span>Model confidence</span><strong>Medium</strong></div></div></section><section class="card"><div class="card-title"><h2>Weather context</h2></div><div class="quality-list"><div class="quality-item"><strong>8 km/h</strong><span class="tiny subtle">Wind · WNW</span></div><div class="quality-item"><strong>78%</strong><span class="tiny subtle">Humidity</span></div><div class="quality-item"><strong>0 mm</strong><span class="tiny subtle">Rain</span></div><div class="quality-item"><strong>410 m</strong><span class="tiny subtle">Mixing height</span></div></div></section><section class="card"><div class="card-title"><h2>Decision note</h2></div><p class="subtle" style="line-height:1.6;margin:0">${decisionNote}</p></section></div></div>
-    <div class="grid forecast-analysis-grid"><section class="card spatial-card"><div class="card-title"><div><h2>Spatial forecast</h2><span class="tiny subtle">Neighbourhood pattern · future OpenStreetMap layer</span></div><span class="tag tag-blue">OSM-ready</span></div><div class="spatial-map">${spatialForecastMap()}</div><div class="map-time-tabs">${[['now','Now'],['24','+24h'],['48','+48h'],['72','+72h']].map(([id,label])=>`<button class="${state.forecast.mapHour===id?'active':''}" data-forecast-map-horizon="${id}">${label}</button>`).join('')}</div><p class="tiny subtle map-caveat">Values are station-area forecasts shown as an interpolated planning surface—not street-level exposure estimates.</p></section>
+    <div class="grid forecast-analysis-grid"><section class="card spatial-card"><div class="card-title"><div><h2>Spatial forecast</h2><span class="tiny subtle">Interactive station-area context on OpenStreetMap</span></div><span class="tag tag-green">OSM live</span></div><div class="spatial-map">${spatialForecastMap()}</div><div class="map-time-tabs">${[['now','Now'],['24','+24h'],['48','+48h'],['72','+72h']].map(([id,label])=>`<button class="${state.forecast.mapHour===id?'active':''}" data-forecast-map-horizon="${id}">${label}</button>`).join('')}</div><p class="tiny subtle map-caveat">Circle shows the selected station's forecast context, not street-level exposure.</p></section>
     <section class="card scenario-card"><div class="card-title"><div><h2>Intervention scenario</h2><span class="tiny subtle">Choose operational packages while weather remains fixed</span></div><span class="tag tag-amber">Planning sensitivity</span></div><div class="scenario-results"><div><span>Baseline peak</span><strong>${scenario.baseline}</strong><small>AQI</small></div><div class="scenario-arrow">→</div><div class="scenario-improved"><span>Scenario peak</span><strong>${scenario.scenario}</strong><small>AQI · range ${scenario.range}</small></div></div>
       ${policyLever('trend','Traffic management','Changes high-emitting vehicle activity; road infrastructure remains unchanged.','trafficReduction',[[0,'No change','0%'],[25,'Targeted','−25%'],[40,'Strong','−40%']])}
       ${policyLever('clipboard','Construction enforcement','Assumes compliance with watering, covers and on-site dust controls.','constructionControl',[[false,'Standard','Existing checks'],[true,'Enhanced','Daily enforcement']])}
@@ -308,8 +359,8 @@ function citizenHome() {
   const values = forecasts.map((forecast,index)=>forecast || fallback[index]);
   const aqiValues = values.map(item=>pm25ToAqi(Number(item.pm25)));
   const station = intelligence()?.location?.replace(/, (Mumbai|Delhi).*$/,'') || 'Borivali East';
-  const connected = state.backend.connected;
-  return `<section class="citizen-hero"><div><div class="eyebrow" style="color:#9cf2e8">${station} · ${connected?'MODEL CACHE CONNECTED':'FRONTEND PREVIEW'}</div><h1>${connected?`Tomorrow’s forecast is ${values[0].aqi_category}.`:'Your air is Poor right now.'}</h1><p>${connected?'This forecast comes from the project’s precomputed 24-hour XGBoost inference. Review the timestamp before using it for personal decisions.':'Most people can continue normal activity, but sensitive residents should reduce prolonged outdoor effort this morning.'}</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-secondary" data-citizen="plan">View health guidance</button><button class="btn btn-soft" data-citizen="plan">Forecast & alerts</button></div></div><div class="citizen-aqi"><div class="aqi-ring"><div><span>${connected?'24H AQI':'AQI'}</span><strong>${aqiValues[0]}</strong><small>PM2.5 ${Number(values[0].pm25).toFixed(1)} µg/m³</small></div></div></div></section><div class="grid citizen-grid"><section class="card"><div class="card-title"><h2>Next 3 horizons</h2><button class="btn btn-soft btn-small" data-citizen="plan">Plan ahead</button></div><div class="forecast-strip">${values.map((item,index)=>`<div class="forecast-day"><span class="tiny subtle">+${[24,48,72][index]} hours</span><strong>${aqiValues[index]}</strong><span class="tag ${aqiValues[index]>150?'tag-red':aqiValues[index]>100?'tag-amber':'tag-green'}">${item.aqi_category}</span></div>`).join('')}</div><div class="alert-box"><span style="font-size:22px">◷</span><div><strong>${connected?'Precomputed forecast':'Cleaner-air window'}</strong><div class="tiny subtle">${connected?`Model timestamp: ${intelligence()?.timestamp}. Live ingestion will replace this cache in production.`:'Tomorrow after 4 PM is currently the best time for outdoor plans.'}</div></div></div></section><section class="card"><div class="card-title"><h2>Nearby station</h2><span class="tag tag-green">${connected?'Model data':'Preview'}</span></div><div class="citizen-map">${mapSvg(true)}</div><button class="btn btn-secondary btn-small" style="width:100%;margin-top:12px" data-citizen="map">Explore map</button></section></div>`;
+  const connected = state.backend.connected || state.backend.liveConnected;
+  return `<section class="citizen-hero"><div><div class="eyebrow" style="color:#9cf2e8">${station} · ${state.backend.liveConnected?'LIVE AIR FEED':'MODEL CACHE CONNECTED'}</div><h1>${connected?`Tomorrow’s forecast is ${values[0].aqi_category}.`:'Your air is Poor right now.'}</h1><p>${state.backend.liveConnected?'Live PM2.5 conditions and the next 72 hours are supplied by Open-Meteo/CAMS for the selected coordinates.':'This forecast uses the project’s precomputed XGBoost inference.'}</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-secondary" data-citizen="plan">View health guidance</button><button class="btn btn-soft" data-citizen="plan">Forecast & alerts</button></div></div><div class="citizen-aqi"><div class="aqi-ring"><div><span>${connected?'24H AQI':'AQI'}</span><strong>${aqiValues[0]}</strong><small>PM2.5 ${Number(values[0].pm25).toFixed(1)} µg/m³</small></div></div></div></section><div class="grid citizen-grid"><section class="card"><div class="card-title"><h2>Next 3 horizons</h2><button class="btn btn-soft btn-small" data-citizen="plan">Plan ahead</button></div><div class="forecast-strip">${values.map((item,index)=>`<div class="forecast-day"><span class="tiny subtle">+${[24,48,72][index]} hours</span><strong>${aqiValues[index]}</strong><span class="tag ${aqiValues[index]>150?'tag-red':aqiValues[index]>100?'tag-amber':'tag-green'}">${item.aqi_category}</span></div>`).join('')}</div><div class="alert-box"><span style="font-size:22px">◷</span><div><strong>${state.backend.liveConnected?'Live forecast':'Precomputed forecast'}</strong><div class="tiny subtle">${state.backend.liveConnected?`Updated ${state.backend.live.observedAt} · Open-Meteo/CAMS.`:`Model timestamp: ${intelligence()?.timestamp || 'cached demo'}.`}</div></div></div></section><section class="card"><div class="card-title"><h2>Nearby station</h2><span class="tag tag-green">${state.backend.liveConnected?'Live':'Model data'}</span></div><div class="citizen-map"><div class="leaflet-map" data-live-map="evidence"></div></div><button class="btn btn-secondary btn-small" style="width:100%;margin-top:12px" data-citizen="map">Explore map</button></section></div>`;
 }
 
 function downloadFile(filename, content, type = 'text/plain') {
@@ -356,11 +407,15 @@ async function loadBackendData() {
     if(!state.backend.stations.some(station=>station.id===state.backend.stationId) && state.backend.stations.length) state.backend.stationId = state.backend.stations[0].id;
     state.backend.intelligence = modelIntelligence;
     state.backend.metrics = metrics;
+    await loadLiveAirQuality();
     const peakAqi = Math.max(...[24,48,72].map(h=>cachedForecast(h)).filter(Boolean).map(item=>pm25ToAqi(Number(item.pm25))));
     if(Number.isFinite(peakAqi) && peakAqi <= 100) { state.forecast.trafficReduction = 0; state.forecast.constructionControl = false; state.forecast.industryReduction = 0; }
   } catch(error) {
     state.backend.connected = false;
     state.backend.mode = 'frontend-fallback';
+    state.backend.stations = fallbackStations[state.city.toLowerCase()];
+    state.backend.stationId = state.backend.stations[0].id;
+    await loadLiveAirQuality();
   } finally {
     state.backend.loading = false;
     render();
@@ -373,6 +428,7 @@ async function loadStationIntelligence() {
     if(!response.ok) throw new Error('Station not found');
     state.backend.intelligence = await response.json();
     state.backend.connected = true;
+    await loadLiveAirQuality();
     const peakAqi = Math.max(...[24,48,72].map(h=>cachedForecast(h)).filter(Boolean).map(item=>pm25ToAqi(Number(item.pm25))));
     if(Number.isFinite(peakAqi) && peakAqi <= 100) { state.forecast.trafficReduction = 0; state.forecast.constructionControl = false; state.forecast.industryReduction = 0; }
     render();
@@ -411,6 +467,7 @@ function render() {
   else if(route.startsWith('admin/')) app.innerHTML = adminShell(route.split('/')[1] || 'pulse');
   else if(route.startsWith('citizen/')) app.innerHTML = citizenShell(route.split('/')[1] || 'home');
   else app.innerHTML = landing();
+  requestAnimationFrame(mountLiveMaps);
   window.scrollTo(0,0);
 }
 
