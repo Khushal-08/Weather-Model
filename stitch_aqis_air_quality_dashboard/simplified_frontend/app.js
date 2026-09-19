@@ -11,8 +11,8 @@ const state = {
   actions: { traffic: true, construction: true, health: true },
   alertLanguage: 'English',
   forecast: { pollutant: 'PM2.5', horizon: '72', aggregation: 'Hourly', confidence: true, thresholds: true, mapHour: '24', scenarioPackage: 'targeted', trafficReduction: 25, constructionControl: true, industryReduction: 10 },
-  plan: { department: 'Ward Environment Team', priority: 'High', owner: 'Ward Response Officer', deadline: '2026-09-18T06:00', status: 'Draft', reportId: 'AQIS-MUM-2026-0917-01' },
-  backend: { loading: true, connected: false, liveConnected: false, mode: 'frontend-fallback', stations: [], stationId: 'Borivali_East_Mumbai_-_MPCB', intelligence: null, live: null, metrics: null }
+  plan: { department: 'Ward Environment Team', priority: 'High', owner: 'Ward Response Officer', deadline: '2026-09-20T06:00', status: 'Draft', reportId: 'AQIS-MUM-2026-0919-01' },
+  backend: { loading: true, connected: false, liveConnected: false, mode: 'frontend-fallback', stations: [], stationId: 'Borivali_East_Mumbai_-_MPCB', intelligence: null, live: null, osmEvidence: null, metrics: null }
 };
 
 function intelligence() { return state.backend.intelligence?.data || null; }
@@ -31,9 +31,23 @@ function backendStatusText() {
 }
 
 const fallbackStations = {
-  mumbai: [{ id:'Borivali_East_Mumbai_-_MPCB', name:'Borivali East, Mumbai - MPCB', latitude:19.229, longitude:72.8649 }],
-  delhi: [{ id:'Anand_Vihar_Delhi_-_DPCC', name:'Anand Vihar, Delhi - DPCC', latitude:28.6469, longitude:77.3160 }]
+  mumbai: [
+    ['Borivali_East_Mumbai_-_MPCB','Borivali East, Mumbai - MPCB',19.229,72.8649],
+    ['Chhatrapati_Shivaji_Intl._Airport_(T2)_Mumbai_-_MPCB','Mumbai Airport T2 - MPCB',19.0974,72.8743],
+    ['Kurla_Mumbai_-_MPCB','Kurla, Mumbai - MPCB',19.0728,72.8826],
+    ['Powai_Mumbai_-_MPCB','Powai, Mumbai - MPCB',19.1176,72.906],
+    ['Sion_Mumbai_-_MPCB','Sion, Mumbai - MPCB',19.047,72.8746],
+    ['Vasai_West_Mumbai_-_MPCB','Vasai West, Mumbai - MPCB',19.38,72.8256],
+    ['Worli_Mumbai_-_MPCB','Worli, Mumbai - MPCB',19.0169,72.8169]
+  ],
+  delhi: [
+    ['Alipur','Alipur, Delhi',28.7973,77.133],['Anand_Vihar','Anand Vihar, Delhi',28.6469,77.3159],
+    ['Dwarka_Sector_8','Dwarka Sector 8, Delhi',28.571,77.0719],['Jawaharlal_Nehru_Stadium','Jawaharlal Nehru Stadium, Delhi',28.5818,77.2343],
+    ['Okhla_Phase_II','Okhla Phase II, Delhi',28.5307,77.2736],['Punjabi_Bagh','Punjabi Bagh, Delhi',28.662,77.1242],
+    ['RK_Puram','RK Puram, Delhi',28.5638,77.1869],['Rohini','Rohini, Delhi',28.7299,77.1121]
+  ]
 };
+Object.keys(fallbackStations).forEach(city => fallbackStations[city] = fallbackStations[city].map(([id,name,latitude,longitude]) => ({id,name,latitude,longitude})));
 
 function selectedStation() {
   return state.backend.stations.find(station => station.id === state.backend.stationId) || state.backend.stations[0] || fallbackStations[state.city.toLowerCase()][0];
@@ -48,22 +62,51 @@ async function loadLiveAirQuality() {
   const station = selectedStation();
   if(!station) return;
   try {
-    const url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${station.latitude}&longitude=${station.longitude}&current=pm2_5,pm10,nitrogen_dioxide&hourly=pm2_5,pm10,nitrogen_dioxide&forecast_days=4&timezone=auto`;
-    const response = await fetch(url);
-    if(!response.ok) throw new Error('Live feed unavailable');
-    const data = await response.json();
+    const airUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${station.latitude}&longitude=${station.longitude}&current=pm2_5,pm10,nitrogen_dioxide&hourly=pm2_5,pm10,nitrogen_dioxide&forecast_days=4&timezone=auto`;
+    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${station.latitude}&longitude=${station.longitude}&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,wind_direction_10m&hourly=boundary_layer_height&forecast_days=4&timezone=auto`;
+    const [airResponse, weatherResponse] = await Promise.all([fetch(airUrl), fetch(weatherUrl)]);
+    if(!airResponse.ok) throw new Error('Live feed unavailable');
+    const [data, weatherData] = await Promise.all([airResponse.json(), weatherResponse.ok ? weatherResponse.json() : null]);
     const currentIndex = Math.max(0, data.hourly.time.findIndex(time => new Date(time) >= new Date()));
-    const at = hours => Number(data.hourly.pm2_5[Math.min(currentIndex + hours, data.hourly.pm2_5.length - 1)]);
-    const makeForecast = hours => ({ pm25: at(hours), aqi_category: categoryForPm25(at(hours)) });
+    const readAt = (key, hours) => Number(data.hourly[key][Math.min(currentIndex + hours, data.hourly[key].length - 1)]);
+    const pollutantSeries = (key, currentKey) => ({ current:Number(data.current?.[currentKey]), 24:readAt(key,24), 48:readAt(key,48), 72:readAt(key,72) });
+    const pm25 = pollutantSeries('pm2_5','pm2_5');
+    const pm10 = pollutantSeries('pm10','pm10');
+    const no2 = pollutantSeries('nitrogen_dioxide','nitrogen_dioxide');
+    const weatherIndex = weatherData ? Math.max(0, weatherData.hourly.time.findIndex(time => new Date(time) >= new Date())) : 0;
+    const direction = Number(weatherData?.current?.wind_direction_10m || 0);
+    const compass = ['N','NE','E','SE','S','SW','W','NW'][Math.round(direction / 45) % 8];
+    const makeForecast = hours => ({ pm25:pm25[hours], aqi_category:categoryForPm25(pm25[hours]) });
     state.backend.live = {
       source:'Open-Meteo Air Quality API', observedAt:data.current?.time || new Date().toISOString(),
-      current:{ pm25:Number(data.current?.pm2_5), pm10:Number(data.current?.pm10), no2:Number(data.current?.nitrogen_dioxide) },
+      current:{ pm25:pm25.current, pm10:pm10.current, no2:no2.current },
+      pollutants:{ 'PM2.5':pm25, 'PM10':pm10, 'NO₂':no2 },
+      weather: weatherData ? { temperature:Number(weatherData.current.temperature_2m), humidity:Number(weatherData.current.relative_humidity_2m), rain:Number(weatherData.current.precipitation), windSpeed:Number(weatherData.current.wind_speed_10m), windDirection:compass, mixingHeight:Number(weatherData.hourly.boundary_layer_height[weatherIndex]) } : null,
       forecast:{ '24h':makeForecast(24), '48h':makeForecast(48), '72h':makeForecast(72) }
     };
     state.backend.liveConnected = true;
   } catch(error) {
     state.backend.liveConnected = false;
   }
+}
+
+async function loadOsmEvidence() {
+  const station = selectedStation();
+  const key = `${station.latitude},${station.longitude}`;
+  if(state.backend.osmEvidence?.key === key) return;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 7000);
+  try {
+    const query = `[out:json][timeout:6];(way(around:4000,${station.latitude},${station.longitude})[highway~"motorway|trunk|primary"];way(around:4000,${station.latitude},${station.longitude})[landuse="industrial"];way(around:4000,${station.latitude},${station.longitude})[landuse="construction"];way(around:4000,${station.latitude},${station.longitude})[construction];);out tags geom 60;`;
+    const response = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`, { signal:controller.signal });
+    if(!response.ok) throw new Error('OSM evidence unavailable');
+    const payload = await response.json();
+    const features = (payload.elements || []).filter(item => item.geometry?.length).map(item => ({ tags:item.tags || {}, points:item.geometry.map(point => [point.lat,point.lon]) }));
+    state.backend.osmEvidence = { key, features, fetchedAt:new Date().toISOString() };
+    if(location.hash.includes('/admin/pulse') || location.hash.includes('/admin/evidence')) render();
+  } catch(error) {
+    state.backend.osmEvidence = { key, features:[], fallback:true };
+  } finally { clearTimeout(timer); }
 }
 
 const icons = {
@@ -185,7 +228,8 @@ function kpis() {
   const pm25 = forecast ? Number(forecast.pm25) : 88;
   const aqi = forecast ? pm25ToAqi(pm25) : 168;
   const category = forecast?.aqi_category || 'Poor';
-  return `<div class="grid kpi-grid"><div class="card kpi"><div class="kpi-label">${state.backend.connected?'24-hour forecast AQI':'Observed AQI'}</div><div class="kpi-value">${aqi}</div><span class="tag ${aqi>150?'tag-red':aqi>100?'tag-amber':'tag-green'}">${category}</span></div><div class="card kpi"><div class="kpi-label">Dominant pollutant</div><div class="kpi-value">PM2.5</div><span class="subtle tiny">${pm25.toFixed(1)} µg/m³ ${state.backend.connected?'predicted':'observed'}</span></div><div class="card kpi"><div class="kpi-label">24-hour risk</div><div class="kpi-value">${aqi>200?'High':aqi>100?'Elevated':'Low'}</div><span class="tag ${aqi>100?'tag-amber':'tag-green'}">${state.backend.connected?'Cached inference':'Peak 8 AM'}</span></div><div class="card kpi"><div class="kpi-label">Cached stations</div><div class="kpi-value">${state.backend.stations.length || '14'}</div><span class="tag tag-green">${state.backend.connected?'API connected':'Preview data'}</span></div></div>`;
+  const live = state.backend.liveConnected;
+  return `<div class="grid kpi-grid"><div class="card kpi"><div class="kpi-label">24-hour forecast AQI</div><div class="kpi-value">${aqi}</div><span class="tag ${aqi>150?'tag-red':aqi>100?'tag-amber':'tag-green'}">${category}</span></div><div class="card kpi"><div class="kpi-label">Dominant pollutant</div><div class="kpi-value">PM2.5</div><span class="subtle tiny">${pm25.toFixed(1)} µg/m³ forecast</span></div><div class="card kpi"><div class="kpi-label">24-hour risk</div><div class="kpi-value">${aqi>200?'High':aqi>100?'Elevated':'Low'}</div><span class="tag ${aqi>100?'tag-amber':'tag-green'}">${live?'Live CAMS context':'Cached inference'}</span></div><div class="card kpi"><div class="kpi-label">Available stations</div><div class="kpi-value">${state.backend.stations.length || '15'}</div><span class="tag tag-green">${live?'Live coordinate lookup':state.backend.connected?'Model API connected':'Fallback registry'}</span></div></div>`;
 }
 
 function mapCard(showTooltip = true) {
@@ -194,7 +238,9 @@ function mapCard(showTooltip = true) {
 }
 
 function pulsePage() {
-  return `<main class="page">${pageHeading('Mumbai City Pulse','A clear view of current conditions and the next 24 hours.', `<button class="btn btn-primary" data-admin="actions">Create response plan</button>`)}${kpis()}<div class="grid pulse-grid">${mapCard()}<div class="side-stack"><section class="card"><div class="card-title"><h2>Short forecast</h2><button class="btn btn-soft btn-small" data-admin="forecast">Full forecast</button></div><div class="forecast-strip"><div class="forecast-day"><span class="tiny subtle">Now</span><strong>88</strong><span class="tiny">µg/m³</span></div><div class="forecast-day"><span class="tiny subtle">+24h</span><strong>92</strong><span class="tiny">High</span></div><div class="forecast-day"><span class="tiny subtle">+48h</span><strong>74</strong><span class="tiny">Falling</span></div></div></section><section class="card"><div class="card-title"><h2>Likely source signals</h2></div>${sourceRows()}<button class="btn btn-secondary btn-small" style="width:100%;margin-top:10px" data-admin="evidence">Open Evidence Explorer</button></section><section class="card"><div class="card-title"><h2>Data quality</h2><span class="tag tag-green">Good</span></div><div class="quality-list"><div class="quality-item"><strong>8 min</strong><span class="tiny subtle">Data age</span></div><div class="quality-item"><strong>98.6%</strong><span class="tiny subtle">Coverage</span></div><div class="quality-item"><strong>0</strong><span class="tiny subtle">Active flags</span></div><div class="quality-item"><strong>v4.2</strong><span class="tiny subtle">Model</span></div></div></section></div></div></main>`;
+  const d = pollutantData();
+  const station = selectedStation();
+  return `<main class="page">${pageHeading(`${state.city} City Pulse`,'A clear view of current conditions and the next 24 hours.', `<button class="btn btn-primary" data-admin="actions">Create response plan</button>`)}${kpis()}<div class="grid pulse-grid">${mapCard()}<div class="side-stack"><section class="card"><div class="card-title"><h2>Short forecast</h2><button class="btn btn-soft btn-small" data-admin="forecast">Full forecast</button></div><div class="forecast-strip">${[['Now',d.values[0]],['+24h',d.values[1]],['+48h',d.values[2]]].map(([label,value])=>`<div class="forecast-day"><span class="tiny subtle">${label}</span><strong>${Number(value).toFixed(1)}</strong><span class="tiny">µg/m³</span></div>`).join('')}</div><p class="tiny subtle" style="margin:10px 0 0">${state.backend.liveConnected?'Live Open-Meteo/CAMS forecast':`Cached model · ${station.name}`}</p></section><section class="card"><div class="card-title"><h2>Likely source signals</h2></div>${sourceRows()}<button class="btn btn-secondary btn-small" style="width:100%;margin-top:10px" data-admin="evidence">Open Evidence Explorer</button></section><section class="card"><div class="card-title"><h2>Data quality</h2><span class="tag tag-green">Good</span></div><div class="quality-list"><div class="quality-item"><strong>${state.backend.liveConnected?'Live':'Cached'}</strong><span class="tiny subtle">Air feed</span></div><div class="quality-item"><strong>${state.backend.stations.length}</strong><span class="tiny subtle">City stations</span></div><div class="quality-item"><strong>0</strong><span class="tiny subtle">Active flags</span></div><div class="quality-item"><strong>v4.2</strong><span class="tiny subtle">Model</span></div></div></section></div></div></main>`;
 }
 
 function sourceRows() {
@@ -206,19 +252,15 @@ function sourceRows() {
 }
 
 function pollutantData() {
-  const api24 = cachedForecast(24)?.pm25;
-  const api48 = cachedForecast(48)?.pm25;
-  const api72 = cachedForecast(72)?.pm25;
-  const apiValues = [api24, api24, api48, api72].map(Number);
-  const apiAvailable = apiValues.every(Number.isFinite);
-  const apiPeak = apiAvailable ? Math.max(...apiValues) : 92;
-  const apiPeakIndex = apiAvailable ? apiValues.indexOf(apiPeak) : 1;
-  const apiPath = apiAvailable ? apiValues.map((value,index)=>`${index===0?'M':'L'}${[60,330,600,870][index]} ${Math.max(45,260-(value/120)*205)}`).join(' ') : 'M60 228 C160 238,220 195,310 201 S430 105,530 132 S680 185,870 164';
-  return {
-    'PM2.5': { unit:'µg/m³', values:apiAvailable?apiValues:[88,92,78,69], peak:apiAvailable?apiPeak.toFixed(1):'92', time:apiAvailable?['Now','+24 hours','+48 hours','+72 hours'][apiPeakIndex]:'Tomorrow · 8 AM', change:apiAvailable?(state.backend.liveConnected?'Live forecast':'Cached inference'):'+4.5%', path:apiPath },
-    'PM10': { unit:'µg/m³', values:[132,148,126,108], peak:'148', time:'Tomorrow · 10 AM', change:'+12.1%', path:'M60 214 C170 220,235 178,330 188 S455 86,555 112 S700 170,870 178' },
-    'NO₂': { unit:'µg/m³', values:[46,61,52,42], peak:'61', time:'Tomorrow · 9 AM', change:'+32.6%', path:'M60 235 C165 230,230 205,325 214 S450 145,550 158 S700 205,870 218' }
-  }[state.forecast.pollutant];
+  const live = state.backend.live?.pollutants?.[state.forecast.pollutant];
+  const cachedPm25 = [state.backend.live?.current?.pm25, cachedForecast(24)?.pm25, cachedForecast(48)?.pm25, cachedForecast(72)?.pm25].map(Number);
+  const fallback = { 'PM2.5':[88,92,78,69], 'PM10':[132,148,126,108], 'NO₂':[46,61,52,42] }[state.forecast.pollutant];
+  const values = live ? [live.current,live[24],live[48],live[72]].map(Number) : (state.forecast.pollutant === 'PM2.5' && cachedPm25.every(Number.isFinite) ? cachedPm25 : fallback);
+  const peak = Math.max(...values);
+  const peakIndex = values.indexOf(peak);
+  const chartMax = Math.max(120, Math.ceil(peak / 20) * 20);
+  const path = values.map((value,index)=>`${index===0?'M':'L'}${[60,330,600,870][index]} ${Math.max(45,260-(value/chartMax)*205)}`).join(' ');
+  return { unit:'µg/m³', values, peak:peak.toFixed(1), time:['Now','+24 hours','+48 hours','+72 hours'][peakIndex], change:live?'Live forecast':state.forecast.pollutant==='PM2.5'?'Cached inference':'Illustrative fallback', path };
 }
 
 function chartSvg() {
@@ -255,6 +297,17 @@ function spatialForecastMap() {
   return `<div class="leaflet-map" data-live-map="forecast" data-aqi="${m.main}"></div>`;
 }
 
+function weatherContextCards() {
+  const w = state.backend.live?.weather;
+  const values = w ? [
+    [`${w.windSpeed.toFixed(1)} km/h`, `Wind · ${w.windDirection}`],
+    [`${Math.round(w.humidity)}%`, 'Humidity'],
+    [`${w.rain.toFixed(1)} mm`, 'Rain'],
+    [`${Math.round(w.mixingHeight)} m`, 'Mixing height']
+  ] : [['8 km/h','Wind · WNW'],['78%','Humidity'],['0 mm','Rain'],['410 m','Mixing height']];
+  return values.map(([value,label]) => `<div class="quality-item"><strong>${value}</strong><span class="tiny subtle">${label}</span></div>`).join('');
+}
+
 function mountLiveMaps() {
   if(!window.L) return;
   const station = selectedStation();
@@ -273,17 +326,23 @@ function mountLiveMaps() {
     if(element.dataset.liveMap === 'citizen') stationPoint.bindTooltip(stationSummary, { direction:'top' });
     else stationPoint.bindPopup(stationSummary).openPopup();
     state.backend.stations.filter(item => item.id !== station.id).slice(0,8).forEach(item => L.circleMarker([item.latitude,item.longitude], { radius:5, color:'#0b6b63', fillColor:'#0b6b63', fillOpacity:.8 }).addTo(map).bindTooltip(item.name));
-    if(element.dataset.liveMap === 'evidence' && state.city === 'Mumbai') {
+    if(element.dataset.liveMap === 'evidence') {
       const sources = intelligence()?.source_influence?.sources || [];
       const contribution = (name, fallback) => Number(sources.find(source => source.name === name)?.contribution_percentage || fallback);
-      L.polyline([[19.175,72.851],[19.205,72.856],[19.229,72.8649],[19.260,72.872],[19.286,72.879]], { color:'#c2413b', weight:7, opacity:.82 }).addTo(map)
-        .bindPopup(`<strong>Traffic corridor screening</strong><br>Western Express Highway vicinity<br>Relative source signal: ${contribution('Traffic',53.7)}%`);
-      L.circle([19.2355,72.875], { radius:620, color:'#d97706', dashArray:'7 5', weight:3, fillColor:'#f2b84b', fillOpacity:.18 }).addTo(map)
-        .bindPopup(`<strong>Construction screening zone</strong><br>Nearby mapped activity requires field verification.<br>Relative source signal: ${contribution('Construction',25)}%`);
-      L.circle([19.248,72.887], { radius:760, color:'#7157a8', dashArray:'7 5', weight:3, fillColor:'#8065b6', fillOpacity:.16 }).addTo(map)
-        .bindPopup(`<strong>Industrial land-use screening zone</strong><br>Correlation indicator—not verified emissions.<br>Relative source signal: ${contribution('Industry',10.2)}%`);
+      const features = state.backend.osmEvidence?.features || [];
+      const roads = features.filter(feature => feature.tags.highway).slice(0,18);
+      const construction = features.filter(feature => feature.tags.landuse === 'construction' || feature.tags.construction).slice(0,8);
+      const industry = features.filter(feature => feature.tags.landuse === 'industrial').slice(0,8);
+      roads.forEach(feature => L.polyline(feature.points, { color:'#c2413b', weight:5, opacity:.72 }).addTo(map).bindPopup(`<strong>OSM mapped major road</strong><br>${feature.tags.name || feature.tags.ref || feature.tags.highway}<br>Traffic influence signal: ${contribution('Traffic',53.7)}%`));
+      construction.forEach(feature => L.polygon(feature.points, { color:'#d97706', dashArray:'7 5', weight:3, fillColor:'#f2b84b', fillOpacity:.22 }).addTo(map).bindPopup(`<strong>OSM construction feature</strong><br>${feature.tags.name || 'Mapped construction land use'}<br>Construction influence signal: ${contribution('Construction',25)}%`));
+      industry.forEach(feature => L.polygon(feature.points, { color:'#7157a8', dashArray:'7 5', weight:3, fillColor:'#8065b6', fillOpacity:.2 }).addTo(map).bindPopup(`<strong>OSM industrial land use</strong><br>${feature.tags.name || 'Mapped industrial zone'}<br>Industry influence signal: ${contribution('Industry',10.2)}%`));
+      if(!features.length) {
+        L.polyline([[station.latitude-.045,station.longitude-.012],[station.latitude,station.longitude],[station.latitude+.045,station.longitude+.012]], { color:'#c2413b', weight:6, opacity:.75 }).addTo(map).bindPopup(`<strong>Traffic screening corridor</strong><br>Fallback geometry pending live OSM feature lookup.<br>Relative signal: ${contribution('Traffic',53.7)}%`);
+        L.circle([station.latitude+.008,station.longitude+.012], { radius:600, color:'#d97706', dashArray:'7 5', weight:3, fillColor:'#f2b84b', fillOpacity:.18 }).addTo(map).bindPopup(`<strong>Construction screening area</strong><br>Requires field verification.<br>Relative signal: ${contribution('Construction',25)}%`);
+        L.circle([station.latitude+.02,station.longitude+.022], { radius:720, color:'#7157a8', dashArray:'7 5', weight:3, fillColor:'#8065b6', fillOpacity:.16 }).addTo(map).bindPopup(`<strong>Industrial screening area</strong><br>Requires OSM/field verification.<br>Relative signal: ${contribution('Industry',10.2)}%`);
+      }
       const legend = L.control({ position:'topright' });
-      legend.onAdd = () => { const div = L.DomUtil.create('div','map-evidence-legend'); div.innerHTML = '<strong>Source evidence</strong><div><i style="background:#c2413b"></i>Traffic corridor</div><div><i style="background:#d97706"></i>Construction zone</div><div><i style="background:#7157a8"></i>Industrial zone</div><small>Screening hypotheses</small>'; return div; };
+      legend.onAdd = () => { const div = L.DomUtil.create('div','map-evidence-legend'); div.innerHTML = `<strong>Source evidence</strong><div><i style="background:#c2413b"></i>Major roads (${roads.length})</div><div><i style="background:#d97706"></i>Construction (${construction.length})</div><div><i style="background:#7157a8"></i>Industrial (${industry.length})</div><small>${features.length?'Live OSM features':'Fallback screening geometry'}</small>`; return div; };
       legend.addTo(map);
     }
     setTimeout(() => map.invalidateSize(), 0);
@@ -299,7 +358,7 @@ function forecastPage() {
   return `<main class="page">
     ${pageHeading('Forecast Operations','Interrogate the forecast before using it for a city response.', `<button class="btn btn-secondary" data-download-forecast>Download CSV</button>`)}
     <section class="card forecast-controls"><div><label>Pollutant</label><div class="segmented">${['PM2.5','PM10','NO₂'].map(x=>`<button class="${state.forecast.pollutant===x?'active':''}" data-forecast-pollutant="${x}">${x}</button>`).join('')}</div></div><div><label>Horizon</label><div class="segmented">${['24','48','72'].map(x=>`<button class="${state.forecast.horizon===x?'active':''}" data-forecast-horizon="${x}">${x}h</button>`).join('')}</div></div><div class="field compact-field"><label>Aggregation</label><select data-forecast-aggregation><option ${state.forecast.aggregation==='Hourly'?'selected':''}>Hourly</option><option ${state.forecast.aggregation==='Daily'?'selected':''}>Daily</option></select></div><label class="control-check"><input type="checkbox" data-forecast-option="confidence" ${state.forecast.confidence?'checked':''}/> Confidence band</label><label class="control-check"><input type="checkbox" data-forecast-option="thresholds" ${state.forecast.thresholds?'checked':''}/> CPCB thresholds</label></section>
-    <div class="grid forecast-layout"><section class="card chart-card"><div class="card-title"><div><h2>${state.forecast.pollutant} outlook · ${state.forecast.horizon} hours</h2><span class="tiny subtle">${state.forecast.aggregation} forecast · shaded region is the 80% prediction interval</span></div><span class="tag tag-blue">Model v4.2</span></div><div class="chart-wrap">${chartSvg()}</div></section><div class="side-stack"><section class="card"><div class="card-title"><h2>Operational summary</h2><span class="tag tag-amber">Review</span></div><div class="metric-list"><div class="metric-row"><span>Predicted peak</span><strong>${d.peak} ${d.unit}</strong></div><div class="metric-row"><span>Peak time</span><strong>${d.time}</strong></div><div class="metric-row"><span>vs current</span><strong>${d.change}</strong></div><div class="metric-row"><span>Model confidence</span><strong>Medium</strong></div></div></section><section class="card"><div class="card-title"><h2>Weather context</h2></div><div class="quality-list"><div class="quality-item"><strong>8 km/h</strong><span class="tiny subtle">Wind · WNW</span></div><div class="quality-item"><strong>78%</strong><span class="tiny subtle">Humidity</span></div><div class="quality-item"><strong>0 mm</strong><span class="tiny subtle">Rain</span></div><div class="quality-item"><strong>410 m</strong><span class="tiny subtle">Mixing height</span></div></div></section><section class="card"><div class="card-title"><h2>Decision note</h2></div><p class="subtle" style="line-height:1.6;margin:0">${decisionNote}</p></section></div></div>
+    <div class="grid forecast-layout"><section class="card chart-card"><div class="card-title"><div><h2>${state.forecast.pollutant} outlook · ${state.forecast.horizon} hours</h2><span class="tiny subtle">${state.forecast.aggregation} forecast · ${state.backend.liveConnected?'live CAMS/Open-Meteo values':'cached model values'}</span></div><span class="tag ${state.backend.liveConnected?'tag-green':'tag-blue'}">${state.backend.liveConnected?'Live feed':'Model v4.2'}</span></div><div class="chart-wrap">${chartSvg()}</div></section><div class="side-stack"><section class="card"><div class="card-title"><h2>Operational summary</h2><span class="tag tag-amber">Review</span></div><div class="metric-list"><div class="metric-row"><span>Predicted peak</span><strong>${d.peak} ${d.unit}</strong></div><div class="metric-row"><span>Peak time</span><strong>${d.time}</strong></div><div class="metric-row"><span>Data mode</span><strong>${d.change}</strong></div><div class="metric-row"><span>Model confidence</span><strong>Medium</strong></div></div></section><section class="card"><div class="card-title"><h2>Weather context</h2><span class="tag ${state.backend.live?.weather?'tag-green':'tag-blue'}">${state.backend.live?.weather?'Live':'Fallback'}</span></div><div class="quality-list">${weatherContextCards()}</div></section><section class="card"><div class="card-title"><h2>Decision note</h2></div><p class="subtle" style="line-height:1.6;margin:0">${decisionNote}</p></section></div></div>
     <div class="grid forecast-analysis-grid"><section class="card spatial-card"><div class="card-title"><div><h2>Spatial forecast</h2><span class="tiny subtle">Interactive station-area context on OpenStreetMap</span></div><span class="tag tag-green">OSM live</span></div><div class="spatial-map">${spatialForecastMap()}</div><div class="map-time-tabs">${[['now','Now'],['24','+24h'],['48','+48h'],['72','+72h']].map(([id,label])=>`<button class="${state.forecast.mapHour===id?'active':''}" data-forecast-map-horizon="${id}">${label}</button>`).join('')}</div><p class="tiny subtle map-caveat">Circle shows the selected station's forecast context, not street-level exposure.</p></section>
     <section class="card scenario-card"><div class="card-title"><div><h2>Intervention scenario</h2><span class="tiny subtle">Choose operational packages while weather remains fixed</span></div><span class="tag tag-amber">Planning sensitivity</span></div><div class="scenario-results"><div><span>Baseline peak</span><strong>${scenario.baseline}</strong><small>AQI</small></div><div class="scenario-arrow">→</div><div class="scenario-improved"><span>Scenario peak</span><strong>${scenario.scenario}</strong><small>AQI · range ${scenario.range}</small></div></div>
       ${policyLever('trend','Traffic management','Changes high-emitting vehicle activity; road infrastructure remains unchanged.','trafficReduction',[[0,'No change','0%'],[25,'Targeted','−25%'],[40,'Strong','−40%']])}
@@ -346,8 +405,24 @@ function modelPage() {
   return `<main class="page">${pageHeading('Model & Data Card','Technical evidence for deciding whether this forecast is fit for operational use.', `<div class="version-lock"><span class="tag tag-green">Operational candidate</span><strong>v4.2</strong></div>`)}<div class="model-summary"><div><span>Model family</span><strong>Gradient-boosted time-series ensemble</strong></div><div><span>Target</span><strong>Station-level PM2.5</strong></div><div><span>Last evaluation</span><strong>15 Sep 2026</strong></div><div><span>Owner</span><strong>AQIS Forecasting Team</strong></div></div><section class="card" style="margin-top:16px"><div class="card-title"><div><h2>Dataset registry</h2><span class="tiny subtle">Every production input must have provenance and a quality check</span></div><span class="tag tag-blue">4 registered sources</span></div><div class="table-scroll"><table class="metric-table dataset-table"><thead><tr><th>Dataset</th><th>Purpose</th><th>Coverage</th><th>Update</th><th>Quality controls</th><th>Status</th></tr></thead><tbody><tr><td><strong>CPCB / MPCB station observations</strong><small>Regulatory monitoring feed</small></td><td>Targets and pollutant lags</td><td>Mumbai stations · 2019–2026</td><td>Hourly</td><td>Range, missingness, spike and station-status checks</td><td><span class="tag tag-green">Primary</span></td></tr><tr><td><strong>OpenAQ harmonized feed</strong><small>Access and schema normalization</small></td><td>Ingestion fallback</td><td>Station dependent</td><td>Hourly</td><td>Duplicate removal and CPCB identifier matching</td><td><span class="tag tag-blue">Fallback</span></td></tr><tr><td><strong>Open-Meteo forecast/archive</strong><small>Meteorological covariates</small></td><td>Wind, rain, humidity, temperature</td><td>Station coordinates</td><td>Hourly</td><td>Timestamp alignment and physical-range checks</td><td><span class="tag tag-green">Active</span></td></tr><tr><td><strong>OpenStreetMap</strong><small>Geospatial context only</small></td><td>Road and land-use proximity</td><td>5 km station buffer</td><td>On refresh</td><td>Geometry validity and feature recency check</td><td><span class="tag tag-amber">Planned</span></td></tr></tbody></table></div><p class="tiny subtle model-disclaimer">Record counts and data hashes will be populated by the production ingestion pipeline; they are intentionally not fabricated in this frontend prototype.</p></section><div class="grid model-evidence-grid"><section class="card"><div class="card-title"><div><h2>Validation design</h2><span class="tiny subtle">Designed to prevent future information leaking into training</span></div><span class="tag tag-green">Time-aware</span></div><div class="validation-steps"><div><strong>1</strong><span><b>Training window</b>Historical observations through the cutoff date</span></div><div><strong>2</strong><span><b>Rolling-origin validation</b>Forecasts evaluated only on later, unseen periods</span></div><div><strong>3</strong><span><b>Baselines</b>Compared with persistence at every horizon</span></div><div><strong>4</strong><span><b>Station audit</b>Metrics reviewed per station, season and AQI band</span></div></div></section><section class="card"><div class="card-title"><h2>Evaluation scope</h2><span class="tag tag-amber">Reproducibility pending</span></div><div class="quality-list"><div class="quality-item"><strong>Chronological</strong><span class="tiny subtle">Split strategy</span></div><div class="quality-item"><strong>24 / 48 / 72h</strong><span class="tiny subtle">Horizons</span></div><div class="quality-item"><strong>RMSE · MAE</strong><span class="tiny subtle">Primary metrics</span></div><div class="quality-item"><strong>Persistence</strong><span class="tiny subtle">Baseline</span></div></div><p class="tiny subtle" style="line-height:1.55;margin-top:12px">Before deployment, attach the evaluation script version, exact cutoff dates, station list, row counts and dataset hashes.</p></section></div><section class="card" style="margin-top:16px"><div class="card-title"><div><h2>Held-out performance</h2><span class="tiny subtle">PM2.5 · units in µg/m³ · lower is better</span></div><span class="tag tag-blue">Project evaluation snapshot</span></div><div class="table-scroll"><table class="metric-table"><thead><tr><th>Horizon</th><th>Model RMSE</th><th>Persistence RMSE</th><th>Improvement</th><th>Operational interpretation</th></tr></thead><tbody><tr><td><strong>24 hours</strong></td><td>35.58</td><td>47.82</td><td class="positive">25.59%</td><td>Best-supported horizon for response planning</td></tr><tr><td><strong>48 hours</strong></td><td>50.87</td><td>58.77</td><td class="positive">13.45%</td><td>Use with confidence band and daily review</td></tr><tr><td><strong>72 hours</strong></td><td>56.14</td><td>61.70</td><td class="positive">9.00%</td><td>Planning signal only; do not treat as precise</td></tr></tbody></table></div></section><div class="grid model-evidence-grid" style="margin-top:16px"><section class="card"><div class="card-title"><h2>Known limitations</h2></div><ul class="limitations"><li>Accuracy degrades during extreme or previously unseen pollution events.</li><li>Missing station observations can widen uncertainty or suppress a forecast.</li><li>Road and land-use evidence indicates correlation, not chemical source apportionment.</li><li>Station forecasts should not be presented as street-level exposure estimates.</li></ul></section><section class="card"><div class="card-title"><h2>Deployment gates</h2></div><div class="gate"><span>✓</span><div><strong>Baseline improvement</strong><small>Passed at all reported horizons</small></div></div><div class="gate"><span>✓</span><div><strong>Chronological validation</strong><small>Reported in project evaluation</small></div></div><div class="gate pending"><span>!</span><div><strong>Reproducibility bundle</strong><small>Dataset hashes and evaluation artifact required</small></div></div><div class="gate pending"><span>!</span><div><strong>Live drift monitoring</strong><small>Connect after backend integration</small></div></div></section></div></main>`;
 }
 
+function modelPageV2() {
+  const sourceMode = state.backend.liveConnected ? 'Live CAMS/Open-Meteo feed' : 'Cached model fallback';
+  return `<main class="page">${pageHeading('Model & Data Card','What the system uses, how it was evaluated, and where its claims stop.', `<div class="version-lock"><span class="tag tag-green">Demo candidate</span><strong>v4.2</strong></div>`)}
+    <div class="model-summary"><div><span>Model family</span><strong>Three direct XGBoost regressors</strong></div><div><span>Target</span><strong>Station-level PM2.5</strong></div><div><span>Evaluation window</span><strong>Jan–Jul 2023</strong></div><div><span>Current data mode</span><strong>${sourceMode}</strong></div></div>
+    <section class="card" style="margin-top:16px"><div class="card-title"><div><h2>Dataset registry</h2><span class="tiny subtle">Provenance stated at the level supported by repository artifacts</span></div><span class="tag tag-blue">4 sources</span></div><div class="table-scroll"><table class="metric-table dataset-table"><thead><tr><th>Dataset</th><th>Role</th><th>Documented coverage</th><th>Status</th></tr></thead><tbody>
+      <tr><td><strong>AQICN / OpenAQ archives</strong><small>CPCB/MPCB-linked station observations</small></td><td>Pollutant targets and lag features</td><td>2021-08 to 2023-07 · 16 Mumbai/Delhi stations</td><td><span class="tag tag-green">Evaluated</span></td></tr>
+      <tr><td><strong>Open-Meteo ERA5</strong><small>Historical meteorology</small></td><td>Weather covariates for model training</td><td>Aligned to station dates</td><td><span class="tag tag-green">Evaluated</span></td></tr>
+      <tr><td><strong>Open-Meteo / CAMS</strong><small>Current hosted experience</small></td><td>Live pollutant and weather forecast context</td><td>Selected station coordinates</td><td><span class="tag tag-green">Live</span></td></tr>
+      <tr><td><strong>OpenStreetMap</strong><small>Road and land-use context</small></td><td>Proximity evidence only</td><td>4 km live lookup with fallback geometry</td><td><span class="tag tag-green">Active</span></td></tr>
+    </tbody></table></div></section>
+    <div class="grid model-evidence-grid" style="margin-top:16px"><section class="card"><div class="card-title"><h2>Validation design</h2><span class="tag tag-green">Chronological</span></div><div class="validation-steps"><div><strong>1</strong><span><b>Direct horizons</b>Independent 24h, 48h and 72h models</span></div><div><strong>2</strong><span><b>Time split</b>Later observations reserved for testing</span></div><div><strong>3</strong><span><b>Persistence baseline</b>Each horizon compared with last-known pollution</span></div><div><strong>4</strong><span><b>No future filling</b>Bidirectional backfill removed to prevent leakage</span></div></div></section><section class="card"><div class="card-title"><h2>Evaluation scope</h2><span class="tag tag-blue">Repository report</span></div><div class="quality-list"><div class="quality-item"><strong>Jan–Jul 2023</strong><span class="tiny subtle">Mumbai test period</span></div><div class="quality-item"><strong>RMSE · R²</strong><span class="tiny subtle">Reported metrics</span></div><div class="quality-item"><strong>24 / 48 / 72h</strong><span class="tiny subtle">Forecast horizons</span></div><div class="quality-item"><strong>Persistence</strong><span class="tiny subtle">Operational baseline</span></div></div></section></div>
+    <section class="card" style="margin-top:16px"><div class="card-title"><div><h2>Held-out performance</h2><span class="tiny subtle">Mumbai test set · PM2.5 · µg/m³</span></div><span class="tag tag-blue">Lower RMSE is better</span></div><div class="table-scroll"><table class="metric-table"><thead><tr><th>Horizon</th><th>Model RMSE</th><th>Persistence RMSE</th><th>Improvement</th><th>R²</th></tr></thead><tbody><tr><td><strong>24 hours</strong></td><td>14.43</td><td>15.76</td><td class="positive">8.43%</td><td>0.7712</td></tr><tr><td><strong>48 hours</strong></td><td>18.01</td><td>19.45</td><td class="positive">7.39%</td><td>0.6428</td></tr><tr><td><strong>72 hours</strong></td><td>19.61</td><td>21.63</td><td class="positive">9.35%</td><td>0.5737</td></tr></tbody></table></div></section>
+    <div class="grid model-evidence-grid" style="margin-top:16px"><section class="card"><div class="card-title"><h2>Known limitations</h2></div><ul class="limitations"><li>Hosted live CAMS values are not CPCB regulatory measurements.</li><li>Source percentages are heuristic screening signals, not chemical mass-balance attribution.</li><li>Accuracy degrades during extreme events and at longer horizons.</li><li>Station forecasts must not be interpreted as street-level personal exposure.</li></ul></section><section class="card"><div class="card-title"><h2>Deployment gates</h2></div><div class="gate"><span>✓</span><div><strong>Baseline improvement</strong><small>Reported at all three horizons</small></div></div><div class="gate"><span>✓</span><div><strong>Live fallback handling</strong><small>Cached values remain available when APIs fail</small></div></div><div class="gate pending"><span>!</span><div><strong>Regulatory live feed</strong><small>Requires an authorized CPCB/OpenAQ source</small></div></div><div class="gate pending"><span>!</span><div><strong>External notifications</strong><small>No SMS/WhatsApp provider connected</small></div></div></section></div>
+  </main>`;
+}
+
 function adminPage(page) {
-  return ({pulse:pulsePage,forecast:forecastPage,evidence:evidencePage,actions:actionsPage,alerts:alertsPage,model:modelPage}[page] || pulsePage)();
+  return ({pulse:pulsePage,forecast:forecastPage,evidence:evidencePage,actions:actionsPage,alerts:alertsPage,model:modelPageV2}[page] || pulsePage)();
 }
 
 function citizenShell(tab) {
@@ -424,14 +499,18 @@ async function loadBackendData() {
     state.backend.intelligence = modelIntelligence;
     state.backend.metrics = metrics;
     await loadLiveAirQuality();
+    loadOsmEvidence();
     const peakAqi = Math.max(...[24,48,72].map(h=>cachedForecast(h)).filter(Boolean).map(item=>pm25ToAqi(Number(item.pm25))));
-    if(Number.isFinite(peakAqi) && peakAqi <= 100) { state.forecast.trafficReduction = 0; state.forecast.constructionControl = false; state.forecast.industryReduction = 0; }
+    if(Number.isFinite(peakAqi) && peakAqi <= 100) { state.forecast.trafficReduction = 0; state.forecast.constructionControl = false; state.forecast.industryReduction = 0; state.actions.traffic = false; state.actions.construction = false; state.actions.health = true; }
   } catch(error) {
     state.backend.connected = false;
     state.backend.mode = 'frontend-fallback';
     state.backend.stations = fallbackStations[state.city.toLowerCase()];
     state.backend.stationId = state.backend.stations[0].id;
     await loadLiveAirQuality();
+    loadOsmEvidence();
+    const peakAqi = Math.max(...[24,48,72].map(h=>cachedForecast(h)).filter(Boolean).map(item=>pm25ToAqi(Number(item.pm25))));
+    if(Number.isFinite(peakAqi) && peakAqi <= 100) { state.actions.traffic = false; state.actions.construction = false; state.actions.health = true; state.forecast.trafficReduction = 0; state.forecast.constructionControl = false; state.forecast.industryReduction = 0; }
   } finally {
     state.backend.loading = false;
     render();
@@ -445,12 +524,25 @@ async function loadStationIntelligence() {
     state.backend.intelligence = await response.json();
     state.backend.connected = true;
     await loadLiveAirQuality();
+    loadOsmEvidence();
     const peakAqi = Math.max(...[24,48,72].map(h=>cachedForecast(h)).filter(Boolean).map(item=>pm25ToAqi(Number(item.pm25))));
-    if(Number.isFinite(peakAqi) && peakAqi <= 100) { state.forecast.trafficReduction = 0; state.forecast.constructionControl = false; state.forecast.industryReduction = 0; }
+    if(Number.isFinite(peakAqi) && peakAqi <= 100) { state.forecast.trafficReduction = 0; state.forecast.constructionControl = false; state.forecast.industryReduction = 0; state.actions.traffic = false; state.actions.construction = false; state.actions.health = true; }
     render();
   } catch(error) {
-    toast('Could not load this station. Existing data remains visible.');
+    state.backend.connected = false;
+    state.backend.live = null;
+    state.backend.liveConnected = false;
+    await loadLiveAirQuality();
+    loadOsmEvidence();
+    render();
+    toast(state.backend.liveConnected ? 'Live station forecast loaded.' : 'Live feed unavailable. Existing data remains visible.');
   }
+}
+
+function saveLocalRecord(key, record) {
+  const records = JSON.parse(localStorage.getItem(key) || '[]');
+  records.unshift(record);
+  localStorage.setItem(key, JSON.stringify(records.slice(0,25)));
 }
 
 async function submitResponseReport() {
@@ -462,7 +554,14 @@ async function submitResponseReport() {
     state.plan.reportId = saved.id;
     render();
     toast(`Report ${saved.id} saved to the backend.`);
-  } catch(error) { toast('Backend unavailable. Report was not submitted.'); }
+  } catch(error) {
+    const id = `AQIS-${state.city.slice(0,3).toUpperCase()}-${Date.now().toString().slice(-8)}`;
+    saveLocalRecord('aqis-submitted-reports', { id, createdAt:new Date().toISOString(), plan:{...state.plan}, actions:{...state.actions}, station:selectedStation(), forecast:pollutantData() });
+    state.plan.status = 'Saved locally';
+    state.plan.reportId = id;
+    render();
+    toast(`Report ${id} saved on this device and ready to download.`);
+  }
 }
 
 async function publishAlertRecord() {
@@ -471,7 +570,11 @@ async function publishAlertRecord() {
     if(!response.ok) throw new Error('Save failed');
     const saved = await response.json();
     toast(`Alert ${saved.id} recorded. No external message was sent.`);
-  } catch(error) { toast('Backend unavailable. Alert was not recorded.'); }
+  } catch(error) {
+    const id = `ALERT-${Date.now().toString().slice(-8)}`;
+    saveLocalRecord('aqis-demo-alerts', { id, createdAt:new Date().toISOString(), station:selectedStation(), language:state.alertLanguage, message:document.querySelector('#alertText')?.value || '' });
+    toast(`Demo alert ${id} saved locally. No external message was sent.`);
+  }
 }
 
 function render() {
@@ -483,6 +586,12 @@ function render() {
   else if(route.startsWith('admin/')) app.innerHTML = adminShell(route.split('/')[1] || 'pulse');
   else if(route.startsWith('citizen/')) app.innerHTML = citizenShell(route.split('/')[1] || 'home');
   else app.innerHTML = landing();
+  const preparedAt = document.querySelector('.report-meta span:last-child');
+  if(preparedAt) preparedAt.textContent = `Prepared ${new Date().toLocaleString('en-IN', { dateStyle:'medium', timeStyle:'short' })}`;
+  const evidenceStatus = document.querySelector('.event-banner > div:nth-child(5) strong');
+  if(evidenceStatus) evidenceStatus.textContent = `${state.backend.liveConnected?'Live feed':'Cached model'} · screening evidence`;
+  const reportData = document.querySelector('.report-summary p:nth-child(2)');
+  if(reportData && state.backend.liveConnected) reportData.innerHTML = `<strong>Predicted PM2.5:</strong> ${Number(cachedForecast(24)?.pm25).toFixed(1)} µg/m³<br><strong>Forecast source:</strong> Open-Meteo/CAMS<br><strong>Project model:</strong> AQIS XGBoost v4.2 validated separately<br><strong>Live timestamp:</strong> ${state.backend.live.observedAt}`;
   requestAnimationFrame(mountLiveMaps);
   window.scrollTo(0,0);
 }

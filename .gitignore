@@ -41,6 +41,7 @@ data/*.zip
 data/*.gz
 models/*.bak
 cache/
+runtime/
 .ipynb_checkpoints/
 
 # Secrets and Configs
