@@ -7,6 +7,7 @@ const state = {
   city: 'Mumbai',
   station: 'Borivali East',
   citizenTab: 'home',
+  citizen: { metric: 'AQI', healthProfile: 'general' },
   layers: { traffic: true, construction: true, industry: true, fire: true, wind: true },
   actions: { traffic: true, construction: true, health: true },
   alertLanguage: 'English',
@@ -18,9 +19,10 @@ const state = {
 function intelligence() { return state.backend.intelligence?.data || null; }
 function cachedForecast(horizon) { return state.backend.live?.forecast?.[`${horizon}h`] || intelligence()?.forecast?.[`${horizon}h`] || null; }
 function pm25ToAqi(value) {
-  const ranges = [[0,30,0,50],[31,60,51,100],[61,90,101,200],[91,120,201,300],[121,250,301,400],[251,500,401,500]];
-  const [cLow,cHigh,iLow,iHigh] = ranges.find(([low,high]) => value >= low && value <= high) || ranges[ranges.length-1];
-  return Math.round(((iHigh-iLow)/(cHigh-cLow))*(Math.min(value,cHigh)-cLow)+iLow);
+  const concentration = Math.max(0, Number(value) || 0);
+  const ranges = [[0,30,0,50],[30,60,50,100],[60,90,100,200],[90,120,200,300],[120,250,300,400],[250,500,400,500]];
+  const [cLow,cHigh,iLow,iHigh] = ranges.find(([,high]) => concentration <= high) || ranges[ranges.length-1];
+  return Math.round(((iHigh-iLow)/(cHigh-cLow))*(Math.min(concentration,cHigh)-cLow)+iLow);
 }
 function backendStatusText() {
   if(state.backend.loading) return 'Connecting model service…';
@@ -55,6 +57,22 @@ function selectedStation() {
 
 function categoryForPm25(pm25) {
   const aqi = pm25ToAqi(pm25);
+  return aqi <= 50 ? 'Good' : aqi <= 100 ? 'Satisfactory' : aqi <= 200 ? 'Moderate' : aqi <= 300 ? 'Poor' : aqi <= 400 ? 'Very Poor' : 'Severe';
+}
+
+function citizenMetricData() {
+  const pollutantKey = { 'PM2.5':'PM2.5', PM10:'PM10', 'NO₂':'NO₂' }[state.citizen.metric];
+  if(state.citizen.metric === 'AQI') {
+    const pm = state.backend.live?.pollutants?.['PM2.5'];
+    const concentrations = pm ? [pm.current, pm[24], pm[48], pm[72]] : [88,92,78,69];
+    return { values:concentrations.map(pm25ToAqi), unit:'PM2.5 sub-index', sourceValues:concentrations, sourceUnit:'µg/m³', note:'Indian AQI-style estimate derived from PM2.5 only—not an official CPCB multi-pollutant AQI.' };
+  }
+  const series = state.backend.live?.pollutants?.[pollutantKey];
+  const fallback = { 'PM2.5':[88,92,78,69], PM10:[132,148,126,108], 'NO₂':[46,61,52,42] }[pollutantKey];
+  return { values:series ? [series.current,series[24],series[48],series[72]].map(Number) : fallback, unit:'µg/m³', note:`Modelled ${pollutantKey} concentration at the selected coordinates.` };
+}
+
+function aqiCategory(aqi) {
   return aqi <= 50 ? 'Good' : aqi <= 100 ? 'Satisfactory' : aqi <= 200 ? 'Moderate' : aqi <= 300 ? 'Poor' : aqi <= 400 ? 'Very Poor' : 'Severe';
 }
 
@@ -229,12 +247,13 @@ function kpis() {
   const aqi = forecast ? pm25ToAqi(pm25) : 168;
   const category = forecast?.aqi_category || 'Poor';
   const live = state.backend.liveConnected;
-  return `<div class="grid kpi-grid"><div class="card kpi"><div class="kpi-label">24-hour forecast AQI</div><div class="kpi-value">${aqi}</div><span class="tag ${aqi>150?'tag-red':aqi>100?'tag-amber':'tag-green'}">${category}</span></div><div class="card kpi"><div class="kpi-label">Dominant pollutant</div><div class="kpi-value">PM2.5</div><span class="subtle tiny">${pm25.toFixed(1)} µg/m³ forecast</span></div><div class="card kpi"><div class="kpi-label">24-hour risk</div><div class="kpi-value">${aqi>200?'High':aqi>100?'Elevated':'Low'}</div><span class="tag ${aqi>100?'tag-amber':'tag-green'}">${live?'Live CAMS context':'Cached inference'}</span></div><div class="card kpi"><div class="kpi-label">Available stations</div><div class="kpi-value">${state.backend.stations.length || '15'}</div><span class="tag tag-green">${live?'Live coordinate lookup':state.backend.connected?'Model API connected':'Fallback registry'}</span></div></div>`;
+  return `<div class="grid kpi-grid"><div class="card kpi"><div class="kpi-label">PM2.5 sub-index · +24h</div><div class="kpi-value">${aqi}</div><span class="tag ${aqi>150?'tag-red':aqi>100?'tag-amber':'tag-green'}">${category}</span><div class="tiny subtle" style="margin-top:7px">Model estimate—not official city AQI</div></div><div class="card kpi"><div class="kpi-label">PM2.5 forecast · +24h</div><div class="kpi-value">${pm25.toFixed(1)}</div><span class="subtle tiny">µg/m³ · CAMS model</span></div><div class="card kpi"><div class="kpi-label">24-hour screening risk</div><div class="kpi-value">${aqi>200?'High':aqi>100?'Elevated':'Low'}</div><span class="tag ${aqi>100?'tag-amber':'tag-green'}">${live?'Live CAMS context':'Cached inference'}</span></div><div class="card kpi"><div class="kpi-label">Available locations</div><div class="kpi-value">${state.backend.stations.length || '15'}</div><span class="tag tag-green">${live?'Coordinate forecasts':state.backend.connected?'Model API connected':'Fallback registry'}</span></div></div>`;
 }
 
 function mapCard(showTooltip = true) {
   const station = selectedStation();
-  return `<section class="card map-card"><div class="map-head"><div><strong>Live station map</strong><div class="tiny subtle">${station.name} · OpenStreetMap context</div></div><div class="map-head-actions"><span class="tag tag-green">Interactive OSM</span></div></div><div class="map-stage"><div class="leaflet-map" data-live-map="evidence"></div><div class="map-live-badge">${state.backend.liveConnected?'● Live air feed':'Cached fallback'} · ${Number(cachedForecast(24)?.pm25 || 0).toFixed(1)} µg/m³ PM2.5</div></div><div class="timeline"><strong class="tiny">Time</strong>${[['now','Now'],['24','+24h'],['48','+48h'],['72','+72h']].map(([id,label])=>`<button class="${state.horizon===id?'active':''}" data-horizon="${id}">${label}</button>`).join('')}</div></section>`;
+  const mapPm25 = state.horizon === 'now' ? Number(state.backend.live?.current?.pm25 || 0) : Number(cachedForecast(Number(state.horizon))?.pm25 || 0);
+  return `<section class="card map-card"><div class="map-head"><div><strong>Modelled air-quality map</strong><div class="tiny subtle">${station.name} · OpenStreetMap context</div></div><div class="map-head-actions"><span class="tag tag-green">Interactive OSM</span></div></div><div class="map-stage"><div class="leaflet-map" data-live-map="evidence"></div><div class="map-live-badge">${state.backend.liveConnected?'● CAMS model':'Cached fallback'} · ${mapPm25.toFixed(1)} µg/m³ PM2.5 · ${state.horizon==='now'?'Now':`+${state.horizon}h`}</div></div><div class="timeline"><strong class="tiny">Time</strong>${[['now','Now'],['24','+24h'],['48','+48h'],['72','+72h']].map(([id,label])=>`<button class="${state.horizon===id?'active':''}" data-horizon="${id}">${label}</button>`).join('')}</div><p class="tiny subtle map-caveat">CAMS coordinate forecast; PM2.5-derived sub-index is not the official CPCB city AQI.</p></section>`;
 }
 
 function pulsePage() {
@@ -316,13 +335,15 @@ function mountLiveMaps() {
     element.dataset.mapReady = 'true';
     const map = L.map(element).setView([station.latitude, station.longitude], element.dataset.liveMap === 'forecast' ? 12 : 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'&copy; OpenStreetMap contributors' }).addTo(map);
-    const horizon = state.forecast.mapHour === 'now' ? 24 : Number(state.forecast.mapHour);
-    const pm25 = Number(cachedForecast(horizon)?.pm25 || state.backend.live?.current?.pm25 || 0);
+    const mapMode = element.dataset.liveMap;
+    const horizonKey = mapMode === 'forecast' ? state.forecast.mapHour : mapMode === 'evidence' ? state.horizon : 'now';
+    const pm25 = horizonKey === 'now' ? Number(state.backend.live?.current?.pm25 || cachedForecast(24)?.pm25 || 0) : Number(cachedForecast(Number(horizonKey))?.pm25 || 0);
     const aqi = pm25ToAqi(pm25);
     const color = aqi <= 50 ? '#15803d' : aqi <= 100 ? '#d97706' : aqi <= 200 ? '#ea580c' : '#dc2626';
     L.circle([station.latitude, station.longitude], { radius:1800, color, fillColor:color, fillOpacity:.2, weight:2 }).addTo(map);
     const stationPoint = L.circleMarker([station.latitude, station.longitude], { radius:10, color:'#fff', weight:4, fillColor:color, fillOpacity:1 }).addTo(map);
-    const stationSummary = `<strong>${station.name}</strong><br>${state.backend.liveConnected?'Live Open-Meteo':'Cached'} PM2.5: ${pm25.toFixed(1)} µg/m³<br>AQI estimate: ${aqi}`;
+    const timeLabel = horizonKey === 'now' ? 'Current model value' : `+${horizonKey}h forecast`;
+    const stationSummary = `<strong>${station.name}</strong><br>${timeLabel} PM2.5: ${pm25.toFixed(1)} µg/m³<br>PM2.5-derived sub-index: ${aqi}<br><small>Not official CPCB AQI</small>`;
     if(element.dataset.liveMap === 'citizen') stationPoint.bindTooltip(stationSummary, { direction:'top' });
     else stationPoint.bindPopup(stationSummary).openPopup();
     state.backend.stations.filter(item => item.id !== station.id).slice(0,8).forEach(item => L.circleMarker([item.latitude,item.longitude], { radius:5, color:'#0b6b63', fillColor:'#0b6b63', fillOpacity:.8 }).addTo(map).bindTooltip(item.name));
@@ -437,21 +458,33 @@ function citizenPage(tab) {
 }
 
 function citizenPlan() {
-  return `${pageHeading('Plan & Alerts','One place to check what is coming, protect your health and choose when AQIS should notify you.')}<div class="citizen-plan-stack">
-    <section class="card chart-card"><div class="card-title"><div><h2>72-hour forecast</h2><span class="tiny subtle">PM2.5 · Borivali East</span></div><span class="tag tag-amber">Morning peak expected</span></div><div class="chart-wrap">${chartSvg()}</div><div class="alert-box"><span style="font-size:22px">◷</span><div><strong>Best outdoor window</strong><div class="tiny subtle">Tomorrow after 4 PM, when pollution is expected to begin falling.</div></div></div></section>
-    <section class="card"><div class="card-title"><div><h2>Health guidance</h2><span class="tiny subtle">Matched to the current Poor category</span></div><span class="tag tag-green">Personal guidance</span></div><div class="guidance"><div class="guidance-item"><span>⌂</span><strong>This morning</strong><p class="tiny subtle">Sensitive people should reduce prolonged outdoor activity.</p></div><div class="guidance-item"><span>◷</span><strong>Plan for later</strong><p class="tiny subtle">Move exercise or outdoor errands to after 4 PM.</p></div><div class="guidance-item"><span>♡</span><strong>Be prepared</strong><p class="tiny subtle">Keep prescribed reliever medication available.</p></div></div></section>
-    <section class="card alert-settings"><div><span class="tag tag-blue">Optional</span><h2>Get an air-quality alert</h2><p class="subtle">We will notify you when conditions near your saved location worsen.</p></div><div class="alert-form"><div class="field"><label>Notify me when</label><select><option>AQI becomes Poor</option><option>AQI becomes Very Poor</option><option>Any forecast worsens</option></select></div><div class="field"><label>Channel</label><select><option>WhatsApp</option><option>SMS</option><option>Email</option></select></div><button class="btn btn-primary" data-citizen-alert>Save alert</button></div><div class="tiny subtle saved-location">Saved location: Borivali East, Mumbai</div></section>
+  const metric = citizenMetricData();
+  const currentAqi = pm25ToAqi(state.backend.live?.current?.pm25 || metric.sourceValues?.[0] || 0);
+  const category = aqiCategory(currentAqi);
+  const station = selectedStation();
+  const profiles = {
+    general:{ label:'Everyone', title:'Everyday planning', dos:['Normal activity is reasonable at Good or Satisfactory levels.','Prefer quieter routes away from heavy traffic when practical.','Check again before long outdoor exercise.'], donts:['Do not treat this model estimate as a medical diagnosis.','Do not rely on one model value if you develop symptoms.'] },
+    asthma:{ label:'Asthma', title:'Asthma-aware planning', dos:['Follow your personal asthma action plan.','Keep prescribed reliever medication available.','Reduce exertion and move indoors if symptoms begin.'], donts:['Do not change medication without clinician advice.','Do not continue strenuous exercise through wheezing or breathlessness.'] },
+    heart:{ label:'Heart conditions', title:'Heart-health planning', dos:['Pace strenuous activity and take breaks.','Follow advice already provided by your clinician.','Seek urgent care for chest pain or severe breathlessness.'], donts:['Do not ignore unusual fatigue, dizziness or chest discomfort.','Do not use AQI alone to make treatment decisions.'] },
+    allergies:{ label:'Allergies', title:'Allergy-aware planning', dos:['Remember that AQI does not measure every pollen or allergen.','Keep clinician-recommended medication available.','A well-fitted mask can reduce particle exposure.'], donts:['Do not assume a Good AQI means pollen is low.','Do not use unverified remedies in place of medical advice.'] }
+  };
+  const profile = profiles[state.citizen.healthProfile];
+  const bestIndex = metric.sourceValues ? metric.sourceValues.slice(1).map(Number).indexOf(Math.min(...metric.sourceValues.slice(1).map(Number))) + 1 : 1;
+  const bestWindow = ['Now','around +24 hours','around +48 hours','around +72 hours'][bestIndex];
+  return `${pageHeading('Plan & Alerts','Forecast context, health-aware planning and optional alert preferences in one place.')}<div class="citizen-plan-stack">
+    <section class="card plan-summary"><div><span class="eyebrow">CURRENT MODEL ESTIMATE</span><strong class="plan-aqi">${currentAqi}</strong><span>${category} · PM2.5-derived sub-index</span></div><div><span class="tiny subtle">Current PM2.5</span><strong>${Number(state.backend.live?.current?.pm25 || 0).toFixed(1)} µg/m³</strong><span class="tiny subtle">Open-Meteo/CAMS · not official CPCB AQI</span></div><div><span class="tiny subtle">Lower-exposure window</span><strong>${bestWindow}</strong><span class="tiny subtle">Based on the lowest PM2.5 forecast point shown</span></div></section>
+    <section class="card"><div class="card-title"><div><h2>Health guidance</h2><span class="tiny subtle">Choose a profile to organize precautionary guidance</span></div><span class="tag tag-green">${category}</span></div><div class="profile-tabs">${Object.entries(profiles).map(([id,item])=>`<button class="${state.citizen.healthProfile===id?'active':''}" data-health-profile="${id}">${item.label}</button>`).join('')}</div><div class="health-panel"><div><span class="health-icon">♡</span><h3>${profile.title}</h3><p class="subtle">Guidance is matched to the current PM2.5-derived screening category.</p></div><div><h3>Do</h3><ul class="do-list">${profile.dos.map(item=>`<li>${item}</li>`).join('')}</ul></div><div><h3>Avoid</h3><ul class="dont-list">${profile.donts.map(item=>`<li>${item}</li>`).join('')}</ul></div></div><p class="tiny subtle medical-note">Precautionary information only—not medical advice. AQIS does not diagnose conditions. Consult a qualified clinician for personal guidance or persistent symptoms.</p></section>
+    <section class="card alert-settings"><div><span class="tag tag-blue">Demo preference</span><h2>Set an air-quality alert</h2><p class="subtle">Save when you want this prototype to flag worsening conditions.</p></div><div class="alert-form"><div class="field"><label>Notify me when</label><select><option>PM2.5 sub-index becomes Poor</option><option>PM2.5 sub-index becomes Very Poor</option><option>Any forecast worsens</option></select></div><div class="field"><label>Channel</label><select><option>In-app preview</option><option>Email · integration pending</option><option>SMS · integration pending</option></select></div><button class="btn btn-primary" data-citizen-alert>Save preference</button></div><div class="tiny subtle saved-location">Saved location: ${station.name}. No external message is sent in this prototype.</div></section>
   </div>`;
 }
 
 function citizenHome() {
-  const forecasts = [24,48,72].map(h => cachedForecast(h));
-  const fallback = [{pm25:88,aqi_category:'Poor'},{pm25:92,aqi_category:'Poor'},{pm25:74,aqi_category:'Moderately Polluted'}];
-  const values = forecasts.map((forecast,index)=>forecast || fallback[index]);
-  const aqiValues = values.map(item=>pm25ToAqi(Number(item.pm25)));
-  const station = intelligence()?.location?.replace(/, (Mumbai|Delhi).*$/,'') || 'Borivali East';
-  const connected = state.backend.connected || state.backend.liveConnected;
-  return `<section class="citizen-hero"><div><div class="eyebrow" style="color:#9cf2e8">${station} · ${state.backend.liveConnected?'LIVE AIR FEED':'MODEL CACHE CONNECTED'}</div><h1>${connected?`Tomorrow’s forecast is ${values[0].aqi_category}.`:'Your air is Poor right now.'}</h1><p>${state.backend.liveConnected?'Live PM2.5 conditions and the next 72 hours are supplied by Open-Meteo/CAMS for the selected coordinates.':'This forecast uses the project’s precomputed XGBoost inference.'}</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-secondary" data-citizen="plan">View health guidance</button><button class="btn btn-soft" data-citizen="plan">Forecast & alerts</button></div></div><div class="citizen-aqi"><div class="aqi-ring"><div><span>${connected?'24H AQI':'AQI'}</span><strong>${aqiValues[0]}</strong><small>PM2.5 ${Number(values[0].pm25).toFixed(1)} µg/m³</small></div></div></div></section><div class="grid citizen-grid"><section class="card"><div class="card-title"><h2>Next 3 horizons</h2><button class="btn btn-soft btn-small" data-citizen="plan">Plan ahead</button></div><div class="forecast-strip">${values.map((item,index)=>`<div class="forecast-day"><span class="tiny subtle">+${[24,48,72][index]} hours</span><strong>${aqiValues[index]}</strong><span class="tag ${aqiValues[index]>150?'tag-red':aqiValues[index]>100?'tag-amber':'tag-green'}">${item.aqi_category}</span></div>`).join('')}</div><div class="alert-box"><span style="font-size:22px">◷</span><div><strong>${state.backend.liveConnected?'Live forecast':'Precomputed forecast'}</strong><div class="tiny subtle">${state.backend.liveConnected?`Updated ${state.backend.live.observedAt} · Open-Meteo/CAMS.`:`Model timestamp: ${intelligence()?.timestamp || 'cached demo'}.`}</div></div></div></section><section class="card"><div class="card-title"><h2>Nearby station</h2><span class="tag tag-green">${state.backend.liveConnected?'Live':'Model data'}</span></div><div class="citizen-map"><div class="leaflet-map" data-live-map="citizen"></div></div><button class="btn btn-secondary btn-small" style="width:100%;margin-top:12px" data-citizen="map">Explore map</button></section></div>`;
+  const metric = citizenMetricData();
+  const currentAqi = pm25ToAqi(state.backend.live?.current?.pm25 || 0);
+  const category = aqiCategory(currentAqi);
+  const station = selectedStation();
+  const labels = ['Now','+24h','+48h','+72h'];
+  return `<section class="citizen-hero"><div><div class="eyebrow" style="color:#9cf2e8">${station.name.replace(/, (Mumbai|Delhi).*$/,'')} · CAMS MODEL CONTEXT</div><h1>Current PM2.5 screening level is ${category}.</h1><p>See current modelled concentration separately from future forecasts. The PM2.5-derived sub-index is not official CPCB city AQI.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-secondary" data-citizen="plan">Personal health planning</button><button class="btn btn-soft" data-citizen="plan">Forecast & alerts</button></div></div><div class="citizen-aqi"><div class="aqi-ring"><div><span>CURRENT ESTIMATE</span><strong>${currentAqi}</strong><small>PM2.5-derived sub-index</small></div></div><div class="tiny" style="text-align:center;margin-top:8px">PM2.5 ${Number(state.backend.live?.current?.pm25 || 0).toFixed(1)} µg/m³</div></div></section><section class="card citizen-metrics"><div class="card-title"><div><h2>Air-quality details</h2><span class="tiny subtle">Switch between screening index and pollutant concentrations</span></div><button class="btn btn-soft btn-small" data-citizen="plan">Plan ahead</button></div><div class="metric-tabs">${['AQI','PM2.5','PM10','NO₂'].map(item=>`<button class="${state.citizen.metric===item?'active':''}" data-citizen-metric="${item}">${item}</button>`).join('')}</div><div class="citizen-horizons">${metric.values.map((value,index)=>`<div class="forecast-day"><span class="tiny subtle">${labels[index]}</span><strong>${Number(value).toFixed(state.citizen.metric==='AQI'?0:1)}</strong><span class="tiny">${metric.unit}</span>${state.citizen.metric==='AQI'?`<span class="tag ${value>200?'tag-red':value>100?'tag-amber':'tag-green'}">${aqiCategory(value)}</span>`:''}</div>`).join('')}</div><div class="metric-note">ⓘ ${metric.note}</div></section><div class="grid citizen-grid"><section class="card"><div class="card-title"><h2>What changes next?</h2><span class="tag tag-green">72-hour outlook</span></div><div class="guidance"><div class="guidance-item"><span>●</span><strong>Now</strong><p class="tiny subtle">${Number(state.backend.live?.current?.pm25 || 0).toFixed(1)} µg/m³ PM2.5 · sub-index ${currentAqi}</p></div><div class="guidance-item"><span>↗</span><strong>+24 hours</strong><p class="tiny subtle">${Number(cachedForecast(24)?.pm25 || 0).toFixed(1)} µg/m³ · sub-index ${pm25ToAqi(cachedForecast(24)?.pm25)}</p></div><div class="guidance-item"><span>◷</span><strong>Updated</strong><p class="tiny subtle">${state.backend.live?.observedAt || 'Cached preview'} · Open-Meteo/CAMS</p></div></div></section><section class="card"><div class="card-title"><h2>Nearby location</h2><span class="tag tag-blue">Modelled</span></div><div class="citizen-map"><div class="leaflet-map" data-live-map="citizen"></div></div><button class="btn btn-secondary btn-small" style="width:100%;margin-top:12px" data-citizen="map">Explore map</button></section></div>`;
 }
 
 function downloadFile(filename, content, type = 'text/plain') {
@@ -607,6 +640,8 @@ document.addEventListener('click', (event) => {
   const layerToggle = event.target.closest('[data-layer-toggle]'); if(layerToggle) { document.querySelector('#layers')?.classList.toggle('hidden'); return; }
   const language = event.target.closest('[data-language]'); if(language) { state.alertLanguage = language.dataset.language; return render(); }
   const pollutant = event.target.closest('[data-forecast-pollutant]'); if(pollutant) { state.forecast.pollutant = pollutant.dataset.forecastPollutant; return render(); }
+  const citizenMetric = event.target.closest('[data-citizen-metric]'); if(citizenMetric) { state.citizen.metric = citizenMetric.dataset.citizenMetric; return render(); }
+  const healthProfile = event.target.closest('[data-health-profile]'); if(healthProfile) { state.citizen.healthProfile = healthProfile.dataset.healthProfile; return render(); }
   const forecastHorizon = event.target.closest('[data-forecast-horizon]'); if(forecastHorizon) { state.forecast.horizon = forecastHorizon.dataset.forecastHorizon; return render(); }
   const forecastMapHorizon = event.target.closest('[data-forecast-map-horizon]'); if(forecastMapHorizon) { state.forecast.mapHour = forecastMapHorizon.dataset.forecastMapHorizon; return render(); }
   const policy = event.target.closest('[data-policy-key]'); if(policy) { const raw = policy.dataset.policyValue; state.forecast[policy.dataset.policyKey] = raw === 'true' ? true : raw === 'false' ? false : Number(raw); return render(); }
